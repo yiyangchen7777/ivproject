@@ -26,20 +26,23 @@ if (file.exists("tableau-in-shiny-v1.2.R")) {
 # ----------------- 基础配置 & 数据 -----------------
 POSTCODE_FILTER <- NA_character_
 `%||%` <- function(a, b) ifelse(is.null(a) | is.na(a), b, a)
-first_val <- function(x) {
+scalar_value <- function(x) {
   if (is.null(x) || length(x) == 0) return(NA)
-  out <- x[[1]]
-  if (is.list(out)) {
-    if (length(out) == 0) return(NA)
-    out <- out[[1]]
+  if (is.list(x)) {
+    if (length(x) == 0) return(NA)
+    x <- x[[1]]
   }
-  out
+  if (length(x) == 0) return(NA)
+  if (length(x) > 1) x <- x[1]
+  x
 }
-display_text <- function(x, default = "") {
-  val <- first_val(x)
-  if (is.null(val) || length(val) == 0) return(default)
-  val <- as.character(val)[1]
-  if (is.na(val) || !nzchar(val)) default else val
+scalar_chr <- function(x, default = "") {
+  val <- scalar_value(x)
+  if (is.null(val) || length(val) == 0 || (is.atomic(val) && length(val) == 1 && is.na(val))) {
+    return(default)
+  }
+  val_chr <- as.character(val)[1]
+  if (!nzchar(val_chr) || is.na(val_chr)) default else val_chr
 }
 
 SRC_DISPLAY <- c(
@@ -1045,8 +1048,10 @@ server <- function(input, output, session){
   # 选中记录（为空时走 last_pick）
   sel <- reactive({
     nm <- if (!is.null(input$pick) && nzchar(input$pick)) input$pick else last_pick()
-    validate(need(!is.null(nm) && nzchar(nm), ""))
-    all %>% filter(name == nm) %>% slice(1)
+    req(!is.null(nm) && nzchar(nm))
+    rec <- all %>% filter(name == nm) %>% slice(1)
+    req(nrow(rec) == 1)
+    rec
   })
   
   # ================= 主内容：全屏 skyline 或 详情布局 =================
@@ -1138,8 +1143,8 @@ server <- function(input, output, session){
   output$shopImage <- renderUI({
     # ⚠️ 已移除 “当 pick 为空显示 skyline”的逻辑，只负责轮播图
     s <- sel()
-    pid <- display_text(s$place_id)
-    src_dir <- display_text(s$src)
+    pid <- scalar_chr(s$place_id)
+    src_dir <- scalar_chr(s$src)
     imgs <- character(0)
     if (nzchar(pid) && nzchar(src_dir)) {
       fs_dir <- file.path(src_dir, pid)
@@ -1189,9 +1194,9 @@ server <- function(input, output, session){
   
   output$linkPhoneAddress <- renderText({
     s <- sel()
-    website <- display_text(s$website)
-    phone_v <- display_text(s$phone)
-    addr_v  <- display_text(s$address)
+    website <- scalar_chr(s$website)
+    phone_v <- scalar_chr(s$phone)
+    addr_v  <- scalar_chr(s$address)
     link  <- if (nzchar(website)) sprintf("<a href='%s' target='_blank'>Website ↗</a>", htmlEscape(website)) else "<span class='muted'>No Website Info</span>"
     phone <- if (nzchar(phone_v)) htmlEscape(phone_v) else "<span class='muted'>No Phone Info</span>"
     addr  <- if (nzchar(addr_v)) htmlEscape(addr_v) else "<span class='muted'>No Address Info</span>"
@@ -1199,14 +1204,16 @@ server <- function(input, output, session){
   })
   
   output$shopDesc <- renderUI({
-    s <- sel(); txt <- display_text(s$description, "No Description Info")
+    s <- sel(); txt <- scalar_chr(s$description, "No Description Info")
     HTML(htmlEscape(txt))
   })
   
   output$kpisText <- renderUI({
     s <- sel()
-    pr_txt <- display_text(price_range(display_text(s$price_level, NA_character_)), "No Price Info")
-    catg   <- display_text(s$category, "N/A")
+    lvl_val <- scalar_value(s$price_level)
+    pr_txt <- price_range(lvl_val)
+    pr_txt <- scalar_chr(pr_txt, "No Price Info")
+    catg   <- scalar_chr(s$category, "N/A")
     HTML(paste0(
       "<div style='height:10px'></div>",
       "<div><span class='kpi'>Price range: ", htmlEscape(pr_txt), "</span></div>",
@@ -1256,14 +1263,16 @@ server <- function(input, output, session){
   
   output$peerMap <- renderLeaflet({
     s <- sel()
-    validate(need(!is.na(s$lat) && !is.na(s$lon), "No coordinates for this venue."))
+    lat0 <- as.numeric(scalar_value(s$lat))
+    lon0 <- as.numeric(scalar_value(s$lon))
+    shiny::validate(shiny::need(!is.na(lat0) && !is.na(lon0), "No coordinates for this venue."))
     
-    src_key <- display_text(s$src)
+    src_key <- scalar_chr(s$src)
     peer <- all %>%
       filter(src == src_key) %>%
       filter(!is.na(lat) & !is.na(lon))
     
-    d <- hav_dist_m(s$lat, s$lon, peer$lat, peer$lon)
+    d <- hav_dist_m(lat0, lon0, peer$lat, peer$lon)
     n_in <- sum(!is.na(d) & d <= RADIUS_M, na.rm = TRUE) - 1L
     n_in <- max(0L, n_in)
     
@@ -1284,27 +1293,28 @@ server <- function(input, output, session){
     }
     
     disp <- SRC_DISPLAY[[src_key]] %||% toupper(gsub("_", " ", src_key))
+    disp <- scalar_chr(disp, "")
     
     leaflet(options = leafletOptions(zoomControl = TRUE, preferCanvas = TRUE)) %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
-      setView(lng = s$lon, lat = s$lat, zoom = 15) %>%
+      setView(lng = lon0, lat = lat0, zoom = 15) %>%
       addMapPane("radius", zIndex = 420) %>%
       addMapPane("peers",  zIndex = 430) %>%
       addCircles(
-        lng = s$lon, lat = s$lat, radius = RADIUS_M,
+        lng = lon0, lat = lat0, radius = RADIUS_M,
         color = "#3478f6", weight = 1, opacity = 0.7, fillOpacity = 0.05,
         options = pathOptions(pane = "radius")
       ) %>%
       addCircleMarkers(
         data = peer, lng = ~lon, lat = ~lat,
-        radius = 6, stroke = FALSE, fillOpacity = 0.75, fillColor = "#9EC5FE",
+        radius = 6, stroke = FALSE, fillOpacity = 0.75, fillColor = "#B7F4C2",
         label = ~name,
         labelOptions = labelOptions(direction = "auto", opacity = 0.95, textsize = "13px", sticky = TRUE),
         options = pathOptions(pane = "peers")
       ) %>%
       addMarkers(
-        lng = s$lon, lat = s$lat, icon = icon_selected,
-        label = paste0(s$name, " (", disp, ")"),
+        lng = lon0, lat = lat0, icon = icon_selected,
+        label = paste0(scalar_chr(s$name), " (", disp, ")"),
         labelOptions = labelOptions(direction = "top", textsize = "13px", opacity = 0.95)
       ) %>%
       {
@@ -1318,7 +1328,7 @@ server <- function(input, output, session){
   
   output$openNowRight <- renderUI({
     s <- sel()
-    df  <- parse_opening_hours(display_text(s$openinghours, ""))
+    df  <- parse_opening_hours(as.character(s$openinghours %||% ""))
     now <- with_tz(Sys.time(), "Australia/Melbourne")
     open_flag <- is_open_at(df, now)
     info <- today_hours_and_next_open(df, now)
@@ -1337,7 +1347,7 @@ server <- function(input, output, session){
   
   output$openHoursPlot <- renderPlot({
     s  <- sel()
-    df <- parse_opening_hours(display_text(s$openinghours, ""))
+    df <- parse_opening_hours(as.character(s$openinghours %||% ""))
     req(nrow(df) > 0)
     
     seg <- expand_overnight_for_plot(df)
@@ -1595,4 +1605,4 @@ server <- function(input, output, session){
 
 
 
-shinyApp(ui, server) 
+shinyApp(ui, server, options = list(launch.browser = TRUE)) 
