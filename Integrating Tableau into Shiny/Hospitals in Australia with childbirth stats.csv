@@ -1,0 +1,1107 @@
+Code,Name,Type,Latitude,Longitude,Sector,State,Childbirths 2012,Childbirths 2013,Childbirths 2014,Childbirths 2015,Childbirths 2016,Childbirths 2017,Childbirths 2018,Childbirths 2019,Childbirths 2020,Childbirths 2021,Childbirths total
+H0012,State Forensic Mental Health Service,Hospital,-31.960937,115.788431,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0013,Justice Health Services,Hospital,-33.96907,151.243206,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0014,The Children's Hospital at Westmead,Hospital,-33.801554,150.991759,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0015,Sydney Children's Hospital,Hospital,-33.917179,151.238334,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0016,Sacred Heart Health Service,Hospital,-33.880525,151.219237,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0017,St Vincent's Hospital [Darlinghurst],Hospital,-33.879692,151.221125,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0018,St Joseph's Hospital,Hospital,-33.848659,151.028339,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0019,Balmain Hospital,Hospital,-33.859469,151.181469,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0020,Canterbury Hospital,Hospital,-33.919592,151.098275,Public,New South Wales,1710,1745,1745,1733,1757,1749,1651,1540,1468,1370,16468
+H0021,Royal Prince Alfred Hospital,Hospital,-33.889251,151.182926,Public,New South Wales,5305,5176,5009,4914,4966,5018,4882,4647,4504,4363,48784
+H0022,Tresillian Care Centres,Hospital,-33.918732,151.097526,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0023,Concord Repatriation Hospital,Hospital,-33.837288,151.092664,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0024,Royal Prince Alfred Institute of Rheumatology & Orthopaedics,Hospital,-33.88828,151.180707,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0025,Karitane,Hospital,-33.879777,150.965763,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0026,Camden Hospital,Hospital,-34.062702,150.693297,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0027,Fairfield Hospital,Hospital,-33.860117,150.904339,Public,New South Wales,1911,1903,1810,1730,1755,1718,1595,1539,1495,1515,16971
+H0028,Liverpool Hospital,Hospital,-33.919966,150.930776,Public,New South Wales,3116,3179,3286,3423,3417,3497,3666,3677,3677,3530,34468
+H0029,Campbelltown Hospital,Hospital,-34.077651,150.806321,Public,New South Wales,2845,2903,2928,3060,3273,3527,3837,3996,4001,3927,34297
+H0030,Bankstown Lidcombe Hospital,Hospital,-33.933088,151.020823,Public,New South Wales,2184,2209,2223,2232,2133,1955,1883,1837,1756,1672,20084
+H0031,Braeside Hospital,Hospital,-33.861917,150.902192,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0032,Bowral Hospital,Hospital,-34.485043,150.423796,Public,New South Wales,469,469,446,405,431,422,394,417,501,566,4520
+H0033,Sydney Hospital / Sydney Eye Hospital,Hospital,-33.867929,151.212575,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0034,Calvary Health Care - Sydney,Hospital,-33.976132,151.136206,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0035,Gower Wilson Multi Purpose Service,Hospital,-31.535603,159.071307,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0036,War Memorial Hospital,Hospital,-33.897496,151.253816,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0037,Prince of Wales Hospital,Hospital,-33.918492,151.23938,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0038,St George Hospital NSW,Hospital,-33.966969,151.133776,Public,New South Wales,2544,2567,2538,2495,2498,2428,2385,2342,2323,2386,24506
+H0039,Sutherland Hospital,Hospital,-34.037288,151.115151,Public,New South Wales,1313,1320,1326,1334,1325,1306,1300,1289,1322,1364,13199
+H0040,Royal Hospital for Women,Hospital,-33.919035,151.237938,Public,New South Wales,4017,4033,3972,4014,4035,3874,3779,3756,3823,3826,39129
+H0041,Bulli Hospital,Hospital,-34.336667,150.907344,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0042,Coledale Hospital,Hospital,-34.283797,150.950796,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0043,Kiama Hospital,Hospital,-34.682937,150.850514,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0044,Milton Ulladulla Hospital,Hospital,-35.317313,150.438918,Public,New South Wales,109,104,64,29,14,0,0,0,0,0,320
+H0045,Port Kembla Hospital,Hospital,-34.485923,150.881778,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0046,Shoalhaven Hospital,Hospital,-34.868767,150.595736,Public,New South Wales,865,844,862,903,863,838,840,864,880,870,8629
+H0047,Wollongong Hospital,Hospital,-34.424938,150.883451,Public,New South Wales,2297,2294,2340,2442,2470,2474,2492,2454,2577,2697,24537
+H0048,Shellharbour Hospital,Hospital,-34.558987,150.840947,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0049,Illawarra Mental Health Services,Hospital,-34.42623,150.891252,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0050,David Berry Hospital,Hospital,-34.775909,150.712819,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0051,Auburn Hospital,Hospital,-33.859867,151.033204,Public,New South Wales,1424,1342,1325,1334,1320,1335,1415,1424,1350,1231,13500
+H0052,Blacktown Hospital,Hospital,-33.775552,150.917537,Public,New South Wales,3043,3083,3038,3074,3208,3310,3560,3860,3983,3824,33983
+H0053,Mount Druitt Hospital,Hospital,-33.765929,150.829646,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0054,Westmead Hospital,Hospital,-33.804362,150.987811,Public,New South Wales,5218,5288,5403,5485,5560,5642,5472,5203,5119,5033,53423
+H0055,Blue Mountains Hospital,Hospital,-33.705329,150.32111,Public,New South Wales,215,226,239,255,246,216,210,196,181,195,2179
+H0056,Nepean Hospital,Hospital,-33.759865,150.712627,Public,New South Wales,3656,3690,3763,3860,3996,3986,3939,3956,3903,3819,38568
+H0057,Springwood Hospital,Hospital,-33.690486,150.571129,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0058,Hawkesbury Hospital,Hospital,-33.610712,150.820804,Public,New South Wales,820,792,815,1167,1443,1071,726,723,742,812,9111
+H0059,"Tresillian Family Care Centre, Kingswood",Hospital,-33.758161,150.714392,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0060,Wentworth Psychiatric Services,Hospital,-33.760249,150.712613,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0061,Lithgow Hospital,Hospital,-33.498751,150.127701,Public,New South Wales,189,205,222,214,199,192,173,158,153,153,1858
+H0062,Portland Tabulam Health Centre,Hospital,-33.358415,149.978565,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0063,Greenwich Hospital,Hospital,-33.827329,151.183376,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0064,Neringah Hospital,Hospital,-33.717856,151.114556,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0065,Hornsby Ku-ring-gai Hospital,Hospital,-33.701448,151.112941,Public,New South Wales,1200,1177,1170,1182,1181,1213,1211,1190,1185,1086,11795
+H0067,Mona Vale Hospital,Hospital,-33.685353,151.306618,Public,New South Wales,202,513,626,683,754,727,453,112,0,0,4070
+H0068,Royal North Shore Hospital,Hospital,-33.821312,151.189735,Public,New South Wales,2425,2533,2645,2746,2860,2786,2726,2735,2659,2566,26681
+H0069,Royal Rehabilitation Hospital,Hospital,-33.821772,151.107845,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0070,Ryde Hospital,Hospital,-33.795482,151.089756,Public,New South Wales,128,123,125,120,108,96,80,55,18,0,853
+H0071,Gosford Hospital,Hospital,-33.419451,151.340328,Public,New South Wales,2506,2570,2673,2734,2749,2821,2915,2936,3076,3212,28192
+H0072,Woy Woy Hospital,Hospital,-33.496716,151.320952,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0073,Long Jetty Health Care Centre,Hospital,-33.369012,151.468538,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0074,Wyong Hospital,Hospital,-33.261113,151.480761,Public,New South Wales,164,156,153,145,127,102,87,68,29,0,1031
+H0075,Armidale Hospital,Hospital,-30.512726,151.655629,Public,New South Wales,442,469,453,424,421,403,410,423,415,443,4303
+H0076,Barraba Multi Purpose Service,Hospital,-30.382482,150.605778,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0077,Bingara Multi Purpose Service,Hospital,-29.864055,150.579235,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0078,Boggabri Multi Purpose Service,Hospital,-30.711502,150.040014,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0079,Glen Innes Hospital,Hospital,-29.733293,151.731673,Public,New South Wales,73,64,63,64,64,49,39,55,56,42,569
+H0080,Gunnedah Hospital,Hospital,-30.983146,150.251339,Public,New South Wales,203,183,175,171,154,159,165,154,146,112,1622
+H0081,Guyra Multi Purpose Service,Hospital,-30.213889,151.679112,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0082,Inverell Hospital,Hospital,-29.770728,151.130139,Public,New South Wales,272,278,253,242,246,235,227,220,208,208,2389
+H0083,Manilla Hospital,Hospital,-30.745717,150.732249,Public,New South Wales,2,2,0,0,0,0,0,0,0,0,4
+H0084,Moree Hospital,Hospital,-29.470678,149.839648,Public,New South Wales,194,189,186,184,187,170,151,136,136,140,1673
+H0085,Narrabri Hospital,Hospital,-30.325869,149.777108,Public,New South Wales,138,159,150,124,112,103,86,77,86,88,1123
+H0086,Tenterfield Hospital,Hospital,-29.045083,152.013552,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0087,Quirindi Hospital,Hospital,-31.500345,150.676621,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0088,Tamworth Hospital,Hospital,-31.074079,150.924199,Public,New South Wales,897,962,967,985,1011,1004,1004,1012,1062,1135,10039
+H0089,Tingha Multi Purpose Service,Hospital,-29.950779,151.206732,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0090,Vegetable Creek Multi Purpose Service Emmaville,Hospital,-29.450547,151.599204,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0091,Walcha Multi Purpose Service,Hospital,-30.987818,151.591415,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0092,Warialda Multi Purpose Service,Hospital,-29.538835,150.579567,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0093,Wee Waa Hospital,Hospital,-30.225439,149.448287,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0094,Werris Creek Hospital,Hospital,-31.346691,150.652513,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0095,Bulahdelah Hospital,Hospital,-32.403949,152.210029,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0096,Gloucester Soldiers' Memorial Hospital,Hospital,-32.014787,151.958556,Public,New South Wales,14,16,16,13,8,6,2,0,0,0,75
+H0097,Manning Hospital,Hospital,-31.910418,152.454485,Public,New South Wales,713,668,701,698,653,623,607,631,643,637,6574
+H0098,Wingham Hospital,Hospital,-31.878104,152.365179,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0099,Cessnock Hospital,Hospital,-32.827754,151.348396,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0100,Dungog Hospital,Hospital,-32.401948,151.746157,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0101,Kurri Kurri Hospital,Hospital,-32.825017,151.463018,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0102,Maitland Hospital,Hospital,-32.726723,151.545887,Public,New South Wales,1660,1605,1600,1520,1462,1461,1517,1645,1769,1880,16119
+H0103,Merriwa Multi Purpose Service,Hospital,-32.142714,150.361316,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0104,Muswellbrook Hospital,Hospital,-32.264545,150.900263,Public,New South Wales,205,185,196,196,179,139,97,83,67,39,1386
+H0105,Denman Multi Purpose Service,Hospital,-32.389483,150.684453,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0106,Calvary Mater Newcastle,Hospital,-32.899371,151.720858,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0107,Belmont Hospital,Hospital,-33.024631,151.648181,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0108,"Scott Memorial Hospital, Scone",Hospital,-32.051525,150.876864,Public,New South Wales,71,64,47,37,39,38,46,46,36,36,460
+H0109,Singleton Hospital,Hospital,-32.567087,151.185736,Public,New South Wales,139,125,131,150,144,124,121,120,121,133,1308
+H0110,"Wilson Memorial Community Hospital, Murrurundi",Hospital,-31.770408,150.834764,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0111,Tomaree Community Hospital,Hospital,-32.720053,152.158858,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0112,John Hunter Hospital,Hospital,-32.922177,151.692438,Public,New South Wales,4240,4128,4044,4109,4092,4170,4206,4035,4085,4252,41361
+H0113,Ballina District Hospital,Hospital,-28.863525,153.564013,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0116,Casino and District Memorial Hospital,Hospital,-28.859839,153.035827,Public,New South Wales,38,15,0,0,0,0,0,0,0,0,53
+H0117,Bonalbo Hospital,Hospital,-28.733777,152.622789,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0118,Grafton Base Hospital,Hospital,-29.674807,152.941274,Public,New South Wales,455,451,415,415,415,378,379,385,375,392,4060
+H0119,Kyogle Multi Purpose Service,Hospital,-28.627124,153.001742,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0120,Lismore Base Hospital,Hospital,-28.809191,153.291045,Public,New South Wales,1259,1200,1161,1147,1139,1150,1184,1204,1251,1314,12009
+H0121,Nimbin Multi Purpose Service,Hospital,-28.597371,153.223185,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0122,Maclean District Hospital,Hospital,-29.454219,153.201094,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0124,Murwillumbah District Hospital,Hospital,-28.323417,153.400811,Public,New South Wales,181,170,140,101,66,58,55,51,52,40,914
+H0125,The Tweed Hospital,Hospital,-28.177216,153.545458,Public,New South Wales,1525,1466,1326,1296,1240,1142,1135,1088,1054,995,12267
+H0126,Urbenville Multi Purpose Service,Hospital,-28.471511,152.543029,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0127,Riverlands Drug and Alcohol Centre,Hospital,-28.80834,153.29112,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0128,Bellinger River District Hospital,Hospital,-30.457256,152.893209,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0129,Coffs Harbour Hospital,Hospital,-30.317579,153.093667,Public,New South Wales,1078,1053,1043,1070,1075,1072,1072,1075,1072,1073,10683
+H0130,Dorrigo Multi Purpose Service,Hospital,-30.340625,152.713882,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0131,Kempsey District Hospital,Hospital,-31.067841,152.820038,Public,New South Wales,270,257,259,262,254,254,257,239,230,245,2527
+H0132,Macksville District Hospital,Hospital,-30.713725,152.919838,Public,New South Wales,60,59,48,44,58,55,42,40,39,35,480
+H0133,Wauchope District Memorial Hospital,Hospital,-31.457239,152.728131,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0134,Port Macquarie Base Hospital,Hospital,-31.452336,152.878304,Public,New South Wales,817,783,765,785,770,760,769,776,835,884,7944
+H0135,Batemans Bay Hospital,Hospital,-35.714055,150.182375,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0136,South East Regional Hospital,Hospital,-36.68905,149.858549,Public,New South Wales,228,227,228,225,243,260,243,243,244,260,2401
+H0137,Bombala Multi Purpose Service,Hospital,-36.917513,149.235372,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0138,Braidwood Multi Purpose Service,Hospital,-35.443216,149.805302,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0139,Cooma Hospital and Health Service,Hospital,-36.241389,149.130499,Public,New South Wales,170,161,154,148,140,141,145,140,139,127,1465
+H0140,Crookwell District Hospital,Hospital,-34.464222,149.467427,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0141,Delegate Multi Purpose Service,Hospital,-37.04496,148.945958,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0142,Goulburn Base Hospital,Hospital,-34.747527,149.712806,Public,New South Wales,317,294,284,291,288,273,284,304,299,295,2929
+H0143,Moruya Hospital,Hospital,-35.904137,150.070774,Public,New South Wales,308,300,289,295,302,301,302,317,322,321,3057
+H0144,Pambula Hospital,Hospital,-36.926316,149.879232,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0145,Queanbeyan Hospital,Hospital,-35.347685,149.232294,Public,New South Wales,409,432,417,419,454,513,547,539,524,536,4790
+H0146,Bourke Street Health Service,Hospital,-34.748721,149.719321,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0147,Yass District Hospital,Hospital,-34.844072,148.906427,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0149,Lake Cargelligo Multi Purpose Service,Hospital,-33.292027,146.374304,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0150,Wyalong Hospital,Hospital,-33.916373,147.196483,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0151,Barham Hospital,Hospital,-35.623823,144.133479,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0152,Berrigan Multi Purpose Service,Hospital,-35.662312,145.813035,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0153,Culcairn Multi Purpose Service,Hospital,-35.667399,147.042104,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0154,Corowa Health Service,Hospital,-35.993528,146.383541,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0155,Deniliquin Hospital,Hospital,-35.524044,144.963301,Public,New South Wales,91,105,123,113,91,96,96,79,83,88,965
+H0156,Finley Hospital,Hospital,-35.641725,145.568139,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0157,Henty Multi Purpose Service,Hospital,-35.515801,147.031847,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0158,Holbrook Hospital,Hospital,-35.723991,147.320276,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0159,Jerilderie Multi Purpose Service,Hospital,-35.356628,145.720596,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0160,Mercy Care Hospital - Albury,Hospital,-36.069221,146.916764,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0161,Urana Multi Purpose Service,Hospital,-35.325419,146.267316,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0162,Tocumwal Hospital,Hospital,-35.815407,145.568996,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0163,Tumbarumba Multi Purpose Service,Hospital,-35.778706,148.006203,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0164,Boorowa Multi Purpose Service,Hospital,-34.442822,148.727073,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0165,Mercy Care Hospital - Young,Hospital,-34.321003,148.288693,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0166,Murrumburrah-Harden Hospital,Hospital,-34.555254,148.360186,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0167,Young Hospital,Hospital,-34.320383,148.288457,Public,New South Wales,178,172,142,133,145,154,149,138,132,119,1462
+H0168,Batlow/Adelong Multi Purpose Service,Hospital,-35.521951,148.147891,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0169,Griffith Base Hospital,Hospital,-34.282121,146.043774,Public,New South Wales,475,484,483,485,527,526,506,507,520,507,5020
+H0170,Gundagai Hospital,Hospital,-35.051394,148.101764,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0171,Hay Hospital,Hospital,-34.500349,144.851433,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0172,Hillston Hospital,Hospital,-33.478793,145.539032,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0173,Junee Multi Purpose Service,Hospital,-34.866914,147.581314,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0174,Coolamon-Ganmain Multi Purpose Service,Hospital,-34.819885,147.199329,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0175,Leeton Hospital,Hospital,-34.545222,146.408831,Public,New South Wales,96,84,91,90,42,11,17,18,16,11,476
+H0176,Lockhart Hospital,Hospital,-35.222378,146.719064,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0177,Narrandera Hospital,Hospital,-34.743181,146.547661,Public,New South Wales,7,3,3,0,0,0,0,0,0,0,13
+H0178,Temora Hospital,Hospital,-34.443942,147.542616,Public,New South Wales,95,101,90,81,80,72,65,59,51,47,741
+H0179,Tumut Hospital,Hospital,-35.307265,148.219552,Public,New South Wales,113,110,107,84,72,69,44,23,31,31,684
+H0180,Wagga Wagga Hospital,Hospital,-35.118083,147.356915,Public,New South Wales,719,764,825,881,971,1068,1152,1212,1267,1357,10216
+H0181,Cootamundra Hospital,Hospital,-34.634386,148.012796,Public,New South Wales,58,57,58,63,54,53,58,53,50,40,544
+H0182,Bourke Multi Purpose Service,Hospital,-30.092823,145.947983,Public,New South Wales,3,7,3,0,0,0,0,0,0,0,13
+H0183,Brewarrina Multi Purpose Service,Hospital,-29.961627,146.863796,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0184,Cobar Health Service,Hospital,-31.509026,145.825266,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0185,Collarenebri Multi Purpose Service,Hospital,-29.544889,148.581901,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0186,Coolah Multi Purpose Service,Hospital,-31.821473,149.710049,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0187,Coonabarabran Health Service,Hospital,-31.274791,149.284779,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0188,Baradine Multi Purpose Service,Hospital,-30.945316,149.066189,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0189,Coonamble Multi Purpose Service,Hospital,-30.964803,148.387527,Public,New South Wales,3,0,0,0,0,0,0,0,0,0,3
+H0190,Gulargambone Multi Purpose Service,Hospital,-31.329812,148.469216,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0191,Dubbo Hospital,Hospital,-32.239339,148.620772,Public,New South Wales,1221,1213,1180,1182,1210,1222,1231,1231,1263,1320,12273
+H0192,Dunedoo Multi Purpose Service,Hospital,-32.017204,149.397366,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0193,Gilgandra Multi Purpose Service,Hospital,-31.704565,148.664889,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0194,Gulgong Multi Purpose Service,Hospital,-32.366871,149.521893,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0195,Mudgee Health Service,Hospital,-32.603229,149.588179,Public,New South Wales,258,248,246,247,228,233,228,221,237,260,2406
+H0196,Narromine Health Service,Hospital,-32.24261,148.239201,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0197,Nyngan Multi Purpose Service,Hospital,-31.560024,147.208772,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0198,Trangie Multi Purpose Service,Hospital,-32.030813,147.976355,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0199,Walgett Multipurpose Service,Hospital,-30.030646,148.115959,Public,New South Wales,2,0,0,0,2,2,0,0,0,0,6
+H0200,Warren Multi Purpose Service,Hospital,-31.693958,147.835679,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0201,Wellington Health Service,Hospital,-32.549741,148.951977,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0202,Lightning Ridge Multi Purpose Service,Hospital,-29.429973,147.981869,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0203,Lourdes Hospital Dubbo,Hospital,-32.238511,148.627361,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0204,Bathurst Base Hospital,Hospital,-33.406512,149.572699,Public,New South Wales,531,528,540,527,492,492,495,472,467,493,5037
+H0205,Blayney Multi Purpose Service,Hospital,-33.537728,149.248988,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0206,Canowindra Soldiers Memorial Hospital,Hospital,-33.557204,148.676576,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0207,Condobolin Health Service,Hospital,-33.082332,147.154161,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0208,Cowra Health Service,Hospital,-33.832137,148.692376,Public,New South Wales,156,157,140,136,135,133,135,128,136,148,1404
+H0209,Eugowra Memorial Multipurpose Service,Hospital,-33.424421,148.366799,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0210,Lachlan Health Service - Forbes,Hospital,-33.396281,148.013831,Public,New South Wales,155,169,173,166,159,153,141,181,227,215,1739
+H0211,Grenfell Multi Purpose Service,Hospital,-33.894286,148.167843,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0212,Molong Health Service,Hospital,-33.087622,148.859724,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0213,Oberon Multi Purpose Service,Hospital,-33.705249,149.853596,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0214,Orange Health Service,Hospital,-33.317316,149.093953,Public,New South Wales,980,1019,985,1012,1035,974,990,988,1015,1110,10108
+H0215,Lachlan Health Service - Parkes,Hospital,-33.151507,148.169757,Public,New South Wales,156,153,130,124,133,126,121,57,0,0,1000
+H0216,Peak Hill Multipurpose Service,Hospital,-32.735907,148.199615,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0217,Trundle Multi Purpose Health Service,Hospital,-32.921078,147.704315,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0218,Rylstone Multi Purpose Service,Hospital,-32.804085,149.975652,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0219,Tottenham Multipurpose Service,Hospital,-32.242711,147.358031,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0220,Tullamore Multi Purpose Health Service,Hospital,-32.635114,147.568997,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0221,Balranald Multi Purpose Service,Hospital,-34.644549,143.568413,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0222,Wentworth Hospital,Hospital,-34.109983,141.922481,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0223,Broken Hill Hospital,Hospital,-31.947609,141.454703,Public,New South Wales,244,225,216,227,228,204,189,197,191,195,2116
+H0224,Wilcannia Multi Purpose Service,Hospital,-31.557638,143.385336,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0225,Thomas Walker Hospital,Hospital,-33.832336,151.097897,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0226,Cumberland Hospital,Hospital,-33.80159,150.995246,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0227,Macquarie Hospital,Hospital,-33.802312,151.124818,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0228,Coral Tree Family Centre,Hospital,-33.804256,151.126212,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0229,Morisset Hospital,Hospital,-33.128549,151.512816,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0230,Hunter New England Mental Health Service,Hospital,-32.897873,151.720669,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0231,Kenmore Hospital,Hospital,-34.721253,149.751344,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0233,Western District Health Service [Hamilton],Hospital,-37.736495,142.030606,Public,Victoria,209,205,199,190,176,165,149,127,140,162,1722
+H0234,Western District Health Service [Penshurst],Hospital,-37.877275,142.282487,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0235,Colac Area Health,Hospital,-38.341201,143.582854,Public,Victoria,211,178,176,182,166,142,124,122,133,125,1559
+H0236,Hesse Rural Health Service [Winchelsea],Hospital,-38.243369,143.985357,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0237,Otway Health & Community Services [Apollo Bay],Hospital,-38.753853,143.664264,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0238,University Hospital Geelong,Hospital,-38.151533,144.364964,Public,Victoria,2251,2359,2381,2389,2421,2484,2521,2561,2692,2763,24822
+H0239,Casterton Memorial Hospital,Hospital,-37.589989,141.392283,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0240,Western District Health Service [Coleraine],Hospital,-37.599913,141.692018,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0241,South West Healthcare [Warrnambool],Hospital,-38.380085,142.472977,Public,Victoria,735,734,724,742,702,672,701,704,726,731,7171
+H0242,Beaufort & Skipton Health Service [Skipton],Hospital,-37.683998,143.367547,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0243,Heywood Rural Health,Hospital,-38.137788,141.624256,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0244,Timboon & District Healthcare Service,Hospital,-38.486231,142.976717,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0245,Moyne Health Services [Port Fairy],Hospital,-38.381599,142.227523,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0246,Portland District Health,Hospital,-38.340713,141.606087,Public,Victoria,34,28,45,70,66,58,67,75,79,66,588
+H0247,Lorne Community Hospital,Hospital,-38.545513,143.980743,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0248,The McKellar Centre,Hospital,-38.118795,144.335728,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0249,South West Healthcare [Camperdown],Hospital,-38.237101,143.137714,Public,Victoria,45,42,40,32,28,34,31,28,27,32,339
+H0250,Terang & Mortlake Health Service [Terang],Hospital,-38.239388,142.902119,Public,Victoria,36,30,24,21,20,27,27,22,12,3,222
+H0251,East Grampians Health Service [Ararat],Hospital,-37.278816,142.932858,Public,Victoria,135,117,104,110,114,102,99,98,102,111,1092
+H0252,East Grampians Health Service [Willaura],Hospital,-37.544798,142.74587,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0253,Rural Northwest Health [Warracknabeal],Hospital,-36.252614,142.381609,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0254,Rural Northwest Health [Hopetoun],Hospital,-35.732201,142.366411,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0255,Ballarat Health Services [Base Hospital],Hospital,-37.559658,143.847041,Public,Victoria,1312,1327,1348,1386,1394,1399,1450,1439,1459,1490,14004
+H0256,Ballarat Health Services [Queen Elizabeth Campus],Hospital,-37.564276,143.843264,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0257,Wimmera Base Hospital [Horsham],Hospital,-36.712441,142.208522,Public,Victoria,369,370,368,370,337,319,316,298,281,285,3313
+H0258,West Wimmera Health Service [Rupanyup],Hospital,-36.636571,142.631849,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0259,Stawell Regional Health,Hospital,-37.059577,142.781603,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0260,West Wimmera Health Service [Nhill],Hospital,-36.334003,141.655579,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0261,West Wimmera Health Service [Kaniva],Hospital,-36.381386,141.246006,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0262,West Wimmera Health Service [Jeparit],Hospital,-36.141132,141.984686,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0263,West Wimmera Health Service [Rainbow],Hospital,-35.903874,141.995112,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0264,East Wimmera Health Service [St Arnaud],Hospital,-36.609275,143.246676,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0265,Djerriwarrh Health Service [Bacchus Marsh],Hospital,-37.678267,144.433264,Public,Victoria,959,947,852,724,519,430,491,482,416,455,6275
+H0266,Beaufort & Skipton Health Service [Beaufort],Hospital,-37.431028,143.382284,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0267,Dimboola District Hospital,Hospital,-36.449887,142.024286,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0268,Edenhope and District Memorial Hospital,Hospital,-37.035323,141.288829,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0269,Melton Health,Hospital,-37.686449,144.558284,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0270,Daylesford District Hospital,Hospital,-37.337365,144.145774,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0271,Creswick District Hospital,Hospital,-37.421192,143.891533,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0272,The Bendigo Hospital,Hospital,-36.748727,144.283372,Public,Victoria,1222,1290,1328,1325,1375,1426,1490,1577,1688,1780,14501
+H0273,Bendigo Health Care Group [Anne Caudle],Hospital,-36.750919,144.280399,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0274,Goulburn Valley Health [Waranga],Hospital,-36.587827,145.008593,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0275,Kyabram & District Health Service,Hospital,-36.315539,145.042705,Public,Victoria,21,22,11,0,0,0,0,0,0,0,54
+H0276,Kyneton District Health Service,Hospital,-37.254431,144.469742,Public,Victoria,69,64,55,41,31,30,27,16,3,0,336
+H0277,Heathcote Health,Hospital,-36.925786,144.709499,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0278,Maryborough District Health Service [Maryborough],Hospital,-37.044781,143.737692,Public,Victoria,96,78,78,81,73,69,59,48,36,30,648
+H0279,Maryborough District Health Service [Dunolly],Hospital,-36.855269,143.735139,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0280,Swan Hill District Health [Swan Hill],Hospital,-35.340588,143.556514,Public,Victoria,265,244,217,238,251,223,188,176,183,169,2154
+H0281,Swan Hill District Health [Nyah],Hospital,-35.186052,143.355428,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0282,East Wimmera Health Service [Wycheproof],Hospital,-36.078447,143.233779,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0283,Cohuna District Hospital,Hospital,-35.800063,144.214911,Public,Victoria,51,56,50,53,51,49,52,40,33,16,451
+H0284,Echuca Regional Health,Hospital,-36.138186,144.748369,Public,Victoria,324,335,310,341,354,366,394,387,408,438,3657
+H0285,Kerang District Health,Hospital,-35.724287,143.916563,Public,Victoria,56,48,38,14,0,0,0,0,0,0,156
+H0286,Mildura Base Hospital,Hospital,-34.185634,142.143348,Public,Victoria,879,871,881,871,882,869,843,843,831,825,8595
+H0287,Mallee Track Health & Community Service [Ouyen],Hospital,-35.074349,142.312345,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0288,Maldon Hospital,Hospital,-36.992672,144.063677,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0289,Manangatang & District Hospital,Hospital,-35.050955,142.880512,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0290,Boort District Health,Hospital,-36.111703,143.727285,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0291,Robinvale District Health Services,Hospital,-34.584146,142.781367,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0292,Rochester & Elmore District Health Service,Hospital,-36.366579,144.697751,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0293,East Wimmera Health Service [Donald],Hospital,-36.366895,142.976583,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0294,Inglewood & District Health Service,Hospital,-36.572147,143.873755,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0295,East Wimmera Health Service [Birchip],Hospital,-35.980167,142.915891,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0296,East Wimmera Health Service [Charlton],Hospital,-36.271037,143.345889,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0297,Castlemaine Health,Hospital,-37.052539,144.212315,Public,Victoria,65,67,61,65,57,43,43,43,25,22,491
+H0298,Goulburn Valley Health [Shepparton],Hospital,-36.363625,145.404911,Public,Victoria,1198,1168,1171,1126,1049,1067,1063,982,923,884,10631
+H0299,Goulburn Valley Health [Tatura],Hospital,-36.439082,145.225535,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0300,Northeast Health Wangaratta,Hospital,-36.354035,146.313889,Public,Victoria,573,559,570,588,635,663,662,680,697,726,6353
+H0301,Tallangatta Health Service,Hospital,-36.213705,147.183709,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0302,Albury Wodonga Health [Wodonga Campus],Hospital,-36.131791,146.879417,Public,Victoria,1632,1658,1644,1666,1641,1618,1630,1620,1634,1661,16404
+H0303,Yarrawonga Health,Hospital,-36.011547,146.006584,Public,Victoria,82,71,64,57,47,35,29,22,9,0,416
+H0304,Alpine Health [Myrtleford],Hospital,-36.554525,146.728795,Public,Victoria,5,9,3,0,0,0,0,0,0,0,17
+H0305,Alpine Health [Bright],Hospital,-36.732701,146.965924,Public,Victoria,7,3,4,4,0,0,0,0,0,0,18
+H0306,Alpine Health [Mount Beauty],Hospital,-36.743354,147.169359,Public,Victoria,2,0,0,0,0,0,0,0,0,0,2
+H0307,Corryong Health,Hospital,-36.198711,147.902798,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0308,Seymour District Memorial Hospital,Hospital,-37.018384,145.138771,Public,Victoria,159,119,46,5,0,0,0,0,0,0,329
+H0309,Mansfield District Hospital,Hospital,-37.057574,146.086149,Public,Victoria,80,81,77,78,80,68,53,57,62,58,694
+H0310,Alexandra District Hospital,Hospital,-37.195065,145.716143,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0311,Numurkah & District Health Service,Hospital,-36.100001,145.443695,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0312,The Kilmore & District Hospital,Hospital,-37.301794,144.957915,Public,Victoria,195,199,209,251,274,254,247,224,216,230,2299
+H0313,Yea & District Memorial Hospital,Hospital,-37.213634,145.430724,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0314,Nathalia District Hospital,Hospital,-36.054754,145.204324,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0315,Benalla Health,Hospital,-36.555239,145.994675,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0316,Beechworth Health Service,Hospital,-36.349359,146.690739,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0317,Cobram District Health,Hospital,-35.916273,145.651029,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0318,Bairnsdale Regional Health Service,Hospital,-37.830814,147.607905,Public,Victoria,330,325,335,356,346,332,322,301,305,301,3253
+H0319,West Gippsland Healthcare Group [Warragul],Hospital,-38.173009,145.926804,Public,Victoria,923,968,950,955,898,868,895,884,916,952,9209
+H0320,Bass Coast Health,Hospital,-38.608747,145.580906,Public,Victoria,197,198,196,176,155,133,139,144,133,161,1632
+H0321,Yarram & District Health Service,Hospital,-38.556975,146.678316,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0322,Omeo District Health,Hospital,-37.098142,147.597321,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0323,Central Gippsland Health Service [Sale],Hospital,-38.108408,147.080637,Public,Victoria,505,476,461,451,445,430,408,376,378,419,4349
+H0324,Gippsland Southern Health Service - Korumburra,Hospital,-38.430328,145.828249,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0325,Gippsland Southern Health Service - Leongatha,Hospital,-38.487171,145.950343,Public,Victoria,197,191,199,213,211,200,188,169,189,197,1954
+H0326,Latrobe Regional Hospital [Traralgon],Hospital,-38.218475,146.471335,Public,Victoria,887,857,814,813,840,832,825,836,878,871,8453
+H0327,Central Gippsland Health Service [Maffra],Hospital,-37.961032,146.983487,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0328,South Gippsland Hospital [Foster],Hospital,-38.658319,146.207031,Public,Victoria,83,84,82,75,54,50,55,61,67,64,675
+H0329,Orbost Regional Health,Hospital,-37.701844,148.464957,Public,Victoria,23,22,22,22,15,3,0,0,0,0,107
+H0330,Box Hill Hospital,Hospital,-37.813682,145.119094,Public,Victoria,2282,2352,2379,2499,2673,2661,2601,2556,2489,2748,25240
+H0331,Monash Medical Centre [Clayton],Hospital,-37.921176,145.123128,Public,Victoria,3524,3655,3690,3879,4092,4033,3973,3919,3883,3816,38464
+H0332,Maroondah Hospital [East Ringwood],Hospital,-37.806884,145.254535,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0333,Angliss Hospital,Hospital,-37.898663,145.314166,Public,Victoria,2196,2153,2175,2253,2273,2215,2202,2242,2259,1867,21835
+H0334,St George's Health Service- Aged Care,Hospital,-37.809085,145.052585,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0335,Caritas Christi Hospice [Kew],Hospital,-37.804706,145.015557,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0336,Mercy Health - O'Connell Family Centre,Hospital,-37.816688,145.061729,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0337,The Peter James Centre [East Burwood],Hospital,-37.852712,145.164542,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0338,Wantirna Health,Hospital,-37.848525,145.225902,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0339,Royal Talbot Rehabilitation Centre [Kew],Hospital,-37.789522,145.023715,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0340,Healesville Hospital and Yarra Valley Health,Hospital,-37.646879,145.529032,Public,Victoria,23,4,0,0,0,0,0,0,0,0,27
+H0341,Yarra Ranges Health,Hospital,-37.756319,145.351204,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0342,Monash Medical Centre [Moorabbin],Hospital,-37.920697,145.063197,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0343,Rosebud Hospital,Hospital,-38.362168,144.884899,Public,Victoria,0,0,0,0,0,0,0,0,0,4,4
+H0344,Sandringham Hospital,Hospital,-37.961049,145.018157,Public,Victoria,1287,899,207,0,0,0,0,0,0,0,2393
+H0345,Caulfield Hospital,Hospital,-37.882707,145.016892,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0346,Kooweerup Regional Health Service,Hospital,-38.200653,145.484433,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0347,Kingston Centre [Cheltenham],Hospital,-37.955018,145.078969,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0348,Dandenong Hospital,Hospital,-37.976459,145.218529,Public,Victoria,2587,2569,2543,2589,2659,2686,2667,2649,2547,2493,25989
+H0349,Cranbourne Integrated Care Centre,Hospital,-38.113312,145.280832,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0350,Frankston Hospital,Hospital,-38.150791,145.128428,Public,Victoria,2548,2585,2640,2711,2815,2884,2882,2908,2985,2916,27874
+H0351,Calvary Health Care Bethlehem,Hospital,-37.896962,145.013415,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0352,Queen Elizabeth Centre [Noble Park],Hospital,-37.972053,145.178285,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0353,Casey Hospital,Hospital,-38.045325,145.347181,Public,Victoria,1445,1598,1901,2055,2142,2259,2374,2454,2517,2553,21298
+H0356,Golf Links Road Rehabilitation Centre,Hospital,-38.173447,145.149769,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0357,The Mornington Centre,Hospital,-38.230174,145.041697,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0358,The Alfred,Hospital,-37.846087,144.981937,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0359,Austin Hospital [Heidelberg],Hospital,-37.756355,145.060236,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0360,Heidelberg Repatriation Hospital [Heidelberg West],Hospital,-37.755973,145.04749,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0361,Bundoora Extended Care Centre,Hospital,-37.701124,145.055569,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0362,Mercy Hospital for Women,Hospital,-37.756075,145.061008,Public,Victoria,5768,5829,5778,5721,5827,5739,5609,5704,5767,5616,57358
+H0363,Western Hospital [Footscray],Hospital,-37.792298,144.887191,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0364,Royal Children's Hospital [Parkville],Hospital,-37.794997,144.950859,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0366,Royal Women's Hospital [Parkville],Hospital,-37.798772,144.954825,Public,Victoria,7119,7070,7108,7375,7537,7538,7517,7524,7430,7135,73353
+H0367,The Royal Victorian Eye & Ear Hospital,Hospital,-37.808978,144.976245,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0368,The Northern Hospital [Epping],Hospital,-37.653417,145.014381,Public,Victoria,2822,3083,3278,3463,3535,3626,3667,3500,3323,3274,33571
+H0369,Werribee Mercy Hospital,Hospital,-37.886587,144.698621,Public,Victoria,2170,2462,2919,3408,3718,3810,3858,3845,3814,3743,33747
+H0370,Orygen Inpatient Unit,Hospital,-37.791926,144.886617,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0371,Royal Melbourne Hospital [City Campus],Hospital,-37.799259,144.956864,Public,Victoria,3,6,2,0,4,4,0,4,4,0,27
+H0372,Royal Melbourne Hospital [Royal Park Campus],Hospital,-37.778813,144.948049,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0373,Sunshine Hospital,Hospital,-37.759179,144.816477,Public,Victoria,4892,5202,5124,5188,5323,5451,5558,5808,6291,6509,55346
+H0374,St Vincent's Hospital [Melbourne],Hospital,-37.806545,144.975231,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0375,Williamstown Hospital,Hospital,-37.863576,144.892339,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0376,Peter MacCallum Cancer Centre,Hospital,-37.80001,144.956607,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0377,Tweddle Child & Family Health Centre [Footscray],Hospital,-37.797407,144.887421,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0378,Sunbury Day Hospital,Hospital,-37.576998,144.732674,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0379,Broadmeadows Health Service,Hospital,-37.684321,144.913106,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0380,Craigieburn Health Service,Hospital,-37.596015,144.91928,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0381,The Royal Dental Hospital of Melbourne,Hospital,-37.799299,144.964529,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0382,Albury Wodonga Health [Albury Campus],Hospital,-36.078401,146.939146,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H0383,Victorian Institute of Forensic Mental Health,Hospital,-37.78931,145.012975,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0384,Victorian Institute of Forensic Mental Health Prison Health Service,Hospital,-37.812763,144.950757,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H0385,Mater Adult Hospital,Hospital,-27.485488,153.028103,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0387,Mater Mothers' Hospital,Hospital,-27.485436,153.027001,Public,Queensland,5259,5413,5619,5971,6068,6051,6060,6049,6068,5994,58552
+H0388,The Prince Charles Hospital,Hospital,-27.390497,153.021955,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0390,Princess Alexandra Hospital,Hospital,-27.499402,153.033542,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0391,Ipswich Hospital,Hospital,-27.619465,152.759313,Public,Queensland,2792,2871,2776,2630,2506,2546,2639,2623,2596,2638,26617
+H0392,Redcliffe Hospital,Hospital,-27.228269,153.105245,Public,Queensland,1700,1692,1666,1654,1659,1624,1629,1604,1560,1563,16351
+H0393,Ellen Barron Family Centre,Hospital,-27.385905,153.025152,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0394,Queen Elizabeth II Jubilee Hospital,Hospital,-27.559673,153.048852,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0397,Redland Hospital,Hospital,-27.539992,153.251379,Public,Queensland,2105,1967,1831,1798,1792,1786,1793,1751,1786,1873,18482
+H0398,Logan Hospital,Hospital,-27.670169,153.141732,Public,Queensland,3506,3478,3349,3237,3261,3330,3461,3544,3612,3745,34523
+H0399,Caboolture Hospital,Hospital,-27.080776,152.963623,Public,Queensland,2100,2051,1969,1937,1930,1851,1849,1867,1877,1954,19385
+H0400,Beaudesert Hospital,Hospital,-27.984869,153.002536,Public,Queensland,0,31,118,173,193,231,274,311,319,306,1956
+H0401,Boonah Hospital,Hospital,-27.999128,152.678943,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0402,Caloundra Hospital,Hospital,-26.800582,153.119759,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0403,Esk Hospital,Hospital,-27.240398,152.418179,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0404,Gatton Hospital,Hospital,-27.566778,152.276269,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0405,Kilcoy Hospital,Hospital,-26.941009,152.561495,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0406,Laidley Hospital,Hospital,-27.632725,152.400015,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0407,Maleny Hospital,Hospital,-26.754893,152.844972,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0408,Nambour General Hospital,Hospital,-26.621659,152.952249,Public,Queensland,2269,2364,2444,2502,2240,953,0,0,0,0,12772
+H0409,Gold Coast University Hospital,Hospital,-27.958896,153.381173,Public,Queensland,3572,3956,4432,4735,4929,5032,5029,5060,5240,5343,47328
+H0410,Biggenden Hospital,Hospital,-25.506406,152.051099,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0411,Bundaberg Base Hospital,Hospital,-24.868877,152.336157,Public,Queensland,1101,1115,1078,1048,1007,992,993,947,943,995,10219
+H0412,Cherbourg Hospital,Hospital,-26.291519,151.956324,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0413,Childers Hospital,Hospital,-25.239416,152.273286,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0414,Eidsvold Hospital,Hospital,-25.382639,151.125494,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0415,Gayndah Hospital,Hospital,-25.631384,151.604531,Public,Queensland,0,2,2,0,0,0,0,0,0,0,4
+H0416,Gin Gin Hospital,Hospital,-24.985707,151.953449,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0417,Gympie Hospital,Hospital,-26.184353,152.658258,Public,Queensland,356,355,358,345,334,315,300,303,295,292,3253
+H0418,Hervey Bay Hospital,Hospital,-25.298697,152.820639,Public,Queensland,1028,978,952,926,854,814,807,800,811,851,8821
+H0419,Kingaroy Hospital,Hospital,-26.532454,151.838307,Public,Queensland,404,404,397,366,335,313,296,306,295,286,3402
+H0420,Maryborough Hospital,Hospital,-25.522131,152.689855,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0421,Monto Hospital,Hospital,-24.866424,151.112501,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0423,Mundubbera Hospital,Hospital,-25.587619,151.293282,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0424,Murgon Hospital,Hospital,-26.239075,151.950702,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0425,Nanango Hospital,Hospital,-26.666405,152.007833,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0426,Wondai Hospital,Hospital,-26.323335,151.878658,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0427,Chinchilla Hospital,Hospital,-26.741337,150.634939,Public,Queensland,34,30,40,57,61,43,20,3,2,5,295
+H0428,Dalby Hospital,Hospital,-27.167153,151.278905,Public,Queensland,265,253,253,207,172,203,235,227,248,266,2329
+H0429,Goondiwindi Hospital,Hospital,-28.547951,150.302302,Public,Queensland,98,89,103,103,95,100,110,116,108,102,1024
+H0430,Inglewood Hospital,Hospital,-28.417647,151.061856,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0431,Jandowae Hospital,Hospital,-26.781016,151.105313,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0432,Miles Hospital,Hospital,-26.658236,150.191023,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0433,Millmerran Hospital,Hospital,-27.878928,151.26267,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0434,Oakey Hospital,Hospital,-27.424079,151.719088,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0435,Stanthorpe Hospital,Hospital,-28.660927,151.928397,Public,Queensland,129,124,118,119,118,103,87,79,88,93,1058
+H0436,Tara Hospital,Hospital,-27.273674,150.456368,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0437,Taroom Hospital,Hospital,-25.638818,149.798669,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0438,Texas Hospital,Hospital,-28.855978,151.179481,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0439,Toowoomba Hospital,Hospital,-27.569872,151.944433,Public,Queensland,1914,1949,1916,1963,2000,1994,1990,1964,1987,1997,19674
+H0440,Warwick Hospital,Hospital,-28.224275,152.017983,Public,Queensland,198,192,190,193,182,155,161,179,167,158,1775
+H0441,Augathella Hospital,Hospital,-25.796104,146.590919,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0442,Charleville Hospital,Hospital,-26.410455,146.239228,Public,Queensland,49,48,49,53,53,45,43,55,50,47,492
+H0443,Cunnamulla Hospital,Hospital,-28.071658,145.690405,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0444,Dirranbandi Hospital,Hospital,-28.579349,148.229159,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0445,Injune Hospital,Hospital,-25.847096,148.562471,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0446,Mitchell Hospital,Hospital,-26.489913,147.972493,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0447,Mungindi Hospital,Hospital,-28.972817,148.989061,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0448,Quilpie Hospital,Hospital,-26.616519,144.274617,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0449,Roma Hospital,Hospital,-26.568828,148.775846,Public,Queensland,158,164,160,145,129,128,134,127,130,154,1429
+H0450,St George Hospital Qld,Hospital,-28.0272,148.592683,Public,Queensland,59,53,50,51,49,48,43,34,35,40,462
+H0451,Surat Hospital,Hospital,-27.156595,149.063787,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0452,Alpha Hospital,Hospital,-23.649039,146.632962,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0453,Baralaba Hospital,Hospital,-24.184268,149.809586,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0454,Biloela Hospital,Hospital,-24.395813,150.517491,Public,Queensland,94,83,80,67,57,60,60,57,51,39,648
+H0455,Blackwater Hospital,Hospital,-23.571873,148.878219,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0456,Emerald Hospital,Hospital,-23.514826,148.154989,Public,Queensland,321,328,331,325,307,287,303,319,308,295,3124
+H0457,Gladstone Hospital,Hospital,-23.850654,151.248532,Public,Queensland,502,520,538,573,550,536,569,571,567,563,5489
+H0458,Mount Morgan Hospital,Hospital,-23.645094,150.392639,Public,Queensland,2,2,0,0,0,0,0,0,0,0,4
+H0459,Moura Hospital,Hospital,-24.575948,149.975999,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0460,Rockhampton Hospital,Hospital,-23.379525,150.494542,Public,Queensland,1371,1393,1355,1311,1279,1230,1208,1241,1297,1378,13063
+H0461,Springsure Hospital,Hospital,-24.120122,148.084762,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0462,Theodore Hospital,Hospital,-24.943109,150.075277,Public,Queensland,13,11,11,8,4,0,0,0,0,0,47
+H0463,Capricorn Coast Hospital,Hospital,-23.143888,150.734519,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0464,Woorabinda Hospital,Hospital,-24.131492,149.455983,Public,Queensland,0,2,2,0,0,0,0,0,0,0,4
+H0466,Barcaldine Hospital,Hospital,-23.553316,145.293674,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0467,Blackall Hospital,Hospital,-24.422705,145.449349,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0470,Longreach Hospital,Hospital,-23.439033,144.260873,Public,Queensland,112,98,93,86,71,61,60,57,62,70,770
+H0473,Winton Hospital,Hospital,-22.381189,143.040672,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0476,Clermont Hospital,Hospital,-22.826219,147.632174,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0477,Mackay Base Hospital,Hospital,-21.145792,149.155325,Public,Queensland,1362,1309,1311,1392,1395,1354,1374,1380,1371,1375,13623
+H0478,Moranbah Hospital,Hospital,-22.002125,148.055287,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0479,Proserpine Hospital,Hospital,-20.400017,148.584976,Public,Queensland,291,280,253,251,231,214,213,225,250,256,2464
+H0480,Sarina Hospital,Hospital,-21.421151,149.210268,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0481,Dysart Hospital,Hospital,-22.582729,148.353044,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0482,Ayr Hospital,Hospital,-19.564066,147.408821,Public,Queensland,139,127,116,114,98,87,85,89,90,87,1032
+H0483,Bowen Hospital,Hospital,-20.007104,148.240327,Public,Queensland,7,8,9,7,8,10,5,5,9,4,72
+H0484,Charters Towers Hospital,Hospital,-20.076167,146.264097,Public,Queensland,6,0,3,5,2,0,0,0,0,0,16
+H0485,Collinsville Hospital,Hospital,-20.546108,147.838146,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0486,Home Hill Hospital,Hospital,-19.661764,147.416759,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0487,Ingham Hospital,Hospital,-18.652293,146.164222,Public,Queensland,3,0,0,0,23,44,41,45,55,59,270
+H0488,Joyce Palmer Health Service,Hospital,-18.732733,146.578731,Public,Queensland,0,2,2,3,3,4,4,0,0,3,21
+H0489,Townsville University Hospital,Hospital,-19.320683,146.762092,Public,Queensland,2455,2540,2585,2593,2546,2489,2408,2353,2390,2477,24836
+H0490,Royal Brisbane & Women's Hospital,Hospital,-27.446972,153.027888,Public,Queensland,4138,4107,4153,4259,4479,4668,4631,4625,4783,4777,44620
+H0491,Atherton Hospital,Hospital,-17.266635,145.483177,Public,Queensland,207,200,205,196,164,152,145,150,155,151,1725
+H0492,Babinda Hospital,Hospital,-17.343079,145.918908,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0493,Bamaga Hospital,Hospital,-10.893996,142.385131,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0494,Cairns Hospital,Hospital,-16.912537,145.768522,Public,Queensland,2469,2457,2427,2338,2284,2244,2209,2233,2286,2268,23215
+H0496,Cooktown Hospital,Hospital,-15.478067,145.249616,Public,Queensland,0,0,7,27,22,20,36,34,37,32,215
+H0500,Gordonvale Hospital,Hospital,-17.087337,145.786159,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0501,Herberton Hospital,Hospital,-17.379371,145.38175,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0502,Innisfail Hospital,Hospital,-17.518939,146.030049,Public,Queensland,226,216,183,223,244,215,200,188,187,201,2083
+H0503,Mareeba Hospital,Hospital,-16.987117,145.424468,Public,Queensland,169,196,209,206,194,201,197,166,153,149,1840
+H0504,Mossman Hospital,Hospital,-16.464031,145.368025,Public,Queensland,8,4,0,0,0,3,6,3,0,0,24
+H0506,Thursday Island Hospital,Hospital,-10.588,142.21156,Public,Queensland,136,123,124,129,129,127,126,125,101,94,1214
+H0507,Tully Hospital,Hospital,-17.927624,145.924146,Public,Queensland,11,3,0,0,0,0,0,0,3,3,20
+H0508,Weipa Hospital,Hospital,-12.623419,141.881179,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0516,Cloncurry Hospital,Hospital,-20.704166,140.527571,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0517,Hughenden Hospital,Hospital,-20.8424,144.1892,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0518,Julia Creek Hospital,Hospital,-20.656096,141.749875,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0519,Mount Isa Base Hospital,Hospital,-20.730919,139.493815,Public,Queensland,552,511,510,504,459,440,440,450,462,462,4790
+H0520,Normanton Hospital,Hospital,-17.678739,141.086425,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0521,Richmond Hospital,Hospital,-20.738726,143.150471,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0522,Mornington Island Hospital,Hospital,-16.665534,139.178559,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0525,Doomadgee Hospital,Hospital,-17.942527,138.825267,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0534,Baillie Henderson Hospital,Hospital,-27.524371,151.936283,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0535,Charters Towers Rehabilitation Unit,Hospital,-20.076801,146.280459,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0536,Kirwan Rehabilitation Unit,Hospital,-19.303796,146.731627,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0537,The Park Centre For Mental Health,Hospital,-27.600413,152.910246,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0538,Hampstead Rehabilitation Centre,Hospital,-34.860704,138.620381,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0539,The Queen Elizabeth Hospital,Hospital,-34.884179,138.534039,Public,South Australia,0,0,0,0,0,0,11,24,24,29,88
+H0540,Royal Adelaide Hospital,Hospital,-34.920973,138.587393,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0541,Lyell McEwin Hospital,Hospital,-34.747607,138.664798,Public,South Australia,3339,3418,3479,3645,3725,3688,3672,3667,3718,3749,36100
+H0542,Modbury Hospital,Hospital,-34.834166,138.690505,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0543,Pregnancy Advisory Centre,Hospital,-34.87999,138.542962,Public,South Australia,0,0,0,0,0,4,15,11,0,0,30
+H0544,St Margaret's Hospital,Hospital,-34.846418,138.480466,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0545,Women's and Children's Hospital,Hospital,-34.911444,138.599631,Public,South Australia,4886,4804,4734,4667,4648,4643,4624,4696,4759,4770,47231
+H0546,Wudinna Hospital,Hospital,-33.050274,135.466983,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0547,Cleve District Hospital and Aged Care,Hospital,-33.697779,136.494162,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0548,Cowell District Hospital and Aged Care,Hospital,-33.685299,136.921405,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0549,Cummins and District Memorial Hospital,Hospital,-34.264155,135.73316,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0550,Elliston Hospital,Hospital,-33.647912,134.892443,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0551,Kimba District Hospital and Aged Care,Hospital,-33.143552,136.416013,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0552,Ceduna District Health Service,Hospital,-32.119099,133.672317,Public,South Australia,42,41,44,50,51,38,31,27,24,23,371
+H0553,Port Lincoln Health Service,Hospital,-34.72408,135.850201,Public,South Australia,326,314,302,288,290,280,277,286,288,278,2929
+H0554,Streaky Bay Hospital,Hospital,-32.792776,134.217524,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0555,Tumby Bay Hospital and Health Services,Hospital,-34.372292,136.103932,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0556,Gumeracha District Soldiers' Memorial Hospital,Hospital,-34.826269,138.881575,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0557,Kangaroo Island Health Service,Hospital,-35.652693,137.641289,Public,South Australia,40,34,36,40,33,35,36,29,30,33,346
+H0558,Karoonda and District Soldiers' Memorial Hospital,Hospital,-35.094226,139.889429,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0559,Lameroo District Health Service,Hospital,-35.328203,140.514643,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0560,Tailem Bend District Hospital,Hospital,-35.254803,139.452692,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0561,Mannum District Hospital,Hospital,-34.916481,139.308614,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0562,Meningie and Districts Memorial Hospital and Health Services,Hospital,-35.693212,139.335565,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0563,Mount Barker District Soldiers' Memorial Hospital,Hospital,-35.081813,138.870277,Public,South Australia,363,385,423,454,481,484,488,509,541,572,4700
+H0564,Mount Pleasant District Hospital,Hospital,-34.773855,139.054212,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0565,Murray Bridge Soldiers' Memorial Hospital,Hospital,-35.128911,139.280462,Public,South Australia,222,228,225,232,214,219,232,206,218,214,2210
+H0566,Pinnaroo Soldiers' Memorial Hospital,Hospital,-35.257499,140.902447,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0567,South Coast District Hospital,Hospital,-35.561171,138.606447,Public,South Australia,123,103,92,100,103,101,104,100,112,129,1067
+H0568,Strathalbyn and District Health Service,Hospital,-35.257674,138.893558,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0569,Booleroo Centre District Hospital and Health Services,Hospital,-32.877911,138.350958,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0570,Crystal Brook and District Hospital,Hospital,-33.354297,138.213243,Public,South Australia,44,34,38,35,35,50,54,48,48,43,429
+H0571,Jamestown Hospital and Health Service,Hospital,-33.212265,138.616249,Public,South Australia,46,47,44,46,47,35,29,27,26,29,376
+H0572,Laura and District Hospital,Hospital,-33.174925,138.298687,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0573,Orroroo and District Health Service,Hospital,-32.738519,138.607206,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0574,Peterborough Soldiers' Memorial Hospital,Hospital,-32.980786,138.830344,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0575,Port Broughton and District Hospital and Health Service,Hospital,-33.601287,137.934379,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0576,Port Pirie Regional Health Service,Hospital,-33.177339,138.005533,Public,South Australia,165,158,150,145,135,123,128,133,128,126,1391
+H0577,McLaren Vale & Districts War Memorial Hospital Inc,Hospital,-35.221405,138.544962,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0578,Coober Pedy Hospital and Health Service,Hospital,-29.004893,134.762066,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0579,Hawker Memorial Hospital,Hospital,-31.893389,138.427841,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0580,Leigh Creek Health Service,Hospital,-30.593186,138.399925,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0583,Port Augusta Hospital and Regional Health Services,Hospital,-32.509417,137.776279,Public,South Australia,302,314,319,322,317,298,307,296,265,245,2985
+H0584,Quorn Health Service,Hospital,-32.350917,138.038138,Public,South Australia,6,2,0,0,0,0,0,0,0,0,8
+H0585,Roxby Downs Health Service,Hospital,-30.562778,136.894261,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0587,Whyalla Hospital and Health Services,Hospital,-33.033977,137.577559,Public,South Australia,274,249,230,196,173,168,161,164,169,162,1946
+H0588,Barmera Health Service,Hospital,-34.249146,140.471706,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0589,Riverland General Hospital,Hospital,-34.276054,140.600984,Public,South Australia,172,161,169,166,159,150,143,136,133,151,1540
+H0590,Loxton Hospital Complex,Hospital,-34.454695,140.564296,Public,South Australia,78,96,93,84,83,71,81,83,82,97,848
+H0591,Renmark Paringa District Hospital,Hospital,-34.164836,140.745205,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0592,Waikerie Health Service,Hospital,-34.182447,139.984917,Public,South Australia,45,51,50,41,29,29,31,26,20,9,331
+H0593,Bordertown Memorial Hospital,Hospital,-36.312133,140.766438,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0594,Kingston Soldiers' Memorial Hospital,Hospital,-36.835501,139.848763,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0595,Millicent and District Hospital and Health Service,Hospital,-37.598354,140.358924,Public,South Australia,37,16,0,0,0,0,0,0,0,0,53
+H0596,Mount Gambier and Districts Health Service,Hospital,-37.805003,140.786662,Public,South Australia,550,558,571,549,516,504,513,499,487,493,5240
+H0597,Naracoorte Health Service,Hospital,-36.966849,140.743693,Public,South Australia,157,158,149,137,128,137,151,152,148,147,1464
+H0598,Penola War Memorial Hospital,Hospital,-37.382873,140.836465,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0600,Flinders Medical Centre,Hospital,-35.022229,138.569439,Public,South Australia,3151,3374,3449,3534,3523,3437,3421,3359,3394,3534,34176
+H0602,Noarlunga Hospital,Hospital,-35.139879,138.500218,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0603,Gawler Health Service,Hospital,-34.593743,138.755044,Public,South Australia,536,563,541,495,509,504,481,464,459,482,5034
+H0604,Angaston District Hospital,Hospital,-34.503549,139.054715,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0605,Balaklava Soldiers' Memorial District Hospital,Hospital,-34.139594,138.419596,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0606,Burra Hospital,Hospital,-33.685486,138.934577,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0607,Clare Hospital,Hospital,-33.829588,138.614416,Public,South Australia,105,91,80,80,82,85,76,70,78,81,828
+H0608,Eudunda Hospital,Hospital,-34.175482,139.090586,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0609,Kapunda Hospital,Hospital,-34.330289,138.921679,Public,South Australia,49,47,37,44,51,50,59,72,63,52,524
+H0610,Central Yorke Peninsula Hospital (Maitland),Hospital,-34.370494,137.673947,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0611,Riverton District Soldiers' Memorial Hospital,Hospital,-34.160353,138.742657,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0612,Snowtown Hospital and Health Service,Hospital,-33.786936,138.212768,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0613,Southern Yorke Peninsula Health Service (Yorketown),Hospital,-35.020989,137.604939,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0614,Tanunda War Memorial Hospital,Hospital,-34.528082,138.960859,Public,South Australia,127,116,104,87,77,59,21,0,0,0,591
+H0615,Northern Yorke Peninsula Health Service (Wallaroo),Hospital,-33.927738,137.636783,Public,South Australia,125,130,112,114,119,113,104,91,99,109,1116
+H0618,Glenside Health Services,Hospital,-34.943429,138.627714,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H0620,King Edward Memorial Hospital,Hospital,-31.950093,115.818576,Public,Western Australia,5745,5724,5722,5592,5574,5648,5586,5663,6035,5846,57135
+H0621,Sir Charles Gairdner Hospital,Hospital,-31.968291,115.815467,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0623,Selby Authorised Lodge,Hospital,-31.958204,115.80199,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0624,Osborne Park Hospital,Hospital,-31.885976,115.804717,Public,Western Australia,1663,1550,1531,1484,1455,1424,1381,1345,1393,1512,14738
+H0626,Kalamunda Hospital,Hospital,-31.966471,116.060267,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0627,"Next Step Drug And Alcohol Services, East Perth",Hospital,-31.953405,115.869171,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0628,Joondalup Health Campus (Public),Hospital,-31.738788,115.771737,Public,Western Australia,2167,2337,2427,2777,2823,2638,2607,2558,2531,2608,25473
+H0632,Royal Perth Hospital Wellington Street Campus,Hospital,-31.954242,115.8663,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0633,Fremantle Hospital and Health Service,Hospital,-32.058263,115.751448,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0635,Armadale-Kelmscott Memorial Hospital,Hospital,-32.133212,116.020023,Public,Western Australia,2145,2320,2443,2470,2364,2197,2137,2151,2269,2408,22904
+H0636,Bentley Health Service,Hospital,-32.005332,115.927922,Public,Western Australia,826,921,1027,1033,944,850,759,727,359,0,7446
+H0637,Rockingham General Hospital,Hospital,-32.291359,115.770899,Public,Western Australia,1539,1738,1793,1796,1766,1730,1714,1706,1679,1571,17032
+H0638,Murray District Hospital,Hospital,-32.639709,115.871589,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0639,Peel Health Campus,Hospital,-32.532573,115.763504,Public,Western Australia,775,765,769,792,808,815,798,733,761,786,7802
+H0642,Fitzroy Crossing Hospital,Hospital,-18.191439,125.562765,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0643,Halls Creek Hospital,Hospital,-18.226008,127.666046,Public,Western Australia,3,6,3,0,0,0,0,0,0,0,12
+H0644,Broome Hospital,Hospital,-17.960975,122.236289,Public,Western Australia,327,346,338,351,351,338,327,325,337,323,3363
+H0645,Derby Hospital,Hospital,-17.306339,123.633399,Public,Western Australia,140,135,121,119,112,101,95,84,86,93,1086
+H0646,Wyndham Hospital,Hospital,-15.477793,128.127772,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0647,Kununurra Hospital,Hospital,-15.775404,128.734229,Public,Western Australia,129,141,139,148,141,131,128,119,120,116,1312
+H0648,Hedland Health Campus,Hospital,-20.413541,118.598178,Public,Western Australia,338,333,344,353,362,363,355,353,345,329,3475
+H0649,Onslow Hospital,Hospital,-21.643238,115.115389,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0650,Roebourne Hospital,Hospital,-20.776317,117.143955,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0651,Tom Price Hospital,Hospital,-22.695367,117.790271,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0652,Newman Hospital,Hospital,-23.354824,119.736503,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0653,Paraburdoo Hospital,Hospital,-23.203031,117.670633,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0655,Carnarvon Hospital,Hospital,-24.886592,113.658993,Public,Western Australia,83,70,62,62,54,52,55,54,56,43,591
+H0656,Exmouth Hospital,Hospital,-21.928276,114.119882,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0657,Geraldton Hospital,Hospital,-28.782808,114.610844,Public,Western Australia,459,474,459,462,459,426,405,358,160,203,3865
+H0658,Meekatharra Hospital,Hospital,-26.591366,118.491861,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0659,Morawa Health Service,Hospital,-29.212897,116.002986,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0660,Mullewa Health Service,Hospital,-28.535991,115.510017,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0661,Northampton Kalbarri Health Service,Hospital,-28.351194,114.635119,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0662,North Midlands Health Service,Hospital,-29.534221,115.759184,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0663,Kalbarri Health Centre,Hospital,-27.712843,114.161574,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0664,Dongara Eneabba Mingenew Health Service,Hospital,-29.265173,114.934179,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0665,Lake Grace Hospital,Hospital,-33.102524,118.452658,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0666,Merredin Hospital,Hospital,-31.485204,118.276491,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0667,Narrogin Hospital,Hospital,-32.937341,117.168459,Public,Western Australia,129,150,153,130,120,102,88,101,109,98,1180
+H0668,Northam Hospital,Hospital,-31.649582,116.657681,Public,Western Australia,70,61,42,19,0,6,13,23,35,42,311
+H0669,Wagin Hospital,Hospital,-33.304662,117.347319,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0670,York Hospital,Hospital,-31.894392,116.757416,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0671,Beverley Hospital,Hospital,-32.102825,116.922962,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0672,Boddington Hospital,Hospital,-32.803715,116.475774,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0673,Bruce Rock Memorial Hospital,Hospital,-31.873038,118.146414,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0674,Corrigin Hospital,Hospital,-32.324419,117.878816,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0676,Dalwallinu Hospital,Hospital,-30.277229,116.656544,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0677,Dumbleyung Memorial Hospital,Hospital,-33.310409,117.740499,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0678,Kellerberrin Memorial Hospital,Hospital,-31.628902,117.716531,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0679,Goomalling Hospital,Hospital,-31.303928,116.831102,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0680,Kondinin Hospital,Hospital,-32.488949,118.265439,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0681,Kununoppin Health Service,Hospital,-31.109682,117.922889,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0682,Moora Hospital,Hospital,-30.639557,116.001119,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0683,Narembeen Memorial Hospital,Hospital,-32.061618,118.391289,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0684,Pingelly Health Centre,Hospital,-32.533042,117.089789,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0685,Southern Cross Hospital,Hospital,-31.230709,119.337829,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0686,Wongan Hills Hospital,Hospital,-30.894159,116.724843,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0687,Wyalkatchem-Koorda and Districts Hospital,Hospital,-31.176246,117.386212,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0688,Quairading Hospital,Hospital,-32.014481,117.402627,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0689,Esperance Hospital,Hospital,-33.856188,121.892205,Public,Western Australia,178,177,168,147,147,151,140,134,126,134,1502
+H0690,Kalgoorlie Health Campus,Hospital,-30.740839,121.470122,Public,Western Australia,678,677,693,688,644,617,577,542,508,502,6126
+H0691,Laverton Hospital,Hospital,-28.626817,122.399861,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0692,Leonora Hospital,Hospital,-28.894319,121.337492,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0693,Norseman Hospital,Hospital,-32.198566,121.767663,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0694,Albany Hospital,Hospital,-35.003407,117.904468,Public,Western Australia,528,582,562,553,552,550,544,515,526,520,5432
+H0695,Denmark Hospital and Health Service,Hospital,-34.957977,117.353489,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0696,Katanning Hospital,Hospital,-33.683032,117.563409,Public,Western Australia,41,3,3,0,0,0,0,0,0,0,47
+H0697,Gnowangerup Hospital,Hospital,-33.930469,118.002927,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0698,Plantagenet Hospital,Hospital,-34.626092,117.654561,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0699,Ravensthorpe Health Centre,Hospital,-33.584918,120.045461,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0700,Kojonup Hospital,Hospital,-33.829481,117.152903,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0701,Augusta Hospital,Hospital,-34.305814,115.157983,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0702,Bunbury Hospital,Hospital,-33.366986,115.648183,Public,Western Australia,932,982,1004,1028,1056,1022,1019,1024,1042,1092,10201
+H0703,Busselton Health Campus,Hospital,-33.654351,115.319581,Public,Western Australia,267,276,282,311,318,289,304,310,310,335,3002
+H0704,Collie Hospital,Hospital,-33.351403,116.162223,Public,Western Australia,76,65,68,70,55,45,35,20,12,10,456
+H0705,Margaret River Hospital,Hospital,-33.952162,115.071229,Public,Western Australia,82,83,78,70,59,60,59,38,28,29,586
+H0706,Donnybrook Hospital,Hospital,-33.576942,115.816547,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0707,Harvey Hospital,Hospital,-33.077554,115.896749,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0708,Nannup Hospital,Hospital,-33.982797,115.76723,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0709,Pemberton Hospital,Hospital,-34.444875,116.031954,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0710,Boyup Brook Soldiers Memorial Hospital,Hospital,-33.839231,116.390639,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0711,Warren Hospital,Hospital,-34.240969,116.154112,Public,Western Australia,23,18,16,14,14,17,18,14,13,16,163
+H0712,Bridgetown Hospital,Hospital,-33.951681,116.132183,Public,Western Australia,46,46,41,37,31,24,25,25,31,35,341
+H0713,Graylands Selby-Lemnos and Special Care Health Service,Hospital,-31.961447,115.790855,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0714,Royal Hobart Hospital,Hospital,-42.880028,147.330136,Public,Tasmania,1885,1918,1907,1918,1902,1858,1895,1940,1969,2012,19204
+H0721,Launceston General Hospital,Hospital,-41.446634,147.142059,Public,Tasmania,1534,1516,1505,1526,1557,1547,1560,1579,1586,1592,15502
+H0731,North West Regional Hospital,Hospital,-41.048385,145.880842,Public,Tasmania,0,110,413,646,758,873,889,825,852,925,6291
+H0735,Mersey Community Hospital,Hospital,-41.229052,146.422445,Public,Tasmania,404,391,368,365,258,69,0,0,0,0,1855
+H0737,Royal Darwin Hospital,Hospital,-12.355806,130.881789,Public,Northern Territory,1912,2004,2079,2120,2164,2144,2074,2038,2136,2174,20845
+H0738,Alice Springs Hospital,Hospital,-23.705758,133.878064,Public,Northern Territory,797,770,782,785,795,773,745,754,759,740,7700
+H0739,Tennant Creek Hospital,Hospital,-19.647791,134.186893,Public,Northern Territory,5,8,3,0,3,3,0,3,3,0,28
+H0740,Katherine Hospital,Hospital,-14.439002,132.272129,Public,Northern Territory,316,280,251,244,235,235,247,254,244,231,2537
+H0741,Gove Hospital,Hospital,-12.18602,136.777874,Public,Northern Territory,161,159,150,131,129,141,140,130,135,141,1417
+H0742,The Canberra Hospital,Hospital,-35.345777,149.100898,Public,Australian Capital Territory,3079,3245,3312,3435,3527,3565,3511,3469,3457,3444,34044
+H0743,Calvary Public Hospital Bruce,Hospital,-35.253321,149.089654,Public,Australian Capital Territory,1524,1652,1776,1798,1722,1614,1593,1617,1692,1760,16748
+H0744,Robina Hospital,Hospital,-28.072198,153.377284,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0745,Queensland Children's Hospital,Hospital,-27.484305,153.026717,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H0746,Fiona Stanley Hospital,Hospital,-32.07012,115.846909,Public,Western Australia,0,0,541,1843,2718,2995,3181,3140,3234,3495,21147
+H0747,St John of God Midland Public Hospital,Hospital,-31.894832,116.008852,Public,Western Australia,0,0,0,449,1399,1853,1843,1848,1941,2039,11372
+H0748,Byron Central Hospital,Hospital,-28.637365,153.555898,Public,New South Wales,0,0,0,0,63,125,124,133,126,115,686
+H0749,Women's at Sandringham,Hospital,-37.961049,145.018157,Public,Victoria,0,508,1268,1579,1596,1593,1604,1564,1559,1504,12775
+H0750,Sunshine Coast University Hospital,Hospital,-26.74681,153.113812,Public,Queensland,0,0,0,0,350,1862,3090,3175,3251,3356,15084
+H0751,Perth Children's Hospital,Hospital,-31.969503,115.817165,Public,Western Australia,0,0,0,0,0,0,0,0,0,0,0
+H0752,Karratha Health Campus,Hospital,-20.732208,116.839511,Public,Western Australia,0,0,0,0,0,0,113,258,311,309,991
+H0753,Northern Beaches Hospital,Hospital,-33.750646,151.23377,Public,New South Wales,0,0,0,0,0,0,503,1242,1615,1679,5039
+H0754,Palmerston Regional Hospital,Hospital,-12.475079,131.004464,Public,Northern Territory,0,0,0,0,0,0,0,0,0,0,0
+H1009,Dame Phyllis Frost Centre - Marmak unit,Hospital,-37.781307,144.742309,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H1016,Goodooga Health Service,Hospital,-29.110249,147.456114,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H1018,Ivanhoe Hospital,Hospital,-32.898193,144.298904,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H1024,Menindee Health Service,Hospital,-32.390335,142.414869,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H1028,QEII Family Centre,Hospital,-35.323284,149.079172,Public,Australian Capital Territory,0,0,0,0,0,0,0,0,0,0,0
+H1034,Sydney Dental Hospital,Hospital,-33.884469,151.207811,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H1038,Tibooburra Health Service,Hospital,-29.433211,142.012817,Public,New South Wales,0,0,0,0,0,0,0,0,0,0,0
+H1046,Mallee Track Health & Community Service [Sea Lake],Hospital,-35.500395,142.858003,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H1047,Ursula Frayne Centre,Hospital,-37.791148,144.886747,Public,Victoria,0,0,0,0,0,0,0,0,0,0,0
+H1048,Surgical Treatment and Rehabilitation Service,Hospital,-27.44926,153.02611,Public,Queensland,0,0,0,0,0,0,0,0,0,0,0
+H5002,Adelaide Day Surgery Pty Ltd,Hospital,-34.922409,138.588817,Private,South Australia,,,,,,,,,,,0
+H5003,Adelaide Eye & Laser Centre,Hospital,-34.94042,138.6215,Private,South Australia,,,,,,,,,,,0
+H5004,Aesthetic Day Surgery,Hospital,-33.964843,151.135032,Private,New South Wales,,,,,,,,,,,0
+H5005,Albert Road Clinic,Hospital,-37.834246,144.972151,Private,Victoria,,,,,,,,,,,0
+H5006,Albury Wodonga Private Hospital,Hospital,-36.075621,146.883177,Private,New South Wales,,,,,,,,,,,0
+H5009,Armidale Private Hospital,Hospital,-30.512719,151.654565,Private,New South Wales,,,,,,,,,,,0
+H5010,Ashford Hospital,Hospital,-34.948142,138.576725,Private,South Australia,,,,,,,,,,,-1
+H5011,Attadale Rehabilitation Hospital,Hospital,-32.029729,115.810669,Private,Western Australia,,,,,,,,,,,0
+H5013,Ballina Day Surgery,Hospital,-28.870711,153.563241,Private,New South Wales,,,,,,,,,,,0
+H5014,Baringa Private Hospital,Hospital,-30.278813,153.102893,Private,New South Wales,,,,,,,,,,,0
+H5015,Bathurst Private Hospital,Hospital,-33.435215,149.589242,Private,New South Wales,,,,,,,,,,,0
+H5017,Beleura Private Hospital,Hospital,-38.225484,145.049136,Private,Victoria,,,,,,,,,,,0
+H5018,Bellbird Private Hospital,Hospital,-37.833073,145.156018,Private,Victoria,,,,,,,,,,,0
+H5019,Berkeley Vale Private Hospital,Hospital,-33.337061,151.432784,Private,New South Wales,,,,,,,,,,,0
+H5021,Bethesda Hospital,Hospital,-31.986967,115.778484,Private,Western Australia,,,,,,,,,,,0
+H5024,Brisbane Private Hospital,Hospital,-27.464756,153.022642,Private,Queensland,,,,,,,,,,,0
+H5025,Brisbane Waters Private Hospital,Hospital,-33.495233,151.321708,Private,New South Wales,,,,,,,,,,,0
+H5026,Caboolture Private Hospital,Hospital,-27.080318,152.963628,Private,Queensland,,,,,,,,,,,0
+H5027,Cabrini Brighton,Hospital,-37.91165,144.991572,Private,Victoria,,,,,,,,,,,0
+H5028,Cabrini Health Elsternwick Rehabilitation - Glenhuntly Rd,Hospital,-37.88543,145.009328,Private,Victoria,,,,,,,,,,,0
+H5029,Cabrini Health Elsternwick Rehabilitation - Hopetoun,Hospital,-37.884778,145.01039,Private,Victoria,,,,,,,,,,,0
+H5030,Cabrini Malvern,Hospital,-37.861641,145.0335,Private,Victoria,,,,,,,,,,,-1
+H5031,Cabrini Prahran,Hospital,-37.854034,145.009017,Private,Victoria,,,,,,,,,,,0
+H5032,Cairns Day Surgery,Hospital,-16.918973,145.771955,Private,Queensland,,,,,,,,,,,0
+H5033,Cairns Private Hospital,Hospital,-16.918854,145.772282,Private,Queensland,,,,,,,,,,,-1
+H5034,Caloundra Private Clinic,Hospital,-26.782379,153.125534,Private,Queensland,,,,,,,,,,,0
+H5035,Calvary Central Districts Hospital,Hospital,-34.75542,138.656221,Private,South Australia,,,,,,,,,,,0
+H5036,Calvary Health Care Riverina,Hospital,-35.118702,147.352811,Private,New South Wales,,,,,,,,,,,-1
+H5037,Calvary Health Care Tasmania - Lenah Valley Campus,Hospital,-42.866099,147.303614,Private,Tasmania,,,,,,,,,,,0
+H5038,Calvary Health Care Tasmania - St John's Campus,Hospital,-42.895314,147.305975,Private,Tasmania,,,,,,,,,,,0
+H5039,Calvary Health Care Tasmania - St Luke's Campus,Hospital,-41.433895,147.149521,Private,Tasmania,,,,,,,,,,,0
+H5040,Calvary Health Care Tasmania - St Vincent's Campus,Hospital,-41.441013,147.141308,Private,Tasmania,,,,,,,,,,,0
+H5041,Calvary John James Hospital,Hospital,-35.319869,149.095662,Private,Australian Capital Territory,,,,,,,,,,,-1
+H5042,Calvary North Adelaide Hospital,Hospital,-34.910003,138.589095,Private,South Australia,,,,,,,,,,,-1
+H5043,Calvary Private Hospital Bruce,Hospital,-35.252882,149.088646,Private,Australian Capital Territory,,,,,,,,,,,0
+H5044,Calvary Rehabilitation Hospital,Hospital,-34.891739,138.611481,Private,South Australia,,,,,,,,,,,0
+H5046,Campbelltown Private Hospital,Hospital,-34.075607,150.804948,Private,New South Wales,,,,,,,,,,,0
+H5047,Canberra Imaging Group Angiography/Interventional Suite,Hospital,-35.318557,149.096004,Private,Australian Capital Territory,,,,,,,,,,,0
+H5050,Castlecrag Private Hospital,Hospital,-33.801822,151.217045,Private,New South Wales,,,,,,,,,,,0
+H5051,Central Coast Day Hospital,Hospital,-33.439692,151.384354,Private,New South Wales,,,,,,,,,,,0
+H5055,Colin Street Day Hospital,Hospital,-31.949358,115.841569,Private,Western Australia,,,,,,,,,,,0
+H5057,Coolenberg Day Surgery,Hospital,-31.439829,152.909473,Private,New South Wales,,,,,,,,,,,0
+H5060,Darwin Private Hospital,Hospital,-12.357357,130.881789,Private,Northern Territory,,,,,,,,,,,-1
+H5062,Diagnostic Endoscopy Centre,Hospital,-33.879519,151.220852,Private,New South Wales,,,,,,,,,,,0
+H5063,Donvale Rehabilitation Hospital,Hospital,-37.789836,145.171655,Private,Victoria,,,,,,,,,,,0
+H5064,Dorset Rehabilitation Centre,Hospital,-37.723402,144.947436,Private,Victoria,,,,,,,,,,,0
+H5065,Dudley Private Hospital,Hospital,-33.282219,149.121236,Private,New South Wales,,,,,,,,,,,0
+H5067,Epping Surgery Centre,Hospital,-33.771132,151.083676,Private,New South Wales,,,,,,,,,,,0
+H5068,Epworth Cliveden,Hospital,-37.815662,144.987547,Private,Victoria,,,,,,,,,,,0
+H5069,Epworth Eastern,Hospital,-37.814678,145.119368,Private,Victoria,,,,,,,,,,,0
+H5070,Epworth Freemasons [Albert Street],Hospital,-37.810694,144.984107,Private,Victoria,,,,,,,,,,,0
+H5071,Epworth Freemasons [Victoria Parade],Hospital,-37.809284,144.98212,Private,Victoria,,,,,,,,,,,-1
+H5072,Epworth Rehabilitation Brighton,Hospital,-37.913689,145.002815,Private,Victoria,,,,,,,,,,,0
+H5073,Epworth Camberwell,Hospital,-37.846223,145.054689,Private,Victoria,,,,,,,,,,,0
+H5074,Epworth Richmond Rehabilitation,Hospital,-37.817419,144.993503,Private,Victoria,,,,,,,,,,,0
+H5075,Epworth Richmond,Hospital,-37.817433,144.993029,Private,Victoria,,,,,,,,,,,0
+H5076,Eye-Tech Day Surgeries,Hospital,-27.461026,153.021898,Private,Queensland,,,,,,,,,,,0
+H5077,Eye-Tech Day Surgeries Southside,Hospital,-27.557642,153.082042,Private,Queensland,,,,,,,,,,,0
+H5078,Figtree Private Hospital,Hospital,-34.440199,150.851024,Private,New South Wales,,,,,,,,,,,-1
+H5079,Flinders Private Hospital,Hospital,-35.020629,138.568089,Private,South Australia,,,,,,,,,,,0
+H5080,Forster Private Hospital,Hospital,-32.188561,152.514079,Private,New South Wales,,,,,,,,,,,0
+H5081,Frances Perry House,Hospital,-37.798758,144.955135,Private,Victoria,,,,,,,,,,,-1
+H5084,Glenferrie Private Hospital,Hospital,-37.819459,145.031544,Private,Victoria,,,,,,,,,,,0
+H5085,Glengarry Private Hospital,Hospital,-31.834253,115.784826,Private,Western Australia,,,,,,,,,,,-1
+H5086,Greenslopes Private Hospital,Hospital,-27.513052,153.046942,Private,Queensland,,,,,,,,,,,-1
+H5087,Griffith Rehabilitation Hospital,Hospital,-35.010285,138.523859,Private,South Australia,,,,,,,,,,,0
+H5088,Gympie Private Hospital,Hospital,-26.184392,152.664191,Private,Queensland,,,,,,,,,,,0
+H5091,Hervey Bay Surgical Hospital,Hospital,-25.287202,152.834651,Private,Queensland,,,,,,,,,,,0
+H5092,Hillcrest Rockhampton Private Hospital,Hospital,-23.377595,150.496076,Private,Queensland,,,,,,,,,,,0
+H5093,Hobart Private Hospital,Hospital,-42.880752,147.329886,Private,Tasmania,,,,,,,,,,,-1
+H5094,Hollywood Private Hospital,Hospital,-31.969693,115.809148,Private,Western Australia,,,,,,,,,,,0
+H5095,St Vincent's Private Hospital [Northside],Hospital,-27.390688,153.022728,Private,Queensland,,,,,,,,,,,0
+H5097,Hunter Valley Private Hospital,Hospital,-32.883085,151.695054,Private,New South Wales,,,,,,,,,,,0
+H5098,Hunters Hill Private Hospital,Hospital,-33.835273,151.150172,Private,New South Wales,,,,,,,,,,,0
+H5099,Hurstville Private,Hospital,-33.962333,151.095989,Private,New South Wales,,,,,,,,,,,-1
+H5100,Ipswich Day Hospital,Hospital,-27.6184,152.7608,Private,Queensland,,,,,,,,,,,0
+H5101,John Fawkner Private Hospital,Hospital,-37.754369,144.958398,Private,Victoria,,,,,,,,,,,0
+H5102,John Flynn Private Hospital,Hospital,-28.153911,153.488616,Private,Queensland,,,,,,,,,,,-1
+H5103,Joondalup Health Campus (Private),Hospital,-31.738788,115.77034,Private,Western Australia,,,,,,,,,,,0
+H5105,Kareena Private Hospital,Hospital,-34.034986,151.114186,Private,New South Wales,,,,,,,,,,,-1
+H5106,Kawana Private Hospital,Hospital,-26.733825,153.122164,Private,Queensland,,,,,,,,,,,0
+H5107,Knox Private Hospital,Hospital,-37.849645,145.228035,Private,Victoria,,,,,,,,,,,0
+H5108,Lady Davidson Private Hospital,Hospital,-33.726718,151.139119,Private,New South Wales,,,,,,,,,,,0
+H5109,Lake Macquarie Private Hospital,Hospital,-32.981232,151.691719,Private,New South Wales,,,,,,,,,,,0
+H5110,Lawrence Hargrave Private Hospital,Hospital,-34.310173,150.917631,Private,New South Wales,,,,,,,,,,,0
+H5111,Linacre Private Hospital,Hospital,-37.942699,145.003259,Private,Victoria,,,,,,,,,,,0
+H5113,Macquarie University Hospital,Hospital,-33.773484,151.117877,Private,New South Wales,,,,,,,,,,,0
+H5114,Maryvale Private Hospital,Hospital,-38.215028,146.418561,Private,Victoria,,,,,,,,,,,0
+H5115,Masada Private Hospital,Hospital,-37.869799,145.003096,Private,Victoria,,,,,,,,,,,0
+H5116,Mater Children's Private Brisbane,Hospital,-27.48485,153.027436,Private,Queensland,,,,,,,,,,,0
+H5117,Mater Private Hospital Townsville,Hospital,-19.288482,146.786528,Private,Queensland,,,,,,,,,,,-1
+H5118,Mater Misericordiae Day Unit,Hospital,-21.139073,149.181984,Private,Queensland,,,,,,,,,,,0
+H5119,Mater Misericordiae Hospital Bundaberg,Hospital,-24.870766,152.330412,Private,Queensland,,,,,,,,,,,0
+H5120,Mater Misericordiae Hospital Gladstone,Hospital,-23.850526,151.247469,Private,Queensland,,,,,,,,,,,0
+H5121,Mater Misericordiae Hospital Mackay,Hospital,-21.129416,149.166033,Private,Queensland,,,,,,,,,,,-1
+H5122,Mater Misericordiae Hospital Rockhampton,Hospital,-23.398033,150.497444,Private,Queensland,,,,,,,,,,,-1
+H5124,Mater Mothers' Private Brisbane,Hospital,-27.485992,153.027747,Private,Queensland,,,,,,,,,,,-1
+H5125,Mater Private Hospital Redland,Hospital,-27.540811,153.25043,Private,Queensland,,,,,,,,,,,-1
+H5126,Mater Private Hospital Brisbane,Hospital,-27.483975,153.028777,Private,Queensland,,,,,,,,,,,0
+H5130,Melbourne Private Hospital,Hospital,-37.798272,144.957025,Private,Victoria,,,,,,,,,,,0
+H5131,St John of God Mt Lawley Hospital,Hospital,-31.936721,115.884926,Private,Western Australia,,,,,,,,,,,-1
+H5132,St Vincent's Private Hospital [East Melbourne],Hospital,-37.811733,144.984164,Private,Victoria,,,,,,,,,,,0
+H5133,Metwest Eye Centre,Hospital,-33.774236,150.912421,Private,New South Wales,,,,,,,,,,,0
+H5135,Mildura Health Private Hospital,Hospital,-34.18479,142.145705,Private,Victoria,,,,,,,,,,,0
+H5136,Mitcham Private Hospital,Hospital,-37.810436,145.194808,Private,Victoria,,,,,,,,,,,-1
+H5141,Mount Gambier Private Hospital,Hospital,-37.805952,140.786887,Private,South Australia,,,,,,,,,,,0
+H5142,Mount Hospital,Hospital,-31.958534,115.845401,Private,Western Australia,,,,,,,,,,,0
+H5143,Mount Wilga Private Hospital,Hospital,-33.692829,151.092939,Private,New South Wales,,,,,,,,,,,0
+H5144,Murray Valley Private Hospital,Hospital,-36.138419,146.876478,Private,Victoria,,,,,,,,,,,0
+H5145,Nambour Selangor Private Hospital,Hospital,-26.618265,152.955949,Private,Queensland,,,,,,,,,,,-1
+H5146,National Capital Private Hospital,Hospital,-35.344872,149.101944,Private,Australian Capital Territory,,,,,,,,,,,0
+H5147,Nepean Private Hospital,Hospital,-33.759775,150.715206,Private,New South Wales,,,,,,,,,,,-1
+H5148,New Farm Clinic,Hospital,-27.473623,153.045879,Private,Queensland,,,,,,,,,,,0
+H5149,Newcastle Private Hospital,Hospital,-32.922537,151.698371,Private,New South Wales,,,,,,,,,,,-1
+H5150,Noosa Hospital,Hospital,-26.403209,153.046309,Private,Queensland,,,,,,,,,,,0
+H5151,North Eastern Rehabilitation Centre,Hospital,-37.763424,145.031344,Private,Victoria,,,,,,,,,,,0
+H5152,North Shore Private Hospital,Hospital,-33.820622,151.189159,Private,New South Wales,,,,,,,,,,,-1
+H5153,North West Private Hospital,Hospital,-27.393992,152.992705,Private,Queensland,,,,,,,,,,,-1
+H5154,Northpark Private Hospital,Hospital,-37.691208,145.061631,Private,Victoria,,,,,,,,,,,-1
+H5155,Northside Group [St Leonards Clinic],Hospital,-33.825156,151.188367,Private,New South Wales,,,,,,,,,,,0
+H5156,Northside Group [Cremorne Clinic],Hospital,-33.833425,151.222886,Private,New South Wales,,,,,,,,,,,0
+H5157,Northside Group [Wentworthville Clinic],Hospital,-33.811188,150.974575,Private,New South Wales,,,,,,,,,,,0
+H5158,Norwest Private Hospital,Hospital,-33.744941,150.953608,Private,New South Wales,,,,,,,,,,,-1
+H5159,Nowra Private Hospital,Hospital,-34.893534,150.606551,Private,New South Wales,,,,,,,,,,,0
+H5161,Orange Surgery Centre,Hospital,-33.283027,149.102737,Private,New South Wales,,,,,,,,,,,0
+H5162,Oxford Day Surgery and Dermatology,Hospital,-31.922727,115.841536,Private,Western Australia,,,,,,,,,,,0
+H5164,Pacific Private Day Hospital,Hospital,-27.970407,153.407829,Private,Queensland,,,,,,,,,,,0
+H5165,Parkwynd Private Hospital,Hospital,-34.928514,138.614276,Private,South Australia,,,,,,,,,,,0
+H5166,Peninsula Private Hospital Queensland,Hospital,-27.230696,153.093087,Private,Queensland,,,,,,,,,,,0
+H5167,Peninsula Private Hospital Victoria,Hospital,-38.157557,145.169552,Private,Victoria,,,,,,,,,,,-1
+H5168,Pennant Hills Day Surgery,Hospital,-33.738295,151.074354,Private,New South Wales,,,,,,,,,,,0
+H5169,Perth Clinic,Hospital,-31.950874,115.843266,Private,Western Australia,,,,,,,,,,,0
+H5170,Pindara Day Procedure Centre,Hospital,-28.008508,153.39373,Private,Queensland,,,,,,,,,,,0
+H5171,Pindara Private Hospital,Hospital,-28.007076,153.393569,Private,Queensland,,,,,,,,,,,-1
+H5172,Pine Rivers Private Hospital,Hospital,-27.308361,152.994832,Private,Queensland,,,,,,,,,,,0
+H5173,Port Macquarie Private Hospital,Hospital,-31.442073,152.909375,Private,New South Wales,,,,,,,,,,,0
+H5174,Prince of Wales Private Hospital,Hospital,-33.918492,151.238659,Private,New South Wales,,,,,,,,,,,-1
+H5175,Ringwood Private Hospital,Hospital,-37.811523,145.243629,Private,Victoria,,,,,,,,,,,0
+H5176,Rivercity Private Hospital,Hospital,-27.473491,152.995132,Private,Queensland,,,,,,,,,,,0
+H5179,Shepparton Private Hospital,Hospital,-36.359183,145.410825,Private,Victoria,,,,,,,,,,,0
+H5180,Short Street Day Surgery,Hospital,-27.970813,153.416975,Private,Queensland,,,,,,,,,,,0
+H5181,Lady Bjelke-Petersen Community Hospital,Hospital,-26.543051,151.836891,Private,Queensland,,,,,,,,,,,0
+H5182,South Eastern Private Hospital,Hospital,-37.966243,145.191922,Private,Victoria,,,,,,,,,,,0
+H5184,Southern Highlands Private Hospital,Hospital,-34.484223,150.422882,Private,New South Wales,,,,,,,,,,,0
+H5185,Southside Endoscopy Centre,Hospital,-27.662981,153.17828,Private,Queensland,,,,,,,,,,,0
+H5186,SPORTSMED SA Hospital & Day Surgery,Hospital,-34.913521,138.624987,Private,South Australia,,,,,,,,,,,0
+H5187,St Andrew's Hospital,Hospital,-34.934224,138.614963,Private,South Australia,,,,,,,,,,,0
+H5188,St Andrew's Ipswich Private Hospital,Hospital,-27.618799,152.763079,Private,Queensland,,,,,,,,,,,-1
+H5189,St Andrew's War Memorial Hospital,Hospital,-27.461224,153.021011,Private,Queensland,,,,,,,,,,,0
+H5190,St George Private Hospital,Hospital,-33.966952,151.136055,Private,New South Wales,,,,,,,,,,,-1
+H5191,St Helen's Private Hospital,Hospital,-42.886839,147.325791,Private,Tasmania,,,,,,,,,,,0
+H5192,St John of God Ballarat Hospital,Hospital,-37.558544,143.847406,Private,Victoria,,,,,,,,,,,-1
+H5193,St John of God Bendigo Hospital,Hospital,-36.762043,144.263298,Private,Victoria,,,,,,,,,,,0
+H5194,St John of God Berwick Hospital,Hospital,-38.034499,145.344974,Private,Victoria,,,,,,,,,,,-1
+H5195,St John of God Bunbury Hospital,Hospital,-33.365947,115.648869,Private,Western Australia,,,,,,,,,,,0
+H5196,St John of God Burwood Hospital,Hospital,-33.869832,151.100538,Private,New South Wales,,,,,,,,,,,0
+H5197,St John of God Geelong Hospital,Hospital,-38.151567,144.357679,Private,Victoria,,,,,,,,,,,-1
+H5198,St John of God Geraldton Hospital,Hospital,-28.784383,114.616439,Private,Western Australia,,,,,,,,,,,-1
+H5199,St John of God Murdoch Hospital,Hospital,-32.067919,115.844659,Private,Western Australia,,,,,,,,,,,-1
+H5200,St John of God Richmond Hospital,Hospital,-33.591946,150.702473,Private,New South Wales,,,,,,,,,,,0
+H5201,St John of God Subiaco Hospital,Hospital,-31.941246,115.826282,Private,Western Australia,,,,,,,,,,,-1
+H5202,St John of God Warrnambool Hospital,Hospital,-38.371405,142.478749,Private,Victoria,,,,,,,,,,,-1
+H5203,St John of God Frankston Rehabilitation Hospital,Hospital,-38.153035,145.155926,Private,Victoria,,,,,,,,,,,0
+H5204,St John of God Pinelodge Clinic,Hospital,-37.970226,145.213143,Private,Victoria,,,,,,,,,,,0
+H5205,St Luke's Hospital,Hospital,-33.874188,151.225836,Private,New South Wales,,,,,,,,,,,0
+H5206,St Stephen's Hospital [Hervey Bay],Hospital,-25.299851,152.823273,Private,Queensland,,,,,,,,,,,0
+H5208,St Vincent's Private Hospital [Toowoomba],Hospital,-27.565675,151.971551,Private,Queensland,,,,,,,,,,,-1
+H5209,St Vincent's Private Hospital Fitzroy,Hospital,-37.807993,144.976029,Private,Victoria,,,,,,,,,,,-1
+H5210,St Vincent's Private Hospital [Sydney],Hospital,-33.880698,151.219462,Private,New South Wales,,,,,,,,,,,0
+H5211,St Vincent's Private Hospital [Lismore],Hospital,-28.819949,153.287381,Private,New South Wales,,,,,,,,,,,0
+H5212,Stirling Hospital,Hospital,-35.007274,138.714859,Private,South Australia,,,,,,,,,,,0
+H5213,Strathfield Private Hospital,Hospital,-33.872059,151.097544,Private,New South Wales,,,,,,,,,,,0
+H5214,Subiaco Private Hospital,Hospital,-31.9434,115.826,Private,Western Australia,,,,,,,,,,,0
+H5215,Sunnybank Private Hospital,Hospital,-27.572541,153.061051,Private,Queensland,,,,,,,,,,,-1
+H5216,Sunshine Coast Haematology and Oncology Clinic,Hospital,-26.657299,153.094955,Private,Queensland,,,,,,,,,,,0
+H5218,Sydney Adventist Hospital,Hospital,-33.733379,151.099874,Private,New South Wales,,,,,,,,,,,-1
+H5219,Sydney Day Surgery - Prince Alfred,Hospital,-33.8912,151.1835,Private,New South Wales,,,,,,,,,,,0
+H5220,Sydney Southwest Private Hospital,Hospital,-33.917876,150.927499,Private,New South Wales,,,,,,,,,,,-1
+H5221,Tamara Private Hospital,Hospital,-31.077535,150.921764,Private,New South Wales,,,,,,,,,,,0
+H5222,The Avenue Hospital,Hospital,-37.854809,144.998513,Private,Victoria,,,,,,,,,,,0
+H5223,The Bays Hospital,Hospital,-38.223524,145.040939,Private,Victoria,,,,,,,,,,,-1
+H5225,The Eye Hospital,Hospital,-41.444592,147.141609,Private,Tasmania,,,,,,,,,,,0
+H5226,The Geelong Clinic,Hospital,-38.182406,144.393267,Private,Victoria,,,,,,,,,,,0
+H5227,The Hills Clinic Kellyville,Hospital,-33.716759,150.952057,Private,New South Wales,,,,,,,,,,,0
+H5228,The Hills Private Hospital,Hospital,-33.743476,150.9825,Private,New South Wales,,,,,,,,,,,0
+H5229,The Hobart Clinic,Hospital,-42.905613,147.435278,Private,Tasmania,,,,,,,,,,,0
+H5230,Mater Hospital Sydney,Hospital,-33.831152,151.201247,Private,New South Wales,,,,,,,,,,,0
+H5231,The Melbourne Clinic,Hospital,-37.814361,144.998739,Private,Victoria,,,,,,,,,,,0
+H5232,The Memorial Hospital,Hospital,-34.912733,138.599385,Private,South Australia,,,,,,,,,,,0
+H5233,The Skin Hospital [Westmead],Hospital,-33.8072,150.98879,Private,New South Wales,,,,,,,,,,,0
+H5234,Buderim Private Hospital,Hospital,-26.683988,153.092895,Private,Queensland,,,,,,,,,,,-1
+H5235,The Sydney Clinic,Hospital,-33.901383,151.260988,Private,New South Wales,,,,,,,,,,,0
+H5236,Mulgrave Private Hospital,Hospital,-37.938409,145.213122,Private,Victoria,,,,,,,,,,,0
+H5237,The Victoria Clinic,Hospital,-37.847714,144.997225,Private,Victoria,,,,,,,,,,,0
+H5238,The Victorian Rehabilitation Centre,Hospital,-37.898227,145.161425,Private,Victoria,,,,,,,,,,,0
+H5239,The Wesley Hospital,Hospital,-27.478335,152.997971,Private,Queensland,,,,,,,,,,,-1
+H5241,Toowong Private Hospital,Hospital,-27.47736,152.99125,Private,Queensland,,,,,,,,,,,0
+H5242,Toowoomba Surgicentre,Hospital,-27.566341,151.973785,Private,Queensland,,,,,,,,,,,0
+H5243,Townsville Day Surgery,Hospital,-19.268889,146.782836,Private,Queensland,,,,,,,,,,,0
+H5244,Tweed Day Surgery,Hospital,-28.179019,153.539989,Private,New South Wales,,,,,,,,,,,0
+H5245,Victoria Parade Surgery Centre,Hospital,-37.808521,144.97476,Private,Victoria,,,,,,,,,,,0
+H5246,St Vincent's Private Hospital [Kew],Hospital,-37.806567,145.023694,Private,Victoria,,,,,,,,,,,0
+H5247,Waikiki Private Hospital,Hospital,-32.310552,115.763147,Private,Western Australia,,,,,,,,,,,0
+H5248,Wangaratta Private Hospital,Hospital,-36.349299,146.312423,Private,Victoria,,,,,,,,,,,0
+H5249,Warners Bay Private Hospital,Hospital,-32.965262,151.641204,Private,New South Wales,,,,,,,,,,,0
+H5250,Warringal Private Hospital,Hospital,-37.754419,145.060728,Private,Victoria,,,,,,,,,,,0
+H5251,Waverley Private Hospital,Hospital,-37.884632,145.145798,Private,Victoria,,,,,,,,,,,-1
+H5252,Wesley Hospital Ashfield,Hospital,-33.8925,151.116666,Private,New South Wales,,,,,,,,,,,0
+H5253,Wesley Hospital Kogarah,Hospital,-33.968262,151.12896,Private,New South Wales,,,,,,,,,,,0
+H5254,Western Hospital,Hospital,-34.909971,138.49966,Private,South Australia,,,,,,,,,,,0
+H5255,Western Private Hospital,Hospital,-37.793045,144.885932,Private,Victoria,,,,,,,,,,,0
+H5256,Westmead Private Hospital,Hospital,-33.802865,150.982382,Private,New South Wales,,,,,,,,,,,-1
+H5257,Westmead Rehabilitation Hospital,Hospital,-33.819288,150.981059,Private,New South Wales,,,,,,,,,,,0
+H5258,Westminster Day Surgery,Hospital,-31.862769,115.829163,Private,Western Australia,,,,,,,,,,,0
+H5259,Wolper Jewish Hospital,Hospital,-33.884118,151.240739,Private,New South Wales,,,,,,,,,,,0
+H5260,Adelaide Surgicentre,Hospital,-34.917691,138.621022,Private,South Australia,,,,,,,,,,,0
+H5261,Brisbane Endoscopy Services,Hospital,-27.572418,153.061985,Private,Queensland,,,,,,,,,,,0
+H5263,Mogo Day Surgery,Hospital,-35.782893,150.14387,Private,New South Wales,,,,,,,,,,,0
+H5265,St Andrew's Toowoomba Hospital,Hospital,-27.539156,151.933665,Private,Queensland,,,,,,,,,,,0
+H5266,Greenslopes Day Surgery,Hospital,-27.510139,153.052889,Private,Queensland,,,,,,,,,,,0
+H5267,Ulladulla Endoscopy and Medical Centre,Hospital,-35.358764,150.473481,Private,New South Wales,,,,,,,,,,,0
+H5269,Waratah Private Hospital,Hospital,-33.963651,151.100464,Private,New South Wales,,,,,,,,,,,0
+H5270,Mackay Specialist Day Hospital,Hospital,-21.129471,149.16544,Private,Queensland,,,,,,,,,,,0
+H5275,Burnside War Memorial Hospital,Hospital,-34.927126,138.638878,Private,South Australia,,,,,,,,,,,-1
+H5276,Manningham Day Procedure Centre,Hospital,-37.773471,145.115662,Private,Victoria,,,,,,,,,,,0
+H5277,Glenelg Community Hospital Inc,Hospital,-34.990189,138.512321,Private,South Australia,,,,,,,,,,,0
+H5278,Chermside Day Hospital,Hospital,-27.381971,153.029423,Private,Queensland,,,,,,,,,,,0
+H5279,Vision Day Surgery Eastern,Hospital,-37.817591,145.119433,Private,Victoria,,,,,,,,,,,0
+H5280,Vision Day Surgery Camberwell,Hospital,-37.83252,145.0556,Private,Victoria,,,,,,,,,,,0
+H5281,Vision Day Surgery Footscray,Hospital,-37.800508,144.895155,Private,Victoria,,,,,,,,,,,0
+H5282,North Queensland Day Surgical Centre,Hospital,-19.279643,146.791468,Private,Queensland,,,,,,,,,,,0
+H5283,Vision Day Surgery Hurstville,Hospital,-33.966949,151.100439,Private,New South Wales,,,,,,,,,,,0
+H5284,Vision Eye Institute Chatswood,Hospital,-33.795181,151.187314,Private,New South Wales,,,,,,,,,,,0
+H5285,Vision Day Surgery Rivercity,Hospital,-27.473726,152.995579,Private,Queensland,,,,,,,,,,,0
+H5286,Vision Eye Institute,Hospital,-37.850605,144.980304,Private,Victoria,,,,,,,,,,,0
+H5287,Queensland Eye Hospital,Hospital,-27.4613,153.024547,Private,Queensland,,,,,,,,,,,0
+H5288,The Sydney Private Hospital Incorporating the NSW Eye Centre,Hospital,-33.894,151.1299,Private,New South Wales,,,,,,,,,,,0
+H5289,Epworth Hawthorn,Hospital,-37.821229,145.023405,Private,Victoria,,,,,,,,,,,0
+H5290,Walcott Street Surgical Centre,Hospital,-31.936554,115.874141,Private,Western Australia,,,,,,,,,,,0
+H5291,Miranda Eye Surgical Centre,Hospital,-34.03244,151.101631,Private,New South Wales,,,,,,,,,,,0
+H5292,St Vincent's Private Hospital [Brisbane],Hospital,-27.473334,153.03542,Private,Queensland,,,,,,,,,,,0
+H5293,South Perth Hospital,Hospital,-31.988465,115.862816,Private,Western Australia,,,,,,,,,,,0
+H5294,Northside Group [Macarthur Clinic],Hospital,-34.071999,150.816958,Private,New South Wales,,,,,,,,,,,0
+H5295,Sunshine Coast University Private Hospital,Hospital,-26.74422,153.114563,Private,Queensland,,,,,,,,,,,0
+H5298,Mackay Private Hospital,Hospital,-21.113723,149.166763,Private,Queensland,,,,,,,,,,,0
+H5299,Wagga Endoscopy Centre,Hospital,-35.115815,147.365914,Private,New South Wales,,,,,,,,,,,0
+H5301,Nambour Day Surgery,Hospital,-26.626321,152.96409,Private,Queensland,,,,,,,,,,,0
+H5302,San Day Surgery Hornsby,Hospital,-33.701961,151.110612,Private,New South Wales,,,,,,,,,,,0
+H5306,Wollongong Day Surgery,Hospital,-34.42583,150.881346,Private,New South Wales,,,,,,,,,,,0
+H5307,Hobsons Bay Endoscopy Centre Werribee,Hospital,-37.890649,144.686494,Private,Victoria,,,,,,,,,,,0
+H5308,Altona Endoscopy Centre,Hospital,-37.869448,144.828494,Private,Victoria,,,,,,,,,,,0
+H5309,Hobsons Bay Endoscopy Centre Sydenham,Hospital,-37.693365,144.758677,Private,Victoria,,,,,,,,,,,0
+H5310,Friendly Society Private Hospital,Hospital,-24.870831,152.3429,Private,Queensland,,,,,,,,,,,0
+H5314,Ballarat Day Procedure Centre,Hospital,-37.540799,143.83214,Private,Victoria,,,,,,,,,,,0
+H5315,Buderim Gastroenterology Centre,Hospital,-26.671731,153.084944,Private,Queensland,,,,,,,,,,,0
+H5317,Kingsway Day Surgery,Hospital,-34.034096,151.103827,Private,New South Wales,,,,,,,,,,,0
+H5323,Logan Endoscopy Services,Hospital,-27.659112,153.038795,Private,Queensland,,,,,,,,,,,0
+H5324,Chatswood Private Hospital,Hospital,-33.797612,151.185691,Private,New South Wales,,,,,,,,,,,0
+H5325,Wollongong Private Hospital,Hospital,-34.425814,150.880729,Private,New South Wales,,,,,,,,,,,-1
+H5327,Frankston Private Hospital,Hospital,-38.154662,145.132902,Private,Victoria,,,,,,,,,,,0
+H5328,Jessie McPherson Private Hospital,Hospital,-37.9201,145.1225,Private,Victoria,,,,,,,,,,,-1
+H5329,Liverpool Eye Surgery,Hospital,-33.922953,150.926861,Private,New South Wales,,,,,,,,,,,0
+H5330,Coffs Day Hospital,Hospital,-30.300233,153.115865,Private,New South Wales,,,,,,,,,,,0
+H5331,Western Sydney Private Oncology and Infusion Centre,Hospital,-33.802024,150.982879,Private,New South Wales,,,,,,,,,,,0
+H5332,The Border Cancer Hospital,Hospital,-36.078399,146.938123,Private,New South Wales,,,,,,,,,,,0
+H5333,Sunshine Coast Day Surgery,Hospital,-26.655373,153.096157,Private,Queensland,,,,,,,,,,,0
+H5334,St John of God Midland Private Hospital,Hospital,-31.894611,116.00748,Private,Western Australia,,,,,,,,,,,0
+H5336,Gold Coast Private Hospital,Hospital,-27.962084,153.385112,Private,Queensland,,,,,,,,,,,0
+H5337,La Trobe Private Hospital,Hospital,-37.716679,145.044334,Private,Victoria,,,,,,,,,,,0
+H5338,Holmesglen Private Hospital,Hospital,-37.935738,145.050581,Private,Victoria,,,,,,,,,,,0
+H5339,Epworth Geelong,Hospital,-38.193882,144.302472,Private,Victoria,,,,,,,,,,,0
+H5340,Madison Day Surgery,Hospital,-33.703145,151.100395,Private,New South Wales,,,,,,,,,,,0
+H5341,Chris O'Brien Lifehouse,Hospital,-33.890577,151.182234,Private,New South Wales,,,,,,,,,,,0
+H5343,The Southport Private Hospital,Hospital,-27.973078,153.407852,Private,Queensland,,,,,,,,,,,0
+H5344,Westside Private Hospital,Hospital,-27.491448,152.981745,Private,Queensland,,,,,,,,,,,0
+H5345,Hirondelle Private Hospital,Hospital,-33.789864,151.178696,Private,New South Wales,,,,,,,,,,,0
+H5346,Mayo Private Hospital,Hospital,-31.881672,152.430725,Private,New South Wales,,,,,,,,,,,0
+H5347,Toronto Private Hospital,Hospital,-33.015911,151.592911,Private,New South Wales,,,,,,,,,,,0
+H5348,Lingard Private Hospital,Hospital,-32.940395,151.755463,Private,New South Wales,,,,,,,,,,,0
+H5349,Shellharbour Private Hospital,Hospital,-34.55888,150.847733,Private,New South Wales,,,,,,,,,,,0
+H5350,Gosford Private Hospital,Hospital,-33.41861,151.349518,Private,New South Wales,,,,,,,,,,,-1
+H5351,Dubbo Private Hospital,Hospital,-32.237087,148.621094,Private,New South Wales,,,,,,,,,,,0
+H5352,Maitland Private Hospital,Hospital,-32.764954,151.597672,Private,New South Wales,,,,,,,,,,,0
+H5353,St. Vincent Private Community Hospital [Griffith],Hospital,-34.280708,146.043716,Private,New South Wales,,,,,,,,,,,0
+H5354,Brunswick Private Hospital,Hospital,-37.756737,144.972183,Private,Victoria,,,,,,,,,,,0
+H5355,St Vincent's Private Hospital [Werribee],Hospital,-37.887905,144.701508,Private,Victoria,,,,,,,,,,,0
+H5357,Eden Private Hospital,Hospital,-26.420078,152.908844,Private,Queensland,,,,,,,,,,,0
+H5358,Robina Private Hospital,Hospital,-28.071932,153.375778,Private,Queensland,,,,,,,,,,,0
+H5359,North West Private Hospital (Tas),Hospital,-41.0453,145.878784,Private,Tasmania,,,,,,,,,,,-1
+H5360,Cairns Haematology and Oncology Clinic,Hospital,-16.91609,145.769684,Private,Queensland,,,,,,,,,,,0
+H5361,Northern Beaches Hospital - Private,Hospital,-33.751125,151.233017,Private,New South Wales,,,,,,,,,,,-1
+H5362,James Nash House,Hospital,-34.849781,138.637283,Public,South Australia,0,0,0,0,0,0,0,0,0,0,0
+H5363,University of Canberra Hospital,Hospital,-35.232925,149.081879,Public,Australian Capital Territory,0,0,0,0,0,0,0,0,0,0,0
+H5364,Calvary Adelaide Hospital,Hospital,-34.9276,138.6113,Private,South Australia,,,,,,,,,,,0
+H5365,Albany Community Hospice,Hospital,-35.00322,117.904381,Private,Western Australia,,,,,,,,,,,0
+H5366,Albany Day Hospital,Hospital,-35.016312,117.89196,Private,Western Australia,,,,,,,,,,,0
+H5367,Albury Day Surgery,Hospital,-36.073689,146.883606,Private,New South Wales,,,,,,,,,,,0
+H5368,Alwyn Rehabilitation Hospital,Hospital,-33.882797,151.094406,Private,New South Wales,,,,,,,,,,,0
+H5369,Arcadia Pittwater Private Hospital,Hospital,-33.67746,151.28624,Private,New South Wales,,,,,,,,,,,0
+H5370,Belmont Private Hospital,Hospital,-27.500755,153.098953,Private,Queensland,,,,,,,,,,,0
+H5371,Bendigo Day Surgery,Hospital,-36.761902,144.261673,Private,Victoria,,,,,,,,,,,0
+H5372,Bondi Junction Private Hospital,Hospital,-33.892315,151.24585,Private,New South Wales,,,,,,,,,,,0
+H5373,Brighton Dialysis Clinic,Hospital,-35.008746,138.52224,Private,South Australia,,,,,,,,,,,0
+H5374,Brisbane Day Hospital,Hospital,-27.51023,153.0526,Private,Queensland,,,,,,,,,,,0
+H5375,Cambridge Day Surgery,Hospital,-31.940639,115.824883,Private,Western Australia,,,,,,,,,,,0
+H5376,Canberra Private Hospital,Hospital,-35.320526,149.097397,Private,Australian Capital Territory,,,,,,,,,,,0
+H5377,Charlestown Private Hospital,Hospital,-32.960152,151.697571,Private,New South Wales,,,,,,,,,,,0
+H5378,Churchill Day Surgery,Hospital,-31.94771,115.831169,Private,Western Australia,,,,,,,,,,,0
+H5379,City West Specialist Day Hospital,Hospital,-33.801174,150.982773,Private,New South Wales,,,,,,,,,,,0
+H5381,Craigie Day Surgery,Hospital,-31.78446,115.765938,Private,Western Australia,,,,,,,,,,,0
+H5382,Delmar Private Hospital,Hospital,-33.758137,151.288086,Private,New South Wales,,,,,,,,,,,0
+H5383,Delmont Private Hospital,Hospital,-37.856853,145.094055,Private,Victoria,,,,,,,,,,,0
+H5384,Double Bay Day Hospital,Hospital,-33.877689,151.243973,Private,New South Wales,,,,,,,,,,,0
+H5385,East Sydney Private Hospital,Hospital,-33.873741,151.215942,Private,New South Wales,,,,,,,,,,,0
+H5386,Eastern Suburbs Private Hospital,Hospital,-33.910378,151.245865,Private,New South Wales,,,,,,,,,,,0
+H5387,Forest Hill Dialysis Clinic,Hospital,-37.836281,145.166397,Private,Victoria,,,,,,,,,,,0
+H5388,Gordon Private Hospital,Hospital,-33.7579,151.152664,Private,New South Wales,,,,,,,,,,,0
+H5389,Healthwoods Endoscopy Centre,Hospital,-33.831451,151.012466,Private,New South Wales,,,,,,,,,,,0
+H5390,Holroyd Private Hospital,Hospital,-33.846344,150.979233,Private,New South Wales,,,,,,,,,,,0
+H5391,Hummingbird House,Hospital,-27.38312,153.027527,Private,Queensland,,,,,,,,,,,0
+H5392,Icon Cancer Centre Canberra,Hospital,-35.23685,149.08676,Private,Australian Capital Territory,,,,,,,,,,,0
+H5393,Icon Cancer Centre Chermside,Hospital,-27.38133,153.029739,Private,Queensland,,,,,,,,,,,0
+H5394,Icon Cancer Centre Hobart,Hospital,-42.88067,147.32385,Private,Tasmania,,,,,,,,,,,0
+H5395,Icon Cancer Centre Midland,Hospital,-31.89424,116.00531,Private,Western Australia,,,,,,,,,,,0
+H5396,Icon Cancer Centre North Lakes,Hospital,-27.24166,153.02184,Private,Queensland,,,,,,,,,,,0
+H5397,Icon Cancer Centre Revesby,Hospital,-33.954,151.01528,Private,New South Wales,,,,,,,,,,,0
+H5398,Icon Cancer Centre Rockingham,Hospital,-32.28745,115.74693,Private,Western Australia,,,,,,,,,,,0
+H5399,Icon Cancer Centre South Brisbane,Hospital,-27.484,153.02812,Private,Queensland,,,,,,,,,,,0
+H5400,Icon Cancer Centre Southport,Hospital,-27.97216,153.41107,Private,Queensland,,,,,,,,,,,0
+H5401,Icon Cancer Centre Townsville,Hospital,-19.2765,146.79909,Private,Queensland,,,,,,,,,,,0
+H5402,Icon Cancer Centre Wesley,Hospital,-27.47667,152.99734,Private,Queensland,,,,,,,,,,,0
+H5403,Icon Cancer Centre Windsor Gardens,Hospital,-34.86247,138.64977,Private,South Australia,,,,,,,,,,,0
+H5404,Kings Park Day Hospital,Hospital,-31.950455,115.836075,Private,Western Australia,,,,,,,,,,,0
+H5405,Kingsgrove Day Hospital,Hospital,-33.944141,151.10199,Private,New South Wales,,,,,,,,,,,0
+H5406,Lithgow Community Private Hospital,Hospital,-33.49873,150.127396,Private,New South Wales,,,,,,,,,,,0
+H5407,Longueville Private Hospital,Hospital,-33.827408,151.169769,Private,New South Wales,,,,,,,,,,,0
+H5408,Malvern Dialysis Clinic,Hospital,-37.851421,145.030624,Private,Victoria,,,,,,,,,,,0
+H5409,Manly Waters Private Hospital,Hospital,-33.80521,151.284576,Private,New South Wales,,,,,,,,,,,0
+H5410,Mater Private Hospital Springfield,Hospital,-27.686211,152.908676,Private,Queensland,,,,,,,,,,,0
+H5411,McCourt Street Day Surgery,Hospital,-31.94138,115.827957,Private,Western Australia,,,,,,,,,,,0
+H5412,Miami Private Hospital,Hospital,-28.063068,153.436813,Private,Queensland,,,,,,,,,,,0
+H5413,Monash House Private Hospital,Hospital,-37.920898,145.120193,Private,Victoria,,,,,,,,,,,0
+H5414,Moreton Day Hospital,Hospital,-27.24131,153.020294,Private,Queensland,,,,,,,,,,,0
+H5415,Murdoch Surgicentre,Hospital,-32.067791,115.844986,Private,Western Australia,,,,,,,,,,,0
+H5416,Neerim District Health Service,Hospital,-38.022629,145.953903,Private,Victoria,,,,,,,,,,,0
+H5417,Newcastle Endoscopy Centre,Hospital,-32.963131,151.697693,Private,New South Wales,,,,,,,,,,,0
+H5418,Noosa Surgical and Endoscopy Centre,Hospital,-26.40005,153.06491,Private,Queensland,,,,,,,,,,,0
+H5419,North Eastern Community Hospital,Hospital,-34.882549,138.661331,Private,South Australia,,,,,,,,,,,-1
+H5420,North Shore Specialist Day Hospital,Hospital,-33.823719,151.187088,Private,New South Wales,,,,,,,,,,,0
+H5421,Northern Cancer Institute St Leonards,Hospital,-33.82391,151.192963,Private,New South Wales,,,,,,,,,,,0
+H5422,Northern Endoscopy Centre,Hospital,-34.78167,138.651093,Private,South Australia,,,,,,,,,,,0
+H5423,Northside Endoscopy Service,Hospital,-27.082979,152.950165,Private,Queensland,,,,,,,,,,,0
+H5424,Norwest Day Hospital,Hospital,-33.74477,150.95385,Private,New South Wales,,,,,,,,,,,0
+H5425,PANCH Day Surgery Centre,Hospital,-37.752338,145.006271,Private,Victoria,,,,,,,,,,,0
+H5426,Payneham Dialysis Clinic,Hospital,-34.896931,138.639603,Private,South Australia,,,,,,,,,,,0
+H5427,Perth Day Surgery Centre,Hospital,-31.940439,115.82608,Private,Western Australia,,,,,,,,,,,0
+H5428,Perth Dermatology Clinic,Hospital,-31.944691,115.863998,Private,Western Australia,,,,,,,,,,,0
+H5429,Perth Eye Hospital,Hospital,-31.949883,115.83976,Private,Western Australia,,,,,,,,,,,0
+H5430,President Private Hospital,Hospital,-34.036575,151.079224,Private,New South Wales,,,,,,,,,,,0
+H5431,Rockingham Dialysis Clinic,Hospital,-32.283241,115.746452,Private,Western Australia,,,,,,,,,,,0
+H5432,Rosemont Endoscopy Centre,Hospital,-34.42527,150.876984,Private,New South Wales,,,,,,,,,,,0
+H5433,Salisbury Day Hospital,Hospital,-27.54669,153.034592,Private,Queensland,,,,,,,,,,,0
+H5434,Sight Foundation Theatre,Hospital,-33.867722,151.212891,Private,New South Wales,,,,,,,,,,,0
+H5435,SOLE VITA SURGERY,Hospital,-35.326359,149.094345,Private,Australian Capital Territory,,,,,,,,,,,0
+H5436,South Bank Day Hospital,Hospital,-27.475929,153.014954,Private,Queensland,,,,,,,,,,,0
+H5437,Southern Endoscopy Centre,Hospital,-34.999512,138.521179,Private,South Australia,,,,,,,,,,,0
+H5438,Southside Cancer Care Centre,Hospital,-34.03405,151.104065,Private,New South Wales,,,,,,,,,,,0
+H5439,Spring Hill Specialist Day Hospital,Hospital,-27.461082,153.021851,Private,Queensland,,,,,,,,,,,0
+H5440,Stirling Dialysis Clinic,Hospital,-31.88913,115.808022,Private,Western Australia,,,,,,,,,,,0
+H5441,Sydney Day Hospital,Hospital,-33.869579,151.212708,Private,New South Wales,,,,,,,,,,,0
+H5442,Sydney Day Surgery,Hospital,-33.87644,151.22098,Private,New South Wales,,,,,,,,,,,0
+H5443,Tasman Health Care Day Infusion Unit,Hospital,-27.970409,153.407806,Private,Queensland,,,,,,,,,,,0
+H5444,The Glen Endoscopy Centre,Hospital,-37.884701,145.165359,Private,Victoria,,,,,,,,,,,0
+H5445,The Melbourne Eastern Private Hospital,Hospital,-37.855701,145.269073,Private,Victoria,,,,,,,,,,,0
+H5446,The Park Private Hospital,Hospital,-31.93434,115.874382,Private,Western Australia,,,,,,,,,,,0
+H5447,The Wesley Centre for Hyperbaric Medicine,Hospital,-27.477161,152.997803,Private,Queensland,,,,,,,,,,,0
+H5448,Tuggerah Lakes Private Hospital,Hospital,-33.262482,151.48143,Private,New South Wales,,,,,,,,,,,0
+H5449,Vision Centre Day Surgery,Hospital,-27.96982,153.409225,Private,Queensland,,,,,,,,,,,0
+H5451,West Leederville Private Hospital,Hospital,-31.94294,115.82798,Private,Western Australia,,,,,,,,,,,0
+H5453,Windsor Gardens Day Surgery,Hospital,-34.862469,138.649765,Private,South Australia,,,,,,,,,,,0
+H5455,Ballan District Health & Care,Hospital,-37.59919,144.2228,Private,Victoria,,,,,,,,,,,0
+H5456,Bankstown Day Hospital,Hospital,-33.914394,151.035324,Private,New South Wales,,,,,,,,,,,0
+H5457,Bayside Endoscopy Day Hospital,Hospital,-37.933098,145.036667,Private,Victoria,,,,,,,,,,,0
+H5458,Bunbury Day Surgery,Hospital,-33.340477,115.639557,Private,Western Australia,,,,,,,,,,,0
+H5459,Cannington Dialysis Clinic,Hospital,-32.016842,115.934967,Private,Western Australia,,,,,,,,,,,0
+H5460,Chermside Dialysis Clinic,Hospital,-27.390966,153.031784,Private,Queensland,,,,,,,,,,,0
+H5461,Bayside Day Procedure and Specialist Centre,Hospital,-38.148136,145.143524,Private,Victoria,,,,,,,,,,,0
+H5462,Bayswater Day Procedure and Specialist Centre,Hospital,-37.842178,145.263,Private,Victoria,,,,,,,,,,,0
+H5463,Casey Day Procedure and Specialist Centre,Hospital,-38.02488,145.31446,Private,Victoria,,,,,,,,,,,0
+H5464,Dr Daniel Lanzer Dermatology & Cosmetic Surgery Services,Hospital,-28.00205,153.426727,Private,Queensland,,,,,,,,,,,0
+H5465,Eastern Endoscopy Centre,Hospital,-27.494314,153.213242,Private,Queensland,,,,,,,,,,,0
+H5466,Eastside Endoscopy Centre,Hospital,-37.819901,145.228134,Private,Victoria,,,,,,,,,,,0
+H5467,Euroa Health,Hospital,-36.75922,145.570465,Private,Victoria,,,,,,,,,,,0
+H5468,Greensborough Day Surgery,Hospital,-37.70393,145.10629,Private,Victoria,,,,,,,,,,,0
+H5469,Heyfield Hospital,Hospital,-37.97633,146.784012,Private,Victoria,,,,,,,,,,,0
+H5470,Icon Cancer Centre Adelaide,Hospital,-34.948662,138.570786,Private,South Australia,,,,,,,,,,,0
+H5471,Insight Private Hospital,Hospital,-36.081795,146.910431,Private,New South Wales,,,,,,,,,,,0
+H5472,Kew Endoscopy Centre,Hospital,-37.79461,145.06255,Private,Victoria,,,,,,,,,,,0
+H5473,Lakeview Private Hospital,Hospital,-33.730782,150.963165,Private,New South Wales,,,,,,,,,,,0
+H5474,Lions Eye Institute Day Surgery Centre,Hospital,-31.96793,115.814934,Private,Western Australia,,,,,,,,,,,0
+H5475,Melbourne Endoscopy Monash Day Procedure Centre,Hospital,-37.921371,145.120255,Private,Victoria,,,,,,,,,,,0
+H5476,Melbourne Endoscopy,Hospital,-37.811069,144.984085,Private,Victoria,,,,,,,,,,,0
+H5477,Midland Dialysis Clinic,Hospital,-31.88781,116.00413,Private,Western Australia,,,,,,,,,,,0
+H5478,Western Haematology and Oncology Clinics,Hospital,-31.94462,115.84181,Private,Western Australia,,,,,,,,,,,0
+H5479,Newcastle Dialysis Clinic,Hospital,-32.92661,151.76479,Private,New South Wales,,,,,,,,,,,0
+H5480,Regional Imaging Cardiovascular Centre,Hospital,-35.119236,147.352814,Private,New South Wales,,,,,,,,,,,0
+H5481,Southbank Day Surgery,Hospital,-31.975916,115.871857,Private,Western Australia,,,,,,,,,,,0
+H5482,Spearwood Dialysis Clinic,Hospital,-32.09556,115.78343,Private,Western Australia,,,,,,,,,,,0
+H5483,Sydney Retina Clinic & Day Surgery,Hospital,-33.866261,151.211792,Private,New South Wales,,,,,,,,,,,0
+H5484,The Cataract Clinic (Aust),Hospital,-33.84087,151.209396,Private,New South Wales,,,,,,,,,,,0
+H5485,The Roseberry Eye Specialist Centre,Hospital,-33.922691,151.207275,Private,New South Wales,,,,,,,,,,,0
+H5486,The Skin Hospital [Darlinghurst],Hospital,-33.87913,151.21524,Private,New South Wales,,,,,,,,,,,0
+H5487,Icon Cancer Centre Mackay,Hospital,-21.12852,149.17295,Private,Queensland,,,,,,,,,,,0
+H5488,Minchinbury Community Private Hospital,Hospital,-33.781006,150.828522,Private,New South Wales,,,,,,,,,,,0
+H5489,South Coast Digestive Diseases Centre,Hospital,-28.01032,153.4034,Private,Queensland,,,,,,,,,,,0
+H5490,Toorak Cosmetic Surgery Day Centre,Hospital,-37.84138,145.00798,Private,Victoria,,,,,,,,,,,0
+H5491,St John of God Wembley Day Surgery,Hospital,-31.94045,115.82416,Private,Western Australia,,,,,,,,,,,0
+H5492,West Coast Endoscopy Centre,Hospital,-31.73946,115.76764,Private,Western Australia,,,,,,,,,,,0
+H5493,Clifton Co-Op Hospital Ltd,Hospital,-27.931108,151.91066,Private,Queensland,,,,,,,,,,,0
+H5494,Cosmos Cosmetic Day Surgery,Hospital,-33.91281,151.23944,Private,New South Wales,,,,,,,,,,,0
+H5495,Genesis Cancer Care Fiona Stanley,Hospital,-31.941799,115.822639,Private,Western Australia,,,,,,,,,,,0
+H5496,GI Clinic Perth,Hospital,-32.04477,115.81263,Private,Western Australia,,,,,,,,,,,0
+H5497,Montserrat Western Haematology and Oncology Clinic,Hospital,-27.49273,152.98146,Private,Queensland,,,,,,,,,,,0
+H5500,St Stephen's Private Hospital [Maryborough],Hospital,-25.53346,152.70169,Private,Queensland,,,,,,,,,,,0
+H5501,Warringah Day Surgery,Hospital,-33.76499,151.26805,Private,New South Wales,,,,,,,,,,,0
+H5502,Genesis Cancer Care Shenton House Joondalup,Hospital,-31.74084,115.77066,Private,Western Australia,,,,,,,,,,,0
+H5503,St John of God Hawkesbury District Health Service (Private),Hospital,-33.610756,150.820755,Private,New South Wales,,,,,,,,,,,0
+H5504,Marian Centre,Hospital,-31.9405,115.82337,Private,Western Australia,,,,,,,,,,,0
+H5505,Townsville Private Clinic,Hospital,-19.25832,146.8142,Private,Queensland,,,,,,,,,,,0
+H5506,Toowoomba Hospice,Hospital,-27.56745,151.93395,Private,Queensland,,,,,,,,,,,0
+H5507,Currumbin Clinic,Hospital,-28.1336,153.48643,Private,Queensland,,,,,,,,,,,0
+H5508,South Coast Private Hospital,Hospital,-34.425977,150.890393,Private,New South Wales,,,,,,,,,,,0
+H5509,Abbotsford Private Hospital,Hospital,-31.94091,115.83768,Private,Western Australia,,,,,,,,,,,0
