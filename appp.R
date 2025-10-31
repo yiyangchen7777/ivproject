@@ -17,69 +17,30 @@ library(htmltools)
 library(jsonlite)
 library(geosphere)
 library(htmlwidgets)
+
 # 如果有 tableau 脚本就加载（没有也不会报错）
 if (file.exists("tableau-in-shiny-v1.2.R")) {
   source("tableau-in-shiny-v1.2.R")
 }
 
-read_places <- function(path, type_label) {
-  df <- read.csv(path, stringsAsFactors = FALSE)
-  df$type <- type_label
-  df
-}
-df_cafe       <- read_places("cafe_brunch_bakery_desc.csv", "Cafe")
-df_bars       <- read_places("melbourne_cbd_bars.csv", "Bar")
-df_milktea    <- read_places("milktea_juice_english_clean.csv", "Milktea")
-df_restaurant <- read_places("restaurant_english_clean_desc.csv", "Restaurant")
-
-# places <- bind_rows(df_cafe, df_bars, df_milktea, df_restaurant) %>%
-#   filter(!is.na(lat), !is.na(lon))
-
-places <- bind_rows(df_cafe, df_bars, df_milktea, df_restaurant) %>%
-  filter(!is.na(lat), !is.na(lon)) %>%
-  filter(!name %in% c(
-    "Sobo Japanese VCCC",
-    "226 Sushi& Kimbap",
-    "EDWIN WINE BAR AND CELLAR",
-    "Edwin's Cafe",
-    "Tastes Of Senegal",
-    "90 Secondi",
-    "Salsa's",
-    "Woolworths Metro City North"
-  ))
-
-print(names(places))
-
-# ---------- 判断营业状态 ----------
-is_open_today_now <- function(hours_str) {
-  if (is.null(hours_str) || is.na(hours_str) || trimws(hours_str) == "") return(FALSE)
-  if (grepl("24", hours_str, ignore.case = TRUE) && grepl("hour", hours_str, ignore.case = TRUE)) return(TRUE)
-  today <- weekdays(Sys.Date())
-  m <- stringr::str_extract(hours_str, paste0(today, ":[^|]+"))
-  if (is.na(m)) return(FALSE)
-  if (grepl("Closed", m, ignore.case = TRUE)) return(FALSE)
-  m <- gsub("\u2013|\u2014|–|—|to", "-", m)
-  time_pair <- stringr::str_extract(m, "\\d{1,2}:\\d{2}\\s*(AM|PM)\\s*[-]\\s*\\d{1,2}:\\d{2}\\s*(AM|PM)")
-  if (is.na(time_pair)) return(FALSE)
-  parts <- unlist(strsplit(time_pair, "-"))
-  if (length(parts) < 2) return(FALSE)
-  
-  parse_safe <- function(x) tryCatch(
-    lubridate::parse_date_time(x, orders = "I:M p"),
-    error = function(e) NA
-  )
-  
-  open_t  <- parse_safe(trimws(parts[1]))
-  close_t <- parse_safe(trimws(parts[2]))
-  now_t   <- parse_safe(format(Sys.time(), "%I:%M %p"))
-  
-  if (any(is.na(c(open_t, close_t, now_t)))) return(FALSE)
-  if (close_t < open_t) now_t >= open_t | now_t <= close_t else now_t >= open_t & now_t <= close_t
-}
-
 # ----------------- 基础配置 & 数据 -----------------
 POSTCODE_FILTER <- NA_character_
 `%||%` <- function(a, b) ifelse(is.null(a) | is.na(a), b, a)
+first_val <- function(x) {
+  if (is.null(x) || length(x) == 0) return(NA)
+  out <- x[[1]]
+  if (is.list(out)) {
+    if (length(out) == 0) return(NA)
+    out <- out[[1]]
+  }
+  out
+}
+display_text <- function(x, default = "") {
+  val <- first_val(x)
+  if (is.null(val) || length(val) == 0) return(default)
+  val <- as.character(val)[1]
+  if (is.na(val) || !nzchar(val)) default else val
+}
 
 SRC_DISPLAY <- c(
   bars               = "Bar",
@@ -94,8 +55,6 @@ KNOWN_SRCS <- c(
   milktea_juice      = "milk_juice.csv",
   cafe_brunch_bakery = "cafe.csv"
 )
-
-
 
 for (dirnm in names(SRC_DISPLAY)) {
   if (dir.exists(dirnm)) shiny::addResourcePath(dirnm, normalizePath(dirnm))
@@ -168,6 +127,57 @@ if (!is.na(POSTCODE_FILTER)) {
   all <- dplyr::filter(all, is.na(postcode) | postcode == POSTCODE_FILTER)
 }
 stopifnot(nrow(all) > 0)
+
+# ----------------- Map 数据 -----------------
+read_places <- function(path, type_label) {
+  df <- read.csv(path, stringsAsFactors = FALSE)
+  df$type <- type_label
+  df
+}
+
+df_cafe       <- read_places("cafe_brunch_bakery_desc.csv", "Cafe")
+df_bars       <- read_places("melbourne_cbd_bars.csv", "Bar")
+df_milktea    <- read_places("milktea_juice_english_clean.csv", "Milktea")
+df_restaurant <- read_places("restaurant_english_clean_desc.csv", "Restaurant")
+
+places <- bind_rows(df_cafe, df_bars, df_milktea, df_restaurant) %>%
+  filter(!is.na(lat), !is.na(lon)) %>%
+  filter(!name %in% c(
+    "Sobo Japanese VCCC",
+    "226 Sushi& Kimbap",
+    "EDWIN WINE BAR AND CELLAR",
+    "Edwin's Cafe",
+    "Tastes Of Senegal",
+    "90 Secondi",
+    "Salsa's",
+    "Woolworths Metro City North"
+  ))
+
+is_open_today_now <- function(hours_str) {
+  if (is.null(hours_str) || is.na(hours_str) || trimws(hours_str) == "") return(FALSE)
+  if (grepl("24", hours_str, ignore.case = TRUE) && grepl("hour", hours_str, ignore.case = TRUE)) return(TRUE)
+  today <- weekdays(Sys.Date())
+  m <- stringr::str_extract(hours_str, paste0(today, ":[^|]+"))
+  if (is.na(m)) return(FALSE)
+  if (grepl("Closed", m, ignore.case = TRUE)) return(FALSE)
+  m <- gsub("\u2013|\u2014|–|—|to", "-", m)
+  time_pair <- stringr::str_extract(m, "\\d{1,2}:\\d{2}\\s*(AM|PM)\\s*[-]\\s*\\d{1,2}:\\d{2}\\s*(AM|PM)")
+  if (is.na(time_pair)) return(FALSE)
+  parts <- unlist(strsplit(time_pair, "-"))
+  if (length(parts) < 2) return(FALSE)
+
+  parse_safe <- function(x) tryCatch(
+    lubridate::parse_date_time(x, orders = "I:M p"),
+    error = function(e) NA
+  )
+
+  open_t  <- parse_safe(trimws(parts[1]))
+  close_t <- parse_safe(trimws(parts[2]))
+  now_t   <- parse_safe(format(Sys.time(), "%I:%M %p"))
+
+  if (any(is.na(c(open_t, close_t, now_t)))) return(FALSE)
+  if (close_t < open_t) now_t >= open_t | now_t <= close_t else now_t >= open_t & now_t <= close_t
+}
 
 # ===================== Opening Hours + Helper =====================
 price_map <- c("FREE"=0, "INEXPENSIVE"=1, "MODERATE"=2, "EXPENSIVE"=3, "VERY_EXPENSIVE"=4)
@@ -342,12 +352,16 @@ ui <- fluidPage(
   useShinyjs(),
   theme = bs_theme(bootswatch = "journal"),
   tags$head(
+    if (exists("setUpTableauInShiny")) setUpTableauInShiny(),
+    
+    # ✅ 恢复你原来的整段样式（含 .shop-img 高度等关键规则）
     tags$style(HTML("
       body {
         font-family: 'Inter', sans-serif;
         margin:0; padding:0;
         overflow-x:hidden;
         background: linear-gradient(135deg,#cfe2ff,#dbeafe,#f8fafc);
+        
       }
       #welcome {
         position: relative; z-index: 3; height:100vh;
@@ -362,56 +376,79 @@ ui <- fluidPage(
         background: rgba(255,255,255,0.12);
         box-shadow: 0 12px 40px rgba(31,38,135,0.25);
         backdrop-filter: blur(20px) saturate(140%);
+        -webkit-backdrop-filter: blur(20px) saturate(140%);
         border: 1px solid rgba(255,255,255,0.25);
         border-radius:24px; padding:32px 48px; text-align:center;
         width:90%; max-width:1200px; height:80vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
       }
       .enter-btn { margin-top:24px; padding:12px 26px; font-size:18px; background:#3478f6; color:white; border:none; border-radius:10px; cursor:pointer; box-shadow:0 4px 10px rgba(52,120,246,0.25); transition:all .3s; }
       .enter-btn:hover { background:#265ed2; box-shadow:0 6px 14px rgba(52,120,246,0.35); }
-
-      /* -------------- Map Page 样式 (直接合并) -------------- */
-      .main-block { margin-bottom: 12px; }
-      .sub-option {
-        margin-left: 10px; margin-top: 4px; display: none;
-        max-height: 150px; overflow-y: auto; border-left: 2px solid #ddd; padding-left: 8px;
-      }
-      .sub-option::-webkit-scrollbar { width: 5px; }
-      .sub-option::-webkit-scrollbar-thumb { background-color: #ccc; border-radius: 3px; }
-      .sub-option::-webkit-scrollbar-thumb:hover { background-color: #aaa; }
-      .sub-option label { display:block; font-weight:normal; margin-bottom:2px; }
-      #filter-panel {
-        font-size: 15px;
-        background-color: #f8f9fa;
-        border-radius: 10px;
-        padding: 11px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      }
-      #rating-section, #open-filter, #regional-range {
-        background-color: #f8f9fa;
-        border-radius: 10px;
-        padding: 10px 12px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        margin-bottom: 10px;
-        font-weight: 600;
-        color: #333;
-      }
-      #map-container { position: relative; width: 99.3%; height: calc(100vh - 110px); margin:0; padding:0; }
-      #loading-overlay {
-        position: absolute;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background-color: rgba(255,255,255,0.92);
-        display: flex; flex-direction: column; align-items: center; justify-content: center;
-        z-index: 9999;
-      }
-      .spinner-border {
-        width: 3rem; height: 3rem;
-        border: 0.35em solid #2d9cdb;
-        border-top: 0.35em solid transparent;
-        border-radius: 50%;
-        animation: spin 0.8s linear infinite;
-      }
-      @keyframes spin { 0% {transform: rotate(0deg);} 100% {transform: rotate(360deg);} }
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap');
+      .welcome-title { font-family:'Playfair Display',serif; font-size:52px; font-weight:700; letter-spacing:1px; text-align:center; background: linear-gradient(90deg,#4f46e5,#2563eb,#0ea5e9); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:24px; }
+      
+      .hero-card {background:#fff; border-radius:16px; box-shadow:0 6px 20px rgba(0,0,0,0.07); padding:16px;}
+      .meta-card {background:#fff; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,0.06); padding:12px;}
+      .desc-card {background:#fff; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,0.06); padding:16px;}
+      .kpi-card  {background:#fff; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,0.06); padding:14px;}
+      .shop-img  {width:100%; height:320px; object-fit:cover; border-radius:12px; background:#f2f2f2;}
+      .kpi {font-weight:600; margin-right:16px;}
+      .muted {color:#666;}
+      .rating-wrap {display:flex; flex-direction:column; gap:6px;}
+      .rating-label {font-weight:600;}
+      .progress-outer {width:100%; height:16px; border-radius:999px; background:#f0f2f5; overflow:hidden;}
+      .progress-inner {height:100%; width:0%; border-radius:999px; background:linear-gradient(90deg, #6ba8ff, #3478f6); transition:width 900ms ease;}
     ")),
+    tags$style(HTML("
+        @import url('https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:wght@400;700&family=Poppins:wght@500;600&display=swap');
+
+        .welcome-title {
+          font-family: 'Sorts Mill Goudy', serif !important;
+          font-weight: 700 !important;
+          letter-spacing: 0.5px;
+          background: linear-gradient(90deg,#3b82f6,#2563eb,#0ea5e9);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .navbar-brand {
+          font-family: 'Sorts Mill Goudy', sans-serif !important;
+          font-weight: 500 !important;
+        }
+
+        .navbar-nav > li > a,
+        .navbar-nav .nav-link,
+        .nav-tabs > li > a,
+        .nav-tabs .nav-link {
+          font-family: 'Arial', sans-serif !important;
+          font-weight: 500 !important;
+        }
+
+        /* 各页区块标题 (h3, h4) */
+        h3 {
+          font-family: 'Arial', serif !important;
+          font-weight: 700 !important;
+          color: #2c3e50;
+        }
+        h4 {
+          font-family: 'Arial', sans-serif !important;
+          font-weight: 600 !important;
+          color: #34495e;
+        }
+      ")),
+    tags$style(HTML("
+        .hero-card,
+        .meta-card,
+        .desc-card,
+        .kpi-card {
+          background: #f3f3f3 !important;
+        }
+
+        .hero-card, .meta-card, .desc-card, .kpi-card {
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05) !important;
+        }
+      ")),
+    
+    
     tags$script(HTML("
       function goToMain(){
         $('#welcome').css({opacity:0,pointerEvents:'none'});
@@ -423,31 +460,411 @@ ui <- fluidPage(
             maps.forEach(function(m){if(m&&m.instance&&m.instance.invalidateSize){m.instance.invalidateSize();}});
           }
         },500);
+        setTimeout(function(){
+          $('.carousel').each(function(){ $(this).trigger('slid.bs.carousel'); });
+        },600);
       }
-      // 📍 geolocation
-      $(document).on('click','#locate_btn',function(){
+      Shiny.addCustomMessageHandler('peerCaptionText', function(x){
+        var el = document.getElementById('peerCaption');
+        if (el) el.textContent = x.text || '';
+      });
+      $(document).ready(function(){
+        $('iframe').css('opacity', 0);
+        setTimeout(function(){ $('iframe').animate({opacity: 1}, 1500); }, 400);
+      });
+    "))
+    ,
+    HTML('
+    <style>
+      .main-block { margin-bottom: 12px; }
+      .sub-option {
+        margin-left: 10px; margin-top: 4px; display: none;
+        max-height: 150px; overflow-y: auto; border-left: 2px solid #ddd; padding-left: 8px;
+      }
+      .sub-option::-webkit-scrollbar { width: 5px; }
+      .sub-option::-webkit-scrollbar-thumb { background-color: #ccc; border-radius: 3px; }
+      .sub-option::-webkit-scrollbar-thumb:hover { background-color: #aaa; }
+      .sub-option label { display:block; font-weight:normal; margin-bottom:2px; }
+      
+      #filter-panel {
+        font-size: 15px;
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 11px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        padding-bottom: 4px;
+      }
+      
+      #filter-panel label {
+        font-weight: 600;
+        color: #333;
+      }
+      
+      /* 让下拉框和标题之间间距变小 */
+      #filter-panel .shiny-input-container {
+        margin-top: 4px !important;
+        margin-bottom: 1px !important;
+      }
+      
+      * 全局：去掉 fluidPage 默认 padding，左右更贴边 */
+      .container-fluid {
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100%;
+        max-width: 100%;
+      }
+  
+      /* sidebarPanel：固定窄宽度，更紧凑 */
+      .col-sm-3 {
+        max-width: 250px !important;
+        padding-right: 8px !important;
+        margin-right: 0 !important;
+      }
+      
+      #sidebarLayout { 
+        max-height: 350px !important;
+      }
+      
+      /* “Select Ratings” 白框样式（与 Select Categories 一致） */
+      #rating-section {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 10px 12px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        margin-bottom: 10px;
+        font-weight: 600;
+        color: #333;
+      }
+      
+      /* 让下拉框和标题之间间距变小 */
+      #rating-section .shiny-input-container {
+        margin-top: 4px !important;
+        margin-bottom: 4px !important;
+      }
+      
+      /* 下拉框本身也稍微压紧 */
+      #rating-section select {
+        padding: 4px 8px;
+        font-size: 14px;
+        padding-bottom: 4px;
+      }
+      
+      /* “Opening Status” 白框样式 */
+      #open-filter { 
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 10px 12px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        margin-bottom: 10px;
+        font-weight: 600;
+        color: #333;
+        padding-bottom: 4px;
+      }
+      
+      /* 让复选框与标题之间的间距更小 */
+      #open-filter .shiny-input-container {
+        margin-top: 4px !important;
+        margin-bottom: 4px !important;
+      }
+      
+      /* 复选框本身字体大小、行距调整 */
+      #open-filter label {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 2px;
+      }
+      
+      /* “Select Regional Range” 白框样式 */
+      #regional-range {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 10px 12px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        margin-bottom: 4px;
+        font-weight: 600;
+        color: #333;
+      }
+      
+      /* ----------- 让按钮区更整齐 ----------- */
+      #regional-range .btn {
+        border-radius: 8px !important;
+        font-weight: 600;
+        font-size: 14px;
+        padding: 8px 0;
+        width: 100%;
+        text-align: center;
+        transition: all 0.2s ease-in-out;
+      }
+      
+      /* 主操作按钮：Locate Me（蓝色） */
+      #locate_btn {
+        background-color: #0d6efd;
+        border: 1px solid #0b5ed7;
+        color: #3478f6;
+      }
+      #locate_btn:hover {
+        background-color: #0b5ed7;
+      }
+      
+      /* 次操作按钮：Clear（灰红色） */
+      #clear_btn {
+        background-color: #fff;
+        border: 1px solid #dc3545;
+        color: #dc3545;
+      }
+      #clear_btn:hover {
+        background-color: #dc3545;
+        color: white;
+      }
+      
+      /* 让两个按钮之间的距离更自然 */
+      #regional-range .col-sm-6, 
+      #regional-range .col-md-6 {
+        padding-left: 4px;
+        padding-right: 4px;
+      }
+      
+      /* 下拉框和按钮之间多一点空间 */
+      #regional-range .shiny-input-container {
+        margin-bottom: 12px !important;
+      }
+  
+      /* mainPanel：铺满剩余空间 */
+      .col-sm-9 {
+        flex: 1 1 auto;
+        width: calc(100% - 250px);
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin-left: 0 !important;
+      }
+  
+      /* 地图容器：完全铺满右侧区域 */
+      #map-container {
+        width: 99.3% !important;
+        height: calc(100vh - 110px) !important;
+        margin: 0;
+        padding: 0;
+      }
+  
+      /* 让 leafletOutput 自适应容器 */
+      #map {
+        width: 100% !important;
+        height: 100% !important;
+      }
+  
+      /* 标题区域与主体之间距离稍微减小 */
+      h2, .title {
+        margin-bottom: 20px;
+      }
+
+      /* 发光动画（青蓝光）仅用于商铺，不用于定位图标 */
+      .leaflet-marker-icon.active-glow {
+        animation: glowPulse 1.5s ease-in-out infinite;
+        z-index: 1000 !important;
+      }
+      @keyframes glowPulse {
+        0%   { filter: brightness(1) drop-shadow(0 0 0 rgba(0,255,255,0)); }
+        50%  { filter: brightness(1.3) drop-shadow(0 0 12px rgba(0,255,255,0.9)); }
+        100% { filter: brightness(1) drop-shadow(0 0 0 rgba(0,255,255,0)); }
+      }
+      
+      .checkbox label, .radio label {
+        margin-left: 6px;
+      }
+      
+      #locate_btn {
+        font-size: 14px;
+        font-weight: 500;
+        padding: 8px 0;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+        transition: all 0.2s ease-in-out;
+      }
+      
+      #clear_btn {
+        font-size: 14px;
+        font-weight: 500;
+        padding: 8px 0;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+        transition: all 0.2s ease-in-out;
+      }
+      
+      /* hover 效果 */
+      #locate_btn:hover, #clear_btn:hover {
+        background-color: #eaeaea;
+        border-color: #aaa;
+      }
+  
+      /* 按钮文字间距更宽，视觉平衡 */
+      #locate_btn span, #clear_btn span {
+        letter-spacing: 0.3px;
+      }
+  
+      /* 让按钮在同一行更居中 */
+      .shiny-input-container .btn {
+        width: 100%;
+        text-align: center;
+      }
+  
+      /* 两个按钮间距 */
+      #locate_btn { margin-right: 4px; }
+      #clear_btn { margin-left: 4px; }
+  
+      /* Row 内水平对齐 */
+      .shiny-row {
+        display: flex;
+        gap: 8px;
+      }
+      
+      /* ===== 地图加载动画样式 ===== */
+      #map-container {
+        position: relative;
+      }
+    
+      #loading-overlay {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background-color: rgba(255,255,255,0.92);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+      }
+    
+      .spinner-border {
+        width: 3rem; height: 3rem;
+        border: 0.35em solid #2d9cdb;
+        border-top: 0.35em solid transparent;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+    
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+
+    <script>
+      function sendSubSelection(type){
+        let checked = [];
+        $("input[name=sub_" + type + "]:checked").each(function(){ checked.push($(this).val()); });
+        Shiny.setInputValue("sub_" + type, checked, {priority:"event"});
+      }
+
+      // All 勾中 -> 取消其它，收起子类
+      $(document).on("change", "#main_all", function(){
+        if($(this).is(":checked")){
+          ["restaurant","bar","cafe","milktea"].forEach(function(t){
+            $("#main_" + t).prop("checked", false);
+            $("#sub_" + t).slideUp(0);
+            $("input[name=sub_" + t + "]").prop("checked", false);
+            sendSubSelection(t);
+          });
+        }
+      });
+
+      // 主类互斥 + 展开/收起子类
+      $(document).on("change", "input[id^=main_]:not(#main_all)", function(){
+        if($("#main_all").is(":checked")) $("#main_all").prop("checked", false).trigger("change");
+        const type = $(this).attr("id").replace("main_","");
+        if($(this).is(":checked")) { $("#sub_" + type).slideDown(200); }
+        else {
+          $("#sub_" + type).slideUp(200);
+          $("input[name=sub_" + type + "]").prop("checked", false);
+          sendSubSelection(type);
+        }
+      });
+
+      $(document).on("change", "input[name^=sub_]", function(){
+        const group=$(this).attr("name").replace("sub_","");
+        sendSubSelection(group);
+      });
+
+      // 商铺 marker 发光（排除定位图标）
+      let lastActive = null;
+      document.addEventListener("click", function(e){
+        const el = e.target.closest(".leaflet-marker-icon");
+        if(el && !el.classList.contains("user-location")){
+          if(lastActive && lastActive!==el) lastActive.classList.remove("active-glow");
+          el.classList.toggle("active-glow");
+          lastActive = el.classList.contains("active-glow") ? el : null;
+        } else if(!el){
+          setTimeout(()=>{
+            if(lastActive){
+              lastActive.classList.remove("active-glow");
+              lastActive=null;
+            }
+          },100);
+        }
+      });
+
+      // 📍 Locate Me（高精度 + 不缓存）
+      $(document).on("click", "#locate_btn", function(){
         if(navigator.geolocation){
           navigator.geolocation.getCurrentPosition(function(pos){
-            Shiny.setInputValue('user_location',{lat:pos.coords.latitude,lon:pos.coords.longitude,ts:Date.now()},{priority:'event'});
-          },function(err){alert('Unable to get location: '+err.message);},{enableHighAccuracy:true,maximumAge:0,timeout:10000});
-        } else { alert('Geolocation not supported'); }
+            Shiny.setInputValue("user_location", 
+              {lat:pos.coords.latitude, lon:pos.coords.longitude, ts: Date.now()}, {priority:"event"});
+          }, function(err){
+            alert("Unable to get location: " + err.message);
+          }, {enableHighAccuracy: true, maximumAge: 0, timeout: 10000});
+        } else {
+          alert("Geolocation not supported in this browser.");
+        }
       });
+    </script>
+    ')
+    ,
+    tags$style(HTML("
+      #mainApp .container-fluid {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+      #mainApp .col-sm-3 {
+        max-width: none !important;
+        padding-right: 15px !important;
+      }
+      #mainApp .col-sm-9 {
+        width: auto !important;
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+      }
+      #map-tab .col-sm-3 {
+        max-width: 250px !important;
+        padding-right: 8px !important;
+        margin-right: 0 !important;
+      }
+      #map-tab .col-sm-9 {
+        width: calc(100% - 250px) !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin-left: 0 !important;
+      }
     "))
   ),
   
-  # ========== Welcome Page ==========
+  
+  # Welcome 区
   div(
     id="welcome",
     div(
       class="glass",
       h2(HTML("<span class='welcome-title'>Flavours of Melbourne City</span>")),
       div(
-        style="flex:1;width:100%;display:flex;justify-content:center;align-items:center;background:rgba(255,255,255,0.08);border-radius:20px;padding:20px;",
+        style="flex:1;width:100%;display:flex;justify-content:center;align-items:center;background:rgba(255,255,255,0.08);border-radius:20px;padding:20px;box-sizing:border-box;",
         HTML("
           <iframe 
-            src='https://public.tableau.com/views/Word_17615465535280/Dashboard1?:showVizHome=no&:embed=true&:toolbar=no'
+            src='https://public.tableau.com/views/Word_17615465535280/Dashboard1?:showVizHome=no&:embed=true&:toolbar=no&:render=false&:device=desktop'
             width='100%' height='100%'
-            style='border:none;background:transparent;border-radius:16px;'>
+            style='border:none;background:transparent;border-radius:16px;'
+            allowtransparency='true'>
           </iframe>
         ")
       ),
@@ -455,69 +872,142 @@ ui <- fluidPage(
     )
   ),
   
-  # ========== 主应用区：Navbar ==========
+  # ------------------ 主页面：NavbarPage ------------------
   div(
     id="mainApp",
     navbarPage(
       title = "",
       id = "navtabs",
       
-      # -------- Map Tab --------
-      tabPanel("Map",
-               sidebarLayout(
-                 sidebarPanel(
-                   width = 3,
-                   div(id="filter-panel",
-                       checkboxInput("main_all","All",TRUE),
-                       checkboxInput("main_restaurant","Restaurant",FALSE),
-                       checkboxInput("main_bar","Bar",FALSE),
-                       checkboxInput("main_cafe","Cafe",FALSE),
-                       checkboxInput("main_milktea","Milktea",FALSE)
-                   ),
-                   div(id="rating-section",
-                       selectInput("rating_filter","Select Rating:",
-                                   choices=c("All"="all","4.5+"="4.5_up","4.0-4.5"="4.0_4.5","3.5-4.0"="3.5_4.0")),
-                   ),
-                   div(id="open-filter", checkboxInput("show_open_now","Show Open",FALSE)),
-                   div(id="regional-range",
-                       selectInput("radius_select","Select Range:",choices=c("500m"=500,"1km"=1000,"2km"=2000)),
-                       fluidRow(
-                         column(6, actionButton("locate_btn","Locate Me")),
-                         column(6, actionButton("clear_btn","Clear"))
-                       )
-                   )
-                 ),
-                 mainPanel(
-                   width = 9,
-                   div(
-                     id="map-container",
-                     div(id="loading-overlay",
-                         div(class="spinner-border text-primary",role="status"),
-                         h4("Loading Map...", style="color:#3478f6; margin-top:10px;")
-                     ),
-                     leafletOutput("map", height = 650)
-                   )
-                 )
-               )
+      tabPanel(
+        "Map",
+        div(
+          id = "map-tab",
+          titlePanel("🍽️ Melbourne CBD Food & Drink Map"),
+          sidebarLayout(
+            sidebarPanel(
+              width = 3,
+              tags$div(
+                id = "filter-panel",
+                tags$label("Select Categories: 🍴"),
+                tags$div(
+                  class = "main-block",
+                  checkboxInput("main_all", "All", value = TRUE)
+                ),
+                tags$div(
+                  class = "main-block",
+                  checkboxInput("main_restaurant", "Restaurant", value = FALSE),
+                  tags$div(id = "sub_restaurant", class = "sub-option")
+                ),
+                tags$div(
+                  class = "main-block",
+                  checkboxInput("main_bar", "Bar", value = FALSE),
+                  tags$div(id = "sub_bar", class = "sub-option")
+                ),
+                tags$div(
+                  class = "main-block",
+                  checkboxInput("main_cafe", "Cafe", value = FALSE),
+                  tags$div(id = "sub_cafe", class = "sub-option")
+                ),
+                tags$div(
+                  class = "main-block",
+                  checkboxInput("main_milktea", "Milktea", value = FALSE),
+                  tags$div(id = "sub_milktea", class = "sub-option")
+                ),
+                tags$div(id = "choose_hint", style = "display:none; color:#777; margin-top:6px;")
+              ),
+              br(),
+              div(
+                id = "rating-section",
+                tags$label("Select Rating: ⭐"),
+                selectInput(
+                  "rating_filter",
+                  NULL,
+                  choices = c(
+                    "All Ratings" = "all",
+                    "4.5 +" = "4.5_up",
+                    "4.0 - 4.5" = "4.0_4.5",
+                    "3.5 - 4.0" = "3.5_4.0",
+                    "3.0 - 3.5" = "3.0_3.5",
+                    "3.0 -" = "below_3"
+                  ),
+                  selected = "all",
+                  width = "150px"
+                )
+              ),
+              div(
+                id = "open-filter",
+                tags$label("Opening Status: 🟢"),
+                checkboxInput(
+                  "show_open_now",
+                  "Show Open",
+                  value = FALSE
+                )
+              ),
+              div(
+                id = "regional-range",
+                selectInput(
+                  "radius_select",
+                  "Select Regional Range:",
+                  choices = c("500m" = 500, "1km" = 1000, "2km" = 2000),
+                  selected = 500,
+                  width = "160px"
+                ),
+                fluidRow(
+                  column(6, actionButton("locate_btn", "Locate Me", width = "100%")),
+                  column(6, actionButton("clear_btn", "Clear", width = "95%"))
+                )
+              )
+            ),
+            mainPanel(
+              width = 9,
+              div(
+                id = "map-container",
+                leafletOutput("map", height = 650)
+              )
+            )
+          )
+        )
       ),
       
-      # -------- Route Tab --------
-      tabPanel("Route", h3("🚗 Route Page (Coming Soon)")),
+      tabPanel(
+        "Route",
+        h3("🚗 Route Page"),
+        p("Future route planning content goes here.")
+      ),
       
-      # -------- Detail Tab --------
-      tabPanel("Detail",
-               selectizeInput("pick", label=NULL,
-                              choices=c("", sort(unique(na.omit(all$name)))),
-                              selected="", options=list(placeholder="Search...")),
-               uiOutput("mainContent")
-      )
+      tabPanel(
+        "Detail",
+        
+        # 搜索框
+        fluidRow(
+          column(
+            12,
+            selectizeInput(
+              "pick", label = NULL,
+              choices = c("", sort(unique(stats::na.omit(all$name)))),
+              selected = "",
+              options  = list(placeholder = "search keyword…", create = FALSE),
+              width    = "100%"
+            )
+          )
+        ),
+        
+        # 动态主内容：要么全屏 skyline，要么整页 detail 布局
+        uiOutput("mainContent")
+      ),
+      
+      
+      # ====== 你的原始搜索页 UI（原样放回）======
+      
+      
+      
     )
   )
 )
 
 # ----------------- SERVER -----------------
 server <- function(input, output, session){
-  
   
   # ---------- 静态资源里的 skyline 图片（www/melbourne-skyline.jpg） ----------
   skyline_file <- "sky-line.jpg"
@@ -529,6 +1019,7 @@ server <- function(input, output, session){
   last_pick    <- reactiveVal(NULL)  # 记录最后一次有效选择
   has_selected <- reactiveVal(FALSE) # 是否曾经选中过店铺
   show_skyline <- reactiveVal(TRUE)  # 是否显示全屏 skyline（初始 TRUE）
+  user_loc     <- reactiveVal(NULL)  # Map 页定位状态
   
   # 监听搜索框变化
   observeEvent(input$pick, ignoreInit = TRUE, {
@@ -553,243 +1044,11 @@ server <- function(input, output, session){
   
   # 选中记录（为空时走 last_pick）
   sel <- reactive({
-    nm <- input$pick
-    if (is.null(nm) || !nzchar(nm)) {
-      # 没选时给个默认值
-      nm <- head(sort(unique(stats::na.omit(all$name))), 1)
-    }
+    nm <- if (!is.null(input$pick) && nzchar(input$pick)) input$pick else last_pick()
+    validate(need(!is.null(nm) && nzchar(nm), ""))
     all %>% filter(name == nm) %>% slice(1)
   })
   
-  
-  user_loc <- reactiveVal(NULL)
-  
-  # 动态生成各主类的子类复选框（从数据里抓 category）
-  observe({
-    insert_subs <- function(type, container_id) {
-      subs <- sort(unique(places$category[places$type == type]))
-      if (length(subs) == 0) return()
-      # 生成 label + checkbox，name=sub_<typeLower>
-      type_lower <- tolower(type)
-      # 对每个子类生成一条 <label><input ...> 文本；确保 HTML 转义
-      labels <- vapply(subs, function(s) {
-        sprintf("<label><input type='checkbox' name='sub_%s' value='%s'/> %s</label>",
-                type_lower, htmlEscape(s), htmlEscape(s))
-      }, character(1))
-      html <- paste0("<div class='sub-option-inner'>", paste0(labels, collapse=""), "</div>")
-      js <- sprintf("$('#%s').html(%s);", container_id, jsonlite::toJSON(html, auto_unbox=TRUE))
-      shinyjs::runjs(js)
-    }
-    insert_subs("Restaurant", "sub_restaurant")
-    insert_subs("Bar", "sub_bar")
-    insert_subs("Cafe", "sub_cafe")
-    insert_subs("Milktea", "sub_milktea")
-  })
-  
-  output$map <- renderLeaflet({
-    leaflet() %>%
-      # ---- 现代底图 ----
-    addProviderTiles(providers$Stadia.AlidadeSmooth, group = "Light (Modern)") %>%
-      addProviderTiles(providers$Stadia.AlidadeSmoothDark, group = "Dark (Modern)") %>%
-      addProviderTiles(providers$CartoDB.Voyager, group = "Voyager") %>%
-      addProviderTiles(providers$Esri.WorldGrayCanvas, group = "Minimal Gray") %>%
-      
-      # ---- 初始视图 ----
-    setView(lng = 144.9631, lat = -37.8100, zoom = 15) %>%
-      
-      # ---- 底图切换 ----
-    addLayersControl(
-      baseGroups = c("Light (Modern)", "Dark (Modern)", "Voyager", "Minimal Gray"),
-      options = layersControlOptions(collapsed = FALSE)
-    ) %>%
-      
-      
-      # ---- 🧭 回到初始点按钮 ----
-    addEasyButton(
-      easyButton(
-        icon = "fa-bullseye",
-        title = "Back to Melbourne CBD",
-        onClick = JS("function(btn, map){ map.setView([-37.8100, 144.9631], 15); }")
-      )
-    )
-    
-  })
-  
-  
-  
-  
-  # 当前筛选（主类+子类），再叠加半径（若已定位）
-  get_filtered_df <- reactive({
-    # 主类
-    selected_main <- c()
-    if (isTRUE(input$main_all) ||
-        (!isTRUE(input$main_restaurant) && !isTRUE(input$main_bar) &&
-         !isTRUE(input$main_cafe) && !isTRUE(input$main_milktea))) {
-      selected_main <- c("Restaurant","Bar","Cafe","Milktea")
-    } else {
-      if (isTRUE(input$main_restaurant)) selected_main <- c(selected_main,"Restaurant")
-      if (isTRUE(input$main_bar))        selected_main <- c(selected_main,"Bar")
-      if (isTRUE(input$main_cafe))       selected_main <- c(selected_main,"Cafe")
-      if (isTRUE(input$main_milktea))    selected_main <- c(selected_main,"Milktea")
-    }
-    df <- places %>% filter(type %in% selected_main)
-    
-    # 子类（仅对勾选的主类生效）
-    for (t in c("Restaurant","Bar","Cafe","Milktea")) {
-      sub_vals <- input[[paste0("sub_",tolower(t))]]
-      if (!is.null(sub_vals) && length(sub_vals) > 0) {
-        df <- df %>% filter(!(type==t) | (category %in% sub_vals))
-      }
-    }
-    
-    # 半径叠加（若已定位）
-    loc <- user_loc()
-    r <- as.numeric(input$radius_select)
-    if (!is.null(loc) && !is.na(r) && r > 0) {
-      df$dist <- geosphere::distHaversine(cbind(df$lon, df$lat), c(loc$lon, loc$lat))
-      df <- df[df$dist <= r, , drop = FALSE]
-    }
-    
-    df$open_now <- sapply(df$openinghour, is_open_today_now)
-    
-    # filter by ratings
-    if (!is.null(input$rating_filter) && input$rating_filter != "all") {
-      df <- df %>%
-        filter(!is.na(rating)) %>%
-        dplyr::filter(
-          (input$rating_filter == "4.5_up"   & rating >= 4.5) |
-            (input$rating_filter == "4.0_4.5"  & rating >= 4.0 & rating < 4.5) |
-            (input$rating_filter == "3.5_4.0"  & rating >= 3.5 & rating < 4.0) |
-            (input$rating_filter == "3.0_3.5"  & rating >= 3.0 & rating < 3.5) |
-            (input$rating_filter == "below_3"  & rating < 3.0)
-        )
-    }
-    
-    # ---- Show only open shops filter ----
-    if (isTRUE(input$show_open_now)) {
-      df <- df[df$open_now == TRUE, , drop = FALSE]
-    }
-    
-    df
-  })
-  
-  # 渲染商铺（受主类、子类、半径变化驱动）
-  observe({
-    df <- get_filtered_df()
-    if (nrow(df) == 0) {
-      leafletProxy("map", session = session) %>% clearGroup("poi_markers")
-      return()
-    }
-    df$open_now <- sapply(df$openinghour, is_open_today_now)
-    df$icon_file <- ifelse(df$open_now, paste0(df$type,"_icon.png"), paste0(df$type,"_icon_gray.png"))
-    
-    icons_set <- icons(iconUrl = df$icon_file, iconWidth = 40, iconHeight = 55,
-                       iconAnchorX = 20, iconAnchorY = 55, popupAnchorX = 1, popupAnchorY = -55)
-    popup_html <- function(row) {
-      
-      # remove "Australia"
-      clean_address <- gsub(",\\s*Australia\\s*$", "", row$address, ignore.case = TRUE)
-      
-      # 评分
-      rating_html <- if (!is.na(row$rating) && row$rating != "") {
-        sprintf("⭐ <b>%.1f</b>", as.numeric(row$rating))
-      } else {
-        "<i>No Rating Info</i>"
-      }
-      
-      # 电话
-      phone_html <- if (!is.na(row$phone) && row$phone != "") {
-        sprintf("📞 %s", htmlEscape(row$phone))
-      } else {
-        "<i>No Phone Info</i>"
-      }
-      
-      # 网站
-      website_html <- if (!is.na(row$website) && row$website != "") {
-        sprintf('<a href="%s" target="_blank">🔗 Visit Website</a>', htmlEscape(row$website))
-      } else {
-        "<i>No Website Info</i>"
-      }
-      
-      link <- sprintf('<a href="https://www.google.com/maps/dir/?api=1&destination=%f,%f" target="_blank">🚗 Map</a>',
-                      row$lat, row$lon)
-      # 整合弹窗内容
-      sprintf(
-        "<b>%s</b><br/>%s<br/>%s<br/>%s<br/>%s<br/>%s<br/>%s",
-        htmlEscape(row$name),
-        htmlEscape(clean_address),
-        rating_html,
-        if (row$open_now) "🟢 <i>Open</i>" else "🔴 <i>Closed</i>",
-        phone_html,
-        website_html,
-        link
-      )
-    }
-    
-    leafletProxy("map", session = session) %>%
-      clearGroup("poi_markers") %>%
-      addMarkers(
-        lng = df$lon, lat = df$lat, icon = icons_set,
-        popup = lapply(seq_len(nrow(df)), function(i) popup_html(df[i,])),
-        options = markerOptions(className = "poi-marker"),
-        clusterOptions = markerClusterOptions(),
-        group = "poi_markers"
-      )
-  })
-  
-  # 📍 定位叠加层（不破坏商铺层），并自动飞过去
-  observeEvent(input$user_location, {
-    loc <- input$user_location
-    if (is.null(loc$lat) || is.null(loc$lon)) return()
-    user_loc(loc)
-    r <- as.numeric(input$radius_select)
-    
-    leafletProxy("map", session = session) %>%
-      clearGroup("user_marker") %>%
-      clearGroup("range_circle") %>%
-      addMarkers(
-        lng = loc$lon, lat = loc$lat,
-        icon = icons(
-          iconUrl = "https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon.png",
-          iconWidth = 25, iconHeight = 41,
-          iconAnchorX = 12, iconAnchorY = 20
-        ),
-        label = "You are here 📍",
-        options = markerOptions(className = "user-location", clickable = FALSE),
-        group = "user_marker"
-      ) %>%
-      addCircles(
-        lng = loc$lon, lat = loc$lat,
-        radius = r, color = "#3478f6", fillColor = "#9EC5FE", fillOpacity = 0.3,
-        group = "range_circle"
-      ) %>%
-      flyTo(lng = loc$lon, lat = loc$lat, zoom = 15)
-    # 👉 不在这里重绘 poi_markers，因为上面 observe() 已订阅 user_loc()/radius/input 变化，会自动重绘为“圆内+筛选”的集合
-  })
-  
-  # 半径变化：只更新圆（poi 渲染由上面 observe() 统一负责）
-  observeEvent(input$radius_select, {
-    loc <- user_loc()
-    if (is.null(loc)) return()
-    r <- as.numeric(input$radius_select)
-    leafletProxy("map", session = session) %>%
-      clearGroup("range_circle") %>%
-      addCircles(
-        lng = loc$lon, lat = loc$lat,
-        radius = r, color = "blue", fillColor = "skyblue", fillOpacity = 0.3,
-        group = "range_circle"
-      )
-  })
-  
-  # ❌ Clear Location：仅清除定位层 + 回到 CBD（商铺保持当前筛选/子类状态）
-  observeEvent(input$clear_btn, {
-    user_loc(NULL)
-    leafletProxy("map", session = session) %>%
-      clearGroup("user_marker") %>%
-      clearGroup("range_circle") %>%
-      setView(lng = 144.9631, lat = -37.8100, zoom = 15)
-    # poi_markers 不动；上面的 observe() 会因 user_loc 变为 NULL 自动取消半径限制并维持当前主/子类过滤
-  })
   # ================= 主内容：全屏 skyline 或 详情布局 =================
   output$mainContent <- renderUI({
     if (isTRUE(show_skyline())) {
@@ -878,7 +1137,9 @@ server <- function(input, output, session){
   
   output$shopImage <- renderUI({
     # ⚠️ 已移除 “当 pick 为空显示 skyline”的逻辑，只负责轮播图
-    s <- sel(); pid <- s$place_id %||% ""; src_dir <- s$src %||% ""
+    s <- sel()
+    pid <- display_text(s$place_id)
+    src_dir <- display_text(s$src)
     imgs <- character(0)
     if (nzchar(pid) && nzchar(src_dir)) {
       fs_dir <- file.path(src_dir, pid)
@@ -928,19 +1189,24 @@ server <- function(input, output, session){
   
   output$linkPhoneAddress <- renderText({
     s <- sel()
-    link  <- if (nzchar(s$website %||% "")) sprintf("<a href='%s' target='_blank'>Website ↗</a>", s$website) else "<span class='muted'>No Website Info</span>"
-    phone <- if (nzchar(s$phone %||% "")) s$phone else "<span class='muted'>No Phone Info</span>"
-    addr  <- if (nzchar(s$address %||% "")) s$address else "<span class='muted'>No Address Info</span>"
+    website <- display_text(s$website)
+    phone_v <- display_text(s$phone)
+    addr_v  <- display_text(s$address)
+    link  <- if (nzchar(website)) sprintf("<a href='%s' target='_blank'>Website ↗</a>", htmlEscape(website)) else "<span class='muted'>No Website Info</span>"
+    phone <- if (nzchar(phone_v)) htmlEscape(phone_v) else "<span class='muted'>No Phone Info</span>"
+    addr  <- if (nzchar(addr_v)) htmlEscape(addr_v) else "<span class='muted'>No Address Info</span>"
     sprintf("<div><div>%s</div><div class='muted'>%s</div><div class='muted'>%s</div></div>", link, phone, addr)
   })
   
   output$shopDesc <- renderUI({
-    s <- sel(); txt <- s$description %||% "No Description Info"
+    s <- sel(); txt <- display_text(s$description, "No Description Info")
     HTML(htmlEscape(txt))
   })
   
   output$kpisText <- renderUI({
-    s <- sel(); pr_txt <- price_range(s$price_level); catg <- s$category %||% "N/A"
+    s <- sel()
+    pr_txt <- display_text(price_range(display_text(s$price_level, NA_character_)), "No Price Info")
+    catg   <- display_text(s$category, "N/A")
     HTML(paste0(
       "<div style='height:10px'></div>",
       "<div><span class='kpi'>Price range: ", htmlEscape(pr_txt), "</span></div>",
@@ -992,8 +1258,9 @@ server <- function(input, output, session){
     s <- sel()
     validate(need(!is.na(s$lat) && !is.na(s$lon), "No coordinates for this venue."))
     
+    src_key <- display_text(s$src)
     peer <- all %>%
-      filter(src == s$src) %>%
+      filter(src == src_key) %>%
       filter(!is.na(lat) & !is.na(lon))
     
     d <- hav_dist_m(s$lat, s$lon, peer$lat, peer$lon)
@@ -1001,7 +1268,7 @@ server <- function(input, output, session){
     n_in <- max(0L, n_in)
     
     icon_file <- switch(
-      s$src,
+      src_key,
       "restaurant"         = "Restaurant_icon.png",
       "bars"               = "Bar_icon.png",
       "cafe_brunch_bakery" = "Cafe_icon.png",
@@ -1016,7 +1283,7 @@ server <- function(input, output, session){
       icon_selected <- makeAwesomeIcon(icon = "map-marker-alt", markerColor = "blue", iconColor = "white")
     }
     
-    disp <- SRC_DISPLAY[[s$src]] %||% toupper(gsub("_", " ", s$src))
+    disp <- SRC_DISPLAY[[src_key]] %||% toupper(gsub("_", " ", src_key))
     
     leaflet(options = leafletOptions(zoomControl = TRUE, preferCanvas = TRUE)) %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
@@ -1051,7 +1318,7 @@ server <- function(input, output, session){
   
   output$openNowRight <- renderUI({
     s <- sel()
-    df  <- parse_opening_hours(s$openinghours %||% "")
+    df  <- parse_opening_hours(display_text(s$openinghours, ""))
     now <- with_tz(Sys.time(), "Australia/Melbourne")
     open_flag <- is_open_at(df, now)
     info <- today_hours_and_next_open(df, now)
@@ -1070,7 +1337,7 @@ server <- function(input, output, session){
   
   output$openHoursPlot <- renderPlot({
     s  <- sel()
-    df <- parse_opening_hours(s$openinghours %||% "")
+    df <- parse_opening_hours(display_text(s$openinghours, ""))
     req(nrow(df) > 0)
     
     seg <- expand_overnight_for_plot(df)
@@ -1105,6 +1372,221 @@ server <- function(input, output, session){
             plot.background = element_rect(fill = "#F3F3F3", colour = NA),
             plot.margin = margin(t = 16, r = 8, b = 8, l = 8))
   })
+
+  # ---------------- Map 页逻辑 ----------------
+  observe({
+    insert_subs <- function(type, container_id) {
+      subs <- sort(unique(places$category[places$type == type]))
+      if (length(subs) == 0) return()
+      type_lower <- tolower(type)
+      labels <- vapply(subs, function(s) {
+        sprintf("<label><input type='checkbox' name='sub_%s' value='%s'/> %s</label>",
+                type_lower, htmlEscape(s), htmlEscape(s))
+      }, character(1))
+      html <- paste0("<div class='sub-option-inner'>", paste0(labels, collapse=""), "</div>")
+      js <- sprintf("$('#%s').html(%s);", container_id, jsonlite::toJSON(html, auto_unbox = TRUE))
+      shinyjs::runjs(js)
+    }
+    insert_subs("Restaurant", "sub_restaurant")
+    insert_subs("Bar", "sub_bar")
+    insert_subs("Cafe", "sub_cafe")
+    insert_subs("Milktea", "sub_milktea")
+  })
+  
+  output$map <- renderLeaflet({
+    leaflet() %>%
+      addProviderTiles(providers$Stadia.AlidadeSmooth, group = "Light (Modern)") %>%
+      addProviderTiles(providers$Stadia.AlidadeSmoothDark, group = "Dark (Modern)") %>%
+      addProviderTiles(providers$CartoDB.Voyager, group = "Voyager") %>%
+      addProviderTiles(providers$Esri.WorldGrayCanvas, group = "Minimal Gray") %>%
+      setView(lng = 144.9631, lat = -37.8100, zoom = 15) %>%
+      addLayersControl(
+        baseGroups = c("Light (Modern)", "Dark (Modern)", "Voyager", "Minimal Gray"),
+        options = layersControlOptions(collapsed = FALSE)
+      ) %>%
+      addEasyButton(
+        easyButton(
+          icon = "fa-bullseye",
+          title = "Back to Melbourne CBD",
+          onClick = JS("function(btn, map){ map.setView([-37.8100, 144.9631], 15); }")
+        )
+      )
+  })
+  
+  get_filtered_df <- reactive({
+    selected_main <- c()
+    if (isTRUE(input$main_all) ||
+        (!isTRUE(input$main_restaurant) && !isTRUE(input$main_bar) &&
+         !isTRUE(input$main_cafe) && !isTRUE(input$main_milktea))) {
+      selected_main <- c("Restaurant", "Bar", "Cafe", "Milktea")
+    } else {
+      if (isTRUE(input$main_restaurant)) selected_main <- c(selected_main, "Restaurant")
+      if (isTRUE(input$main_bar))        selected_main <- c(selected_main, "Bar")
+      if (isTRUE(input$main_cafe))       selected_main <- c(selected_main, "Cafe")
+      if (isTRUE(input$main_milktea))    selected_main <- c(selected_main, "Milktea")
+    }
+    df <- places %>% filter(type %in% selected_main)
+    
+    for (t in c("Restaurant", "Bar", "Cafe", "Milktea")) {
+      sub_vals <- input[[paste0("sub_", tolower(t))]]
+      if (!is.null(sub_vals) && length(sub_vals) > 0) {
+        df <- df %>% filter(!(type == t) | (category %in% sub_vals))
+      }
+    }
+    
+    loc <- user_loc()
+    r <- as.numeric(input$radius_select)
+    if (!is.null(loc) && !is.na(r) && r > 0) {
+      df$dist <- geosphere::distHaversine(cbind(df$lon, df$lat), c(loc$lon, loc$lat))
+      df <- df[df$dist <= r, , drop = FALSE]
+    }
+    
+    df$open_now <- sapply(df$openinghour, is_open_today_now)
+    
+    if (!is.null(input$rating_filter) && input$rating_filter != "all") {
+      df <- df %>%
+        filter(!is.na(rating)) %>%
+        dplyr::filter(
+          (input$rating_filter == "4.5_up"   & rating >= 4.5) |
+            (input$rating_filter == "4.0_4.5"  & rating >= 4.0 & rating < 4.5) |
+            (input$rating_filter == "3.5_4.0"  & rating >= 3.5 & rating < 4.0) |
+            (input$rating_filter == "3.0_3.5"  & rating >= 3.0 & rating < 3.5) |
+            (input$rating_filter == "below_3"  & rating < 3.0)
+        )
+    }
+    
+    if (isTRUE(input$show_open_now)) {
+      df <- df[df$open_now == TRUE, , drop = FALSE]
+    }
+    
+    df
+  })
+  
+  observe({
+    df <- get_filtered_df()
+    if (nrow(df) == 0) {
+      leafletProxy("map", session = session) %>% clearGroup("poi_markers")
+      return()
+    }
+    df$open_now <- sapply(df$openinghour, is_open_today_now)
+    df$icon_file <- ifelse(df$open_now, paste0(df$type, "_icon.png"), paste0(df$type, "_icon_gray.png"))
+    
+    icons_set <- icons(
+      iconUrl = df$icon_file,
+      iconWidth = 40,
+      iconHeight = 55,
+      iconAnchorX = 20,
+      iconAnchorY = 55,
+      popupAnchorX = 1,
+      popupAnchorY = -55
+    )
+    
+    popup_html <- function(row) {
+      clean_address <- gsub(",\\s*Australia\\s*$", "", row$address, ignore.case = TRUE)
+      rating_html <- if (!is.na(row$rating) && row$rating != "") {
+        sprintf("⭐ <b>%.1f</b>", as.numeric(row$rating))
+      } else {
+        "<i>No Rating Info</i>"
+      }
+      phone_html <- if (!is.na(row$phone) && row$phone != "") {
+        sprintf("📞 %s", htmlEscape(row$phone))
+      } else {
+        "<i>No Phone Info</i>"
+      }
+      website_html <- if (!is.na(row$website) && row$website != "") {
+        sprintf('<a href="%s" target="_blank">🔗 Visit Website</a>', htmlEscape(row$website))
+      } else {
+        "<i>No Website Info</i>"
+      }
+      link <- sprintf(
+        '<a href="https://www.google.com/maps/dir/?api=1&destination=%f,%f" target="_blank">🚗 Map</a>',
+        row$lat,
+        row$lon
+      )
+      sprintf(
+        "<b>%s</b><br/>%s<br/>%s<br/>%s<br/>%s<br/>%s<br/>%s",
+        htmlEscape(row$name),
+        htmlEscape(clean_address),
+        rating_html,
+        if (row$open_now) "🟢 <i>Open</i>" else "🔴 <i>Closed</i>",
+        phone_html,
+        website_html,
+        link
+      )
+    }
+    
+    leafletProxy("map", session = session) %>%
+      clearGroup("poi_markers") %>%
+      addMarkers(
+        lng = df$lon,
+        lat = df$lat,
+        icon = icons_set,
+        popup = lapply(seq_len(nrow(df)), function(i) popup_html(df[i, ])),
+        options = markerOptions(className = "poi-marker"),
+        clusterOptions = markerClusterOptions(),
+        group = "poi_markers"
+      )
+  })
+  
+  observeEvent(input$user_location, {
+    loc <- input$user_location
+    if (is.null(loc$lat) || is.null(loc$lon)) return()
+    user_loc(loc)
+    r <- as.numeric(input$radius_select)
+    
+    leafletProxy("map", session = session) %>%
+      clearGroup("user_marker") %>%
+      clearGroup("range_circle") %>%
+      addMarkers(
+        lng = loc$lon,
+        lat = loc$lat,
+        icon = icons(
+          iconUrl = "https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon.png",
+          iconWidth = 25,
+          iconHeight = 41,
+          iconAnchorX = 12,
+          iconAnchorY = 20
+        ),
+        label = "You are here 📍",
+        options = markerOptions(className = "user-location", clickable = FALSE),
+        group = "user_marker"
+      ) %>%
+      addCircles(
+        lng = loc$lon,
+        lat = loc$lat,
+        radius = r,
+        color = "#3478f6",
+        fillColor = "#9EC5FE",
+        fillOpacity = 0.3,
+        group = "range_circle"
+      ) %>%
+      flyTo(lng = loc$lon, lat = loc$lat, zoom = 15)
+  })
+  
+  observeEvent(input$radius_select, {
+    loc <- user_loc()
+    if (is.null(loc)) return()
+    r <- as.numeric(input$radius_select)
+    leafletProxy("map", session = session) %>%
+      clearGroup("range_circle") %>%
+      addCircles(
+        lng = loc$lon,
+        lat = loc$lat,
+        radius = r,
+        color = "blue",
+        fillColor = "skyblue",
+        fillOpacity = 0.3,
+        group = "range_circle"
+      )
+  })
+  
+  observeEvent(input$clear_btn, {
+    user_loc(NULL)
+    leafletProxy("map", session = session) %>%
+      clearGroup("user_marker") %>%
+      clearGroup("range_circle") %>%
+      setView(lng = 144.9631, lat = -37.8100, zoom = 15)
+  })
   
   session$onFlushed(function(){
     session$sendCustomMessage("peerCaptionText", list(text = ""))
@@ -1113,4 +1595,4 @@ server <- function(input, output, session){
 
 
 
-shinyApp(ui, server, options = list(launch.browser = TRUE))
+shinyApp(ui, server) 
