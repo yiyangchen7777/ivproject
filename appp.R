@@ -17,10 +17,16 @@ library(htmltools)
 library(jsonlite)
 library(geosphere)
 library(htmlwidgets)
+library(shinydashboard)
+library(tidyr)
+library(DT)
 
 # 如果有 tableau 脚本就加载（没有也不会报错）
 if (file.exists("tableau-in-shiny-v1.2.R")) {
   source("tableau-in-shiny-v1.2.R")
+}
+if (file.exists("route_module.R")) {
+  source("route_module.R")
 }
 
 # ----------------- 基础配置 & 数据 -----------------
@@ -353,18 +359,32 @@ expand_overnight_for_plot <- function(df){
 # ----------------- UI：welcome + navbar 主页面 -----------------
 ui <- fluidPage(
   useShinyjs(),
-  theme = bs_theme(bootswatch = "journal"),
+  theme = bs_theme(version = 5, base_font = font_google("Poppins"), heading_font = font_google("Poppins")),
   tags$head(
     if (exists("setUpTableauInShiny")) setUpTableauInShiny(),
     
-    # ✅ 恢复你原来的整段样式（含 .shop-img 高度等关键规则）
     tags$style(HTML("
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
       body {
-        font-family: 'Inter', sans-serif;
+        font-family: 'Poppins', sans-serif;
         margin:0; padding:0;
         overflow-x:hidden;
         background: linear-gradient(135deg,#cfe2ff,#dbeafe,#f8fafc);
-        
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-family: 'Poppins', sans-serif;
+        font-weight:600;
+        color:#1f2933;
+      }
+      .navbar-brand,
+      .navbar-nav > li > a,
+      .navbar-nav .nav-link,
+      .nav-tabs > li > a,
+      .nav-tabs .nav-link {
+        font-family: 'Poppins', sans-serif !important;
+        font-weight:500;
+        letter-spacing:0.3px;
+        font-size:16px !important;
       }
       #welcome {
         position: relative; z-index: 3; height:100vh;
@@ -384,60 +404,27 @@ ui <- fluidPage(
         border-radius:24px; padding:32px 48px; text-align:center;
         width:90%; max-width:1200px; height:80vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
       }
+      .welcome-title {
+        font-family:'Poppins',sans-serif;
+        font-size:52px; font-weight:700; letter-spacing:0.5px;
+        background: linear-gradient(90deg,#4f46e5,#2563eb,#0ea5e9);
+        -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+        margin-bottom:24px;
+      }
       .enter-btn { margin-top:24px; padding:12px 26px; font-size:18px; background:#3478f6; color:white; border:none; border-radius:10px; cursor:pointer; box-shadow:0 4px 10px rgba(52,120,246,0.25); transition:all .3s; }
       .enter-btn:hover { background:#265ed2; box-shadow:0 6px 14px rgba(52,120,246,0.35); }
-      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap');
-      .welcome-title { font-family:'Playfair Display',serif; font-size:52px; font-weight:700; letter-spacing:1px; text-align:center; background: linear-gradient(90deg,#4f46e5,#2563eb,#0ea5e9); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:24px; }
-      
       .hero-card {background:#fff; border-radius:16px; box-shadow:0 6px 20px rgba(0,0,0,0.07); padding:16px;}
       .meta-card {background:#fff; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,0.06); padding:12px;}
       .desc-card {background:#fff; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,0.06); padding:16px;}
       .kpi-card  {background:#fff; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,0.06); padding:14px;}
       .shop-img  {width:100%; height:320px; object-fit:cover; border-radius:12px; background:#f2f2f2;}
       .kpi {font-weight:600; margin-right:16px;}
-      .muted {color:#666;}
+      .muted {color:#667085;}
       .rating-wrap {display:flex; flex-direction:column; gap:6px;}
       .rating-label {font-weight:600;}
       .progress-outer {width:100%; height:16px; border-radius:999px; background:#f0f2f5; overflow:hidden;}
       .progress-inner {height:100%; width:0%; border-radius:999px; background:linear-gradient(90deg, #6ba8ff, #3478f6); transition:width 900ms ease;}
     ")),
-    tags$style(HTML("
-        @import url('https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:wght@400;700&family=Poppins:wght@500;600&display=swap');
-
-        .welcome-title {
-          font-family: 'Sorts Mill Goudy', serif !important;
-          font-weight: 700 !important;
-          letter-spacing: 0.5px;
-          background: linear-gradient(90deg,#3b82f6,#2563eb,#0ea5e9);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
-
-        .navbar-brand {
-          font-family: 'Sorts Mill Goudy', sans-serif !important;
-          font-weight: 500 !important;
-        }
-
-        .navbar-nav > li > a,
-        .navbar-nav .nav-link,
-        .nav-tabs > li > a,
-        .nav-tabs .nav-link {
-          font-family: 'Arial', sans-serif !important;
-          font-weight: 500 !important;
-        }
-
-        /* 各页区块标题 (h3, h4) */
-        h3 {
-          font-family: 'Arial', serif !important;
-          font-weight: 700 !important;
-          color: #2c3e50;
-        }
-        h4 {
-          font-family: 'Arial', sans-serif !important;
-          font-weight: 600 !important;
-          color: #34495e;
-        }
-      ")),
     tags$style(HTML("
         .hero-card,
         .meta-card,
@@ -975,8 +962,7 @@ ui <- fluidPage(
       
       tabPanel(
         "Route",
-        h3("🚗 Route Page"),
-        p("Future route planning content goes here.")
+        route_module_ui("route")
       ),
       
       tabPanel(
@@ -1011,6 +997,8 @@ ui <- fluidPage(
 
 # ----------------- SERVER -----------------
 server <- function(input, output, session){
+  
+  route_module_server("route")
   
   # ---------- 静态资源里的 skyline 图片（www/melbourne-skyline.jpg） ----------
   skyline_file <- "sky-line.jpg"
@@ -1084,7 +1072,7 @@ server <- function(input, output, session){
               transform:translate(-50%, -50%);
               color:white;
               text-align:center;
-              font-family:'Sorts Mill Goudy', serif;
+              font-family:'Poppins', sans-serif;
               animation:fadeIn 1.4s ease;
             ",
             h1("Discover Melbourne’s Best Food & Drinks",
@@ -1307,7 +1295,7 @@ server <- function(input, output, session){
       ) %>%
       addCircleMarkers(
         data = peer, lng = ~lon, lat = ~lat,
-        radius = 6, stroke = FALSE, fillOpacity = 0.75, fillColor = "#B7F4C2",
+        radius = 6, stroke = FALSE, fillOpacity = 0.75, fillColor = "#AFDBC2",
         label = ~name,
         labelOptions = labelOptions(direction = "auto", opacity = 0.95, textsize = "13px", sticky = TRUE),
         options = pathOptions(pane = "peers")
