@@ -46,12 +46,12 @@ route_default_meal_time <- function() {
   }
 }
 
-route_recommend_venues <- function(data, budget, address, meal_time, user_coords = NULL, search_text = "") {
+route_recommend_venues <- function(data, budget, use_location, meal_time, user_coords = NULL, search_text = "") {
   budget_filter <- dplyr::case_when(
-    budget == "Low ($)" ~ 1,
-    budget == "Medium ($$)" ~ 2,
-    budget == "High ($$$)" ~ 3,
-    budget == "Luxury ($$$$)" ~ 4,
+    budget == "Low" ~ 1,
+    budget == "Medium" ~ 2,
+    budget == "High" ~ 3,
+    budget == "Luxury" ~ 4,
     TRUE ~ 2
   )
 
@@ -75,14 +75,9 @@ route_recommend_venues <- function(data, budget, address, meal_time, user_coords
                grepl(search_text, address, ignore.case = TRUE))
   }
 
-  if (!is.null(address) && nzchar(address)) {
-    if (!is.null(user_coords)) {
-      center_lat <- user_coords$lat
-      center_lon <- user_coords$lng
-    } else {
-      center_lat <- -37.8136
-      center_lon <- 144.9631
-    }
+  if (isTRUE(use_location) && !is.null(user_coords)) {
+    center_lat <- user_coords$lat
+    center_lon <- user_coords$lng
 
     filtered <- filtered %>%
       mutate(
@@ -192,12 +187,14 @@ route_module_ui <- function(id) {
               function(position){
                 Shiny.setInputValue('%s', {
                   lat: position.coords.latitude,
-                  lng: position.coords.longitude
+                  lng: position.coords.longitude,
+                  ts: Date.now()
                 }, {priority:'event'});
               },
               function(error){
                 alert('Unable to get location: ' + error.message);
-              }
+              },
+              {enableHighAccuracy: true, maximumAge: 0, timeout: 10000}
             );
           } else {
             alert('Geolocation is not supported by this browser.');
@@ -250,6 +247,7 @@ route_module_ui <- function(id) {
           box-shadow:0 0 0 3px rgba(52,120,246,0.15);
         }
         .route-sidebar .selectize-input {
+          width:100% !important;
           border:1px solid #d0d5dd !important;
           border-radius:10px !important;
           padding:8px 12px !important;
@@ -266,6 +264,12 @@ route_module_ui <- function(id) {
         }
         .route-sidebar .form-group {
           margin-bottom:16px;
+        }
+        .route-sidebar .shiny-input-container {
+          width:100% !important;
+        }
+        .route-sidebar .selectize-control {
+          width:100% !important;
         }
         .route-optimize-btn {
           padding:10px 24px;
@@ -300,6 +304,81 @@ route_module_ui <- function(id) {
         .route-summary-card h4 { margin:0; font-size:14px; font-weight:400; color:#2c3e50; }
         .route-summary-card span { font-size:12px; color:#7f8c8d; }
         .route-clear-btn { border-radius:6px; background:#fff; border:1px solid #95a5a6; color:#2c3e50; font-weight:400; letter-spacing:0.5px; }
+        .route-location-card {
+          background-color:#f8f9fa;
+          border-radius:10px;
+          padding:12px;
+          box-shadow:0 2px 6px rgba(0,0,0,0.08);
+          margin-bottom:16px;
+        }
+        .route-location-card label {
+          font-weight:500;
+          font-size:13px;
+          color:#1f2933;
+          margin-bottom:8px;
+          display:block;
+        }
+        .route-location-actions {
+          display:flex;
+          gap:8px;
+        }
+        .route-location-actions .btn {
+          flex:1;
+          font-size:13px;
+          letter-spacing:0.3px;
+        }
+        .route-locate-btn {
+          background:#3478f6;
+          color:#ffffff;
+          border:1px solid #2d6ddf;
+          border-radius:8px;
+          box-shadow:0 2px 6px rgba(52,120,246,0.25);
+        }
+        .route-locate-btn:hover {
+          background:#2d6ddf;
+          color:#ffffff;
+        }
+        .route-location-clear {
+          background:#ffffff;
+          color:#3478f6;
+          border:1px solid #3478f6;
+          border-radius:8px;
+        }
+        .route-location-clear:hover {
+          background:#3478f6;
+          color:#ffffff;
+        }
+        .route-location-status {
+          display:block;
+          font-size:12px;
+          margin-top:10px;
+          word-break:break-word;
+        }
+        .route-location-status--inactive { color:#95a5a6; font-style:italic; }
+        .route-location-status--active { color:#2c3e50; }
+        .route-legend {
+          background:rgba(255,255,255,0.92);
+          padding:6px 8px;
+          border-radius:10px;
+          box-shadow:0 4px 12px rgba(15,23,42,0.12);
+          font-size:11px;
+          color:#1f2933;
+          min-width:110px;
+        }
+        .route-legend-item {
+          display:flex;
+          align-items:center;
+          gap:6px;
+          margin-bottom:3px;
+        }
+        .route-legend-item img {
+          width:22px;
+          height:26px;
+          object-fit:contain;
+        }
+        .route-legend-item:last-child {
+          margin-bottom:0;
+        }
       "))
     ),
     fluidRow(
@@ -307,28 +386,22 @@ route_module_ui <- function(id) {
         width = 3,
         div(
           class = "route-sidebar",
-          textInput(ns("search_text"), "Search:", placeholder = "Enter restaurant name..."),
+          textInput(ns("search_text"), "Search:", placeholder = "Enter restaurant name...", width = "100%"),
           selectInput(
             ns("budget"), "Budget:",
             choices = c("Low ($)", "Medium ($$)", "High ($$$)", "Luxury ($$$$)"),
-            selected = "Medium ($$)"
+            selected = "Medium ($$)",
+            width = "100%"
           ),
-          selectInput(
-            ns("address"), "Location:",
-            choices = c(
-              "Melbourne CBD|-37.8136|144.9631",
-              "Flinders Street Station|-37.8183|144.9671",
-              "Southern Cross Station|-37.8184|144.9525",
-              "Queen Victoria Market|-37.8076|144.9568",
-              "Federation Square|-37.8180|144.9691",
-              "Docklands|-37.8142|144.9386",
-              "Carlton|-37.8004|144.9672",
-              "Fitzroy|-37.7987|144.9789",
-              "South Yarra|-37.8397|144.9931",
-              "St Kilda|-37.8679|144.9810",
-              "GPS"
+          div(
+            class = "route-location-card",
+            tags$label("Location:"),
+            div(
+              class = "route-location-actions",
+              actionButton(ns("locate_btn"), "Locate Me", class = "route-locate-btn"),
+              actionButton(ns("clear_location"), "Clear", class = "route-location-clear")
             ),
-            selected = "Melbourne CBD|-37.8136|144.9631"
+            uiOutput(ns("location_status"))
           ),
           selectInput(
             ns("meal_time"), "Meal Time:",
@@ -339,7 +412,8 @@ route_module_ui <- function(id) {
               "Late Night (9 PM+)",
               "Anytime"
             ),
-            selected = route_default_meal_time()
+            selected = route_default_meal_time(),
+            width = "100%"
           ),
           actionButton(ns("clear_selection"), "CLEAR SELECTION", class = "route-clear-btn", width = "100%"),
           tags$hr(),
@@ -362,14 +436,7 @@ route_module_ui <- function(id) {
             height = 600,
             uiOutput(ns("trip_summary")),
             div(
-              style = "display:flex; justify-content:space-between; align-items:center; padding:8px 10px; margin-bottom:10px; background:#f8f9fa; font-size:11px; flex-wrap:wrap; gap:10px;",
-              div(
-                style = "display:flex; flex-wrap:wrap; gap:6px;",
-                tags$span(style = "display:flex; align-items:center;", tags$span(style = "width:20px; height:3px; background:#3498db; margin-right:5px;"), tags$span("Restaurant")),
-                tags$span(style = "display:flex; align-items:center;", tags$span(style = "width:20px; height:3px; background:#9b59b6; margin-right:5px;"), tags$span("Bar")),
-                tags$span(style = "display:flex; align-items:center;", tags$span(style = "width:20px; height:3px; background:#f39c12; margin-right:5px;"), tags$span("Cafe")),
-                tags$span(style = "display:flex; align-items:center;", tags$span(style = "width:20px; height:3px; background:#e91e63; margin-right:5px;"), tags$span("Drinks"))
-              ),
+              style = "display:flex; justify-content:flex-end; padding:8px 10px; margin-bottom:10px;",
               actionButton(
                 ns("optimize_route"),
                 "OPTIMIZE ROUTE",
@@ -417,19 +484,32 @@ route_module_server <- function(id) {
     selected_venues <- reactiveVal(data.frame())
     user_location <- reactiveVal(NULL)
 
-    observeEvent(input$address, {
-      if (input$address == "GPS") {
-        session$sendCustomMessage(message_id, list())
+    category_icon_name <- function(cat, selected = FALSE) {
+      base <- "Restaurant"
+      cat <- ifelse(is.na(cat), "", cat)
+      if (grepl("Bar", cat, ignore.case = TRUE)) {
+        base <- "Bar"
+      } else if (grepl("Cafe|Coffee|Brunch|Bakery", cat, ignore.case = TRUE)) {
+        base <- "Cafe"
+      } else if (grepl("Milk Tea|Juice|Drink", cat, ignore.case = TRUE)) {
+        base <- "Milktea"
       } else {
-        parts <- strsplit(input$address, "\\|")[[1]]
-        if (length(parts) == 3) {
-          user_location(list(
-            name = parts[1],
-            lat = as.numeric(parts[2]),
-            lng = as.numeric(parts[3])
-          ))
-        }
+        base <- "Restaurant"
       }
+      suffix <- if (isTRUE(selected)) "_icon_red.png" else "_icon.png"
+      paste0(base, suffix)
+    }
+
+    observeEvent(input$locate_btn, {
+      session$sendCustomMessage(message_id, list())
+    })
+
+    observeEvent(input$clear_location, {
+      user_location(NULL)
+      leafletProxy(ns("map"), session = session) %>%
+        clearGroup("user_location") %>%
+        setView(lng = 144.9631, lat = -37.8136, zoom = 14)
+      showNotification("Location cleared.", type = "warning", duration = 2)
     })
 
     observeEvent(input$user_coords, {
@@ -445,9 +525,40 @@ route_module_server <- function(id) {
     })
 
     observe({
+      loc <- user_location()
+      proxy <- leafletProxy(ns("map"), session = session)
+      proxy <- proxy %>% clearGroup("user_location")
+      if (!is.null(loc)) {
+        proxy %>%
+          addAwesomeMarkers(
+            lng = loc$lng,
+            lat = loc$lat,
+            icon = awesomeIcons(icon = "user", iconColor = "white", library = "fa", markerColor = "blue"),
+            popup = "<strong>Your Location</strong>",
+            label = "You are here",
+            layerId = "user_location",
+            group = "user_location"
+          ) %>%
+          setView(lng = loc$lng, lat = loc$lat, zoom = 15)
+      }
+    })
+
+    output$location_status <- renderUI({
+      loc <- user_location()
+      if (is.null(loc)) {
+        tags$span("Location not set", class = "route-location-status route-location-status--inactive")
+      } else {
+        label <- if (!is.null(loc$name)) loc$name else "Custom Location"
+        tags$span(
+          sprintf("%s (%.4f, %.4f)", label, loc$lat, loc$lng),
+          class = "route-location-status route-location-status--active"
+        )
+      }
+    })
+
+    observe({
       req(all_venues())
       input$budget
-      input$address
       input$meal_time
       input$search_text
       user_location()
@@ -455,7 +566,7 @@ route_module_server <- function(id) {
       recs <- route_recommend_venues(
         all_venues(),
         input$budget,
-        input$address,
+        use_location = !is.null(user_location()),
         input$meal_time,
         user_coords = user_location(),
         search_text = input$search_text
@@ -613,13 +724,24 @@ route_module_server <- function(id) {
           icon = awesomeIcons(icon = "user", iconColor = "white", library = "fa", markerColor = "blue"),
           popup = "<strong>Your Location</strong>",
           label = "You are here",
-          layerId = "user_location"
+          layerId = "user_location",
+          group = "user_location"
         )
       }
+      legend_html <- htmltools::HTML("
+        <div class='route-legend'>
+          <div class='route-legend-item'><img src='Restaurant.png' alt='Restaurant icon'/><span>Restaurant</span></div>
+          <div class='route-legend-item'><img src='Bar.png' alt='Bar icon'/><span>Bar</span></div>
+          <div class='route-legend-item'><img src='Cafe.png' alt='Cafe icon'/><span>Cafe</span></div>
+          <div class='route-legend-item'><img src='Milktea.png' alt='Drinks icon'/><span>Drinks</span></div>
+        </div>
+      ")
+
       map %>% addLayersControl(
         overlayGroups = c("recommendations", "selected"),
         options = layersControlOptions(collapsed = FALSE)
-      )
+      ) %>%
+        addControl(legend_html, position = "topright", layerId = "route-legend")
     })
 
     observe({
@@ -629,7 +751,7 @@ route_module_server <- function(id) {
         recs <- recs %>% filter(!name %in% selected$name)
       }
 
-      leafletProxy(ns("map"), session = session) %>%
+      proxy <- leafletProxy(ns("map"), session = session) %>%
         clearGroup("recommendations") %>%
         clearGroup("selected") %>%
         clearShapes()
@@ -657,38 +779,23 @@ route_module_server <- function(id) {
           )
         })
 
-        recs$icon_type <- sapply(recs$category, function(cat) {
-          if (grepl("Bar", cat, ignore.case = TRUE)) {
-            "wine-glass"
-          } else if (grepl("Cafe|Coffee|Brunch|Bakery", cat, ignore.case = TRUE)) {
-            "coffee"
-          } else if (grepl("Milk Tea|Juice|Drink", cat, ignore.case = TRUE)) {
-            "glass-martini"
-          } else {
-            "home"
-          }
-        })
+        recs$icon_file <- sapply(recs$category, category_icon_name, selected = FALSE)
+        rec_icons <- icons(
+          iconUrl = recs$icon_file,
+          iconWidth = 40,
+          iconHeight = 55,
+          iconAnchorX = 20,
+          iconAnchorY = 55,
+          popupAnchorX = 1,
+          popupAnchorY = -55
+        )
 
-        recs$marker_color <- sapply(recs$category, function(cat) {
-          if (grepl("Bar", cat, ignore.case = TRUE)) {
-            "purple"
-          } else if (grepl("Cafe|Coffee|Brunch|Bakery", cat, ignore.case = TRUE)) {
-            "orange"
-          } else if (grepl("Milk Tea|Juice|Drink", cat, ignore.case = TRUE)) {
-            "pink"
-          } else {
-            "blue"
-          }
-        })
-
-        icons <- awesomeIcons(icon = recs$icon_type, iconColor = "white", library = "fa", markerColor = recs$marker_color)
-
-        leafletProxy(ns("map"), session = session) %>%
-          addAwesomeMarkers(
+        proxy <- proxy %>%
+          addMarkers(
             data = recs,
             lng = ~lon,
             lat = ~lat,
-            icon = icons,
+            icon = rec_icons,
             popup = ~popup_content,
             label = ~name,
             group = "recommendations",
@@ -704,22 +811,18 @@ route_module_server <- function(id) {
       }
 
       if (nrow(selected) > 0) {
-        selected$icon_type <- sapply(selected$category, function(cat) {
-          if (grepl("Bar", cat, ignore.case = TRUE)) {
-            "wine-glass"
-          } else if (grepl("Cafe|Coffee|Brunch|Bakery", cat, ignore.case = TRUE)) {
-            "coffee"
-          } else if (grepl("Milk Tea|Juice|Drink", cat, ignore.case = TRUE)) {
-            "glass-martini"
-          } else {
-            "home"
-          }
-        })
+        selected_icons <- icons(
+          iconUrl = sapply(selected$category, category_icon_name, selected = TRUE),
+          iconWidth = 40,
+          iconHeight = 55,
+          iconAnchorX = 20,
+          iconAnchorY = 55,
+          popupAnchorX = 1,
+          popupAnchorY = -55
+        )
 
-        selected_icons <- awesomeIcons(icon = selected$icon_type, iconColor = "white", library = "fa", markerColor = "red")
-
-        leafletProxy(ns("map"), session = session) %>%
-          addAwesomeMarkers(
+        proxy <- proxy %>%
+          addMarkers(
             data = selected,
             lng = ~lon,
             lat = ~lat,
@@ -743,11 +846,11 @@ route_module_server <- function(id) {
           for (i in 1:(nrow(selected) - 1)) {
             if (!is.null(route_info$route_geometries[[i]])) {
               geometry <- route_info$route_geometries[[i]]
-              leafletProxy(ns("map"), session = session) %>%
+              proxy <- proxy %>%
                 addPolylines(
                   lng = geometry[, 1],
                   lat = geometry[, 2],
-                  color = "#e74c3c",
+                  color = "#f59e0b",
                   weight = 4,
                   opacity = 0.8,
                   popup = sprintf(
@@ -758,11 +861,11 @@ route_module_server <- function(id) {
                   )
                 )
             } else {
-              leafletProxy(ns("map"), session = session) %>%
+              proxy <- proxy %>%
                 addPolylines(
                   lng = c(selected$lon[i], selected$lon[i + 1]),
                   lat = c(selected$lat[i], selected$lat[i + 1]),
-                  color = "#e74c3c",
+                  color = "#f59e0b",
                   weight = 3,
                   opacity = 0.7,
                   dashArray = "5, 5",
@@ -806,7 +909,13 @@ route_module_server <- function(id) {
       datatable(
         route_info$route_details,
         rownames = FALSE,
-        options = list(pageLength = 5, lengthChange = FALSE, searching = FALSE, ordering = FALSE, info = FALSE)
+        options = list(
+          pageLength = 5,
+          lengthChange = FALSE,
+          searching = FALSE,
+          ordering = FALSE,
+          info = FALSE
+        )
       )
     })
 
