@@ -189,14 +189,31 @@ is_open_today_now <- function(hours_str) {
 }
 
 # ===================== Opening Hours + Helper =====================
-price_map <- c("FREE"=0, "INEXPENSIVE"=1, "MODERATE"=2, "EXPENSIVE"=3, "VERY_EXPENSIVE"=4)
-price_range_map <- c(
-  "FREE"           = "$0",
-  "INEXPENSIVE"    = "$10–$20",
-  "MODERATE"       = "$20–$40",
-  "EXPENSIVE"      = "$40–$70",
-  "VERY_EXPENSIVE" = "$70–$120+"
+price_map <- c(
+  "FREE" = 0,
+  "LOW" = 1,
+  "INEXPENSIVE" = 1,
+  "MEDIUM" = 2,
+  "MODERATE" = 2,
+  "HIGH" = 3,
+  "EXPENSIVE" = 3,
+  "VERY_EXPENSIVE" = 4,
+  "LUXURY" = 4,
+  "N/A" = 2
 )
+price_range_map <- c(
+  "FREE" = "Free",
+  "LOW" = "Low ($)",
+  "INEXPENSIVE" = "Low ($)",
+  "MEDIUM" = "Medium ($$)",
+  "MODERATE" = "Medium ($$)",
+  "HIGH" = "High ($$$)",
+  "EXPENSIVE" = "High ($$$)",
+  "VERY_EXPENSIVE" = "Luxury ($$$$)",
+  "LUXURY" = "Luxury ($$$$)",
+  "N/A" = "No Price Info"
+)
+
 price_range <- function(x){
   lvl <- as.character(x) |> stringr::str_to_upper() |> stringr::str_replace_all("^PRICE_LEVEL_", "")
   out <- price_range_map[lvl]; out[is.na(out) | !nzchar(out)] <- "No Price Info"; out
@@ -367,9 +384,19 @@ ui <- fluidPage(
       @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
       body {
         font-family: 'Poppins', sans-serif;
-        margin:0; padding:0;
+        margin:0;
+        padding:0;
         overflow-x:hidden;
-        background: linear-gradient(135deg,#cfe2ff,#dbeafe,#f8fafc);
+        position:relative;
+      }
+      body::before {
+        content:'';
+        position:fixed;
+        inset:0;
+        background:url('sky-line.jpg') center center/cover no-repeat;
+        opacity:0.2;
+        pointer-events:none;
+        z-index:-2;
       }
       h1, h2, h3, h4, h5, h6 {
         font-family: 'Poppins', sans-serif;
@@ -385,6 +412,21 @@ ui <- fluidPage(
         font-weight:500;
         letter-spacing:0.3px;
         font-size:16px !important;
+      }
+      .navbar {
+        background-color:rgba(202,221,247,0.5) !important;
+        border-bottom:1px solid rgba(15,23,42,0.06);
+        box-shadow:0 6px 18px rgba(15,23,42,0.08);
+        position:relative;
+        z-index:30;
+      }
+      .navbar .navbar-brand,
+      .navbar .nav-link {
+        color:#1f2933 !important;
+      }
+      .navbar .nav-link:hover,
+      .navbar .nav-link:focus {
+        color:#0f172a !important;
       }
       #welcome {
         position: relative; z-index: 3; height:100vh;
@@ -418,6 +460,34 @@ ui <- fluidPage(
       .desc-card {background:#fff; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,0.06); padding:16px;}
       .kpi-card  {background:#fff; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,0.06); padding:14px;}
       .shop-img  {width:100%; height:320px; object-fit:cover; border-radius:12px; background:#f2f2f2;}
+      #mainApp::before {
+        content:'';
+        position:fixed;
+        inset:0;
+        background:url('sky-line.jpg') center center/cover no-repeat;
+        opacity:0.2;
+        pointer-events:none;
+        z-index:-1;
+      }
+      #detail-search {
+        position:relative;
+        z-index:40;
+        width:100%;
+        max-width:900px;
+        margin:12px auto 24px;
+      }
+      #detail-search .selectize-control.single .selectize-input {
+        border-radius:16px;
+        border:1px solid rgba(15,23,42,0.08);
+        box-shadow:0 8px 24px rgba(15,23,42,0.12);
+        padding:14px 18px;
+        font-size:18px;
+        background:rgba(255,255,255,0.92);
+      }
+      #detail-search .selectize-input.focus {
+        border-color:#3478f6 !important;
+        box-shadow:0 0 0 4px rgba(52,120,246,0.22) !important;
+      }
       .kpi {font-weight:600; margin-right:16px;}
       .muted {color:#667085;}
       .rating-wrap {display:flex; flex-direction:column; gap:6px;}
@@ -713,6 +783,29 @@ ui <- fluidPage(
       #map-container {
         position: relative;
       }
+      #map-tab .route-legend {
+        background: rgba(255,255,255,0.92);
+        padding: 6px 8px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(15,23,42,0.12);
+        font-size: 11px;
+        color: #1f2933;
+        min-width: 110px;
+      }
+      #map-tab .route-legend-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 3px;
+      }
+      #map-tab .route-legend-item img {
+        width: 22px;
+        height: 26px;
+        object-fit: contain;
+      }
+      #map-tab .route-legend-item:last-child {
+        margin-bottom: 0;
+      }
     
       #loading-overlay {
         position: absolute;
@@ -873,13 +966,13 @@ ui <- fluidPage(
         "Map",
         div(
           id = "map-tab",
-          titlePanel("🍽️ Melbourne CBD Food & Drink Map"),
+          titlePanel(""),
           sidebarLayout(
             sidebarPanel(
               width = 3,
               tags$div(
                 id = "filter-panel",
-                tags$label("Select Categories: 🍴"),
+                tags$label("Select Categories:"),
                 tags$div(
                   class = "main-block",
                   checkboxInput("main_all", "All", value = TRUE)
@@ -909,7 +1002,7 @@ ui <- fluidPage(
               br(),
               div(
                 id = "rating-section",
-                tags$label("Select Rating: ⭐"),
+                tags$label("Select Rating:"),
                 selectInput(
                   "rating_filter",
                   NULL,
@@ -927,7 +1020,7 @@ ui <- fluidPage(
               ),
               div(
                 id = "open-filter",
-                tags$label("Opening Status: 🟢"),
+                tags$label("Opening Status: "),
                 checkboxInput(
                   "show_open_now",
                   "Show Open",
@@ -969,15 +1062,18 @@ ui <- fluidPage(
         "Detail",
         
         # 搜索框
-        fluidRow(
-          column(
-            12,
-            selectizeInput(
-              "pick", label = NULL,
-              choices = c("", sort(unique(stats::na.omit(all$name)))),
-              selected = "",
-              options  = list(placeholder = "search keyword…", create = FALSE),
-              width    = "100%"
+        div(
+          id = "detail-search",
+          fluidRow(
+            column(
+              12,
+              selectizeInput(
+                "pick", label = NULL,
+                choices = c("", sort(unique(stats::na.omit(all$name)))),
+                selected = "",
+                options  = list(placeholder = "search keyword…", create = FALSE),
+                width    = "100%"
+              )
             )
           )
         ),
@@ -1028,9 +1124,28 @@ server <- function(input, output, session){
   
   # ✅ 改动点：无论选中过没选过，从 Map/Route 切回 Detail 都显示 skyline
   observeEvent(input$navtabs, ignoreInit = TRUE, {
-    if (identical(input$navtabs, "Detail")) {
-      show_skyline(TRUE)
-    }
+    if (!identical(input$navtabs, "Detail")) return()
+    show_skyline(TRUE)
+    updateSelectizeInput(session, "pick", selected = "")
+  })
+
+  # 来自 Route 页面“See Details”点击
+  observeEvent(input$`route-see_details`, {
+    raw_name <- input$`route-see_details`
+    if (is.null(raw_name) || !nzchar(raw_name)) return()
+    venue_name <- URLdecode(raw_name)
+    if (!nzchar(venue_name)) return()
+    last_pick(venue_name)
+    has_selected(TRUE)
+    show_skyline(FALSE)
+    updateNavbarPage(session, "navtabs", selected = "Detail")
+    updateSelectizeInput(
+      session,
+      "pick",
+      choices = c("", sort(unique(stats::na.omit(all$name)))),
+      selected = venue_name,
+      server = TRUE
+    )
   })
   
   # 选中记录（为空时走 last_pick）
@@ -1044,7 +1159,8 @@ server <- function(input, output, session){
   
   # ================= 主内容：全屏 skyline 或 详情布局 =================
   output$mainContent <- renderUI({
-    if (isTRUE(show_skyline())) {
+    current_choice <- if (!is.null(input$pick) && nzchar(input$pick)) input$pick else last_pick()
+    if (isTRUE(show_skyline()) || is.null(current_choice) || !nzchar(current_choice)) {
       bg_img <- if (!is.null(skyline_file)) skyline_file else
         "https://upload.wikimedia.org/wikipedia/commons/b/bc/Melbourne_skyline_sunset.jpg"
       
@@ -1054,7 +1170,7 @@ server <- function(input, output, session){
           style = sprintf("
             position:fixed;
             inset:0;
-            z-index:0;
+            z-index:5;
             background:url('%s') center center/cover no-repeat;
           ", bg_img),
           div(
@@ -1076,7 +1192,7 @@ server <- function(input, output, session){
               animation:fadeIn 1.4s ease;
             ",
             h1("Discover Melbourne’s Best Food & Drinks",
-               style="font-size:46px;font-weight:700;line-height:1.3;max-width:900px;")
+               style="font-size:46px;font-weight:700;line-height:1.3;max-width:900px;color:#fefefe;text-shadow:0 4px 18px rgba(0,0,0,0.35);")
           ),
           tags$style(HTML("
             @keyframes fadeIn {
@@ -1392,6 +1508,14 @@ server <- function(input, output, session){
   })
   
   output$map <- renderLeaflet({
+    legend_html <- htmltools::HTML("
+      <div class='route-legend'>
+        <div class='route-legend-item'><img src='Restaurant.png' alt='Restaurant icon'/><span>Restaurant</span></div>
+        <div class='route-legend-item'><img src='Bar.png' alt='Bar icon'/><span>Bar</span></div>
+        <div class='route-legend-item'><img src='Cafe.png' alt='Cafe icon'/><span>Cafe</span></div>
+        <div class='route-legend-item'><img src='Milktea.png' alt='Drinks icon'/><span>Drinks</span></div>
+      </div>
+    ")
     leaflet() %>%
       addProviderTiles(providers$Stadia.AlidadeSmooth, group = "Light (Modern)") %>%
       addProviderTiles(providers$Stadia.AlidadeSmoothDark, group = "Dark (Modern)") %>%
@@ -1401,6 +1525,11 @@ server <- function(input, output, session){
       addLayersControl(
         baseGroups = c("Light (Modern)", "Dark (Modern)", "Voyager", "Minimal Gray"),
         options = layersControlOptions(collapsed = FALSE)
+      ) %>%
+      addControl(
+        legend_html,
+        position = "topright",
+        layerId = "map-legend"
       ) %>%
       addEasyButton(
         easyButton(
@@ -1531,21 +1660,22 @@ server <- function(input, output, session){
     if (is.null(loc$lat) || is.null(loc$lon)) return()
     user_loc(loc)
     r <- as.numeric(input$radius_select)
-    
+    showNotification("GPS location detected successfully!", type = "message", duration = 3)
+
     leafletProxy("map", session = session) %>%
       clearGroup("user_marker") %>%
       clearGroup("range_circle") %>%
-      addMarkers(
+      addAwesomeMarkers(
         lng = loc$lon,
         lat = loc$lat,
-        icon = icons(
-          iconUrl = "https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon.png",
-          iconWidth = 25,
-          iconHeight = 41,
-          iconAnchorX = 12,
-          iconAnchorY = 20
+        icon = awesomeIcons(
+          icon = "user",
+          iconColor = "white",
+          library = "fa",
+          markerColor = "blue"
         ),
-        label = "You are here 📍",
+        popup = "<strong>Your Location</strong>",
+        label = "You are here",
         options = markerOptions(className = "user-location", clickable = FALSE),
         group = "user_marker"
       ) %>%
@@ -1584,6 +1714,7 @@ server <- function(input, output, session){
       clearGroup("user_marker") %>%
       clearGroup("range_circle") %>%
       setView(lng = 144.9631, lat = -37.8100, zoom = 15)
+    showNotification("Location cleared.", type = "warning", duration = 2)
   })
   
   session$onFlushed(function(){
