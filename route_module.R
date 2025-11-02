@@ -1,8 +1,79 @@
+route_is_open_single <- function(hours_str) {
+  if (is.null(hours_str) || is.na(hours_str) || !nzchar(hours_str)) return(NA)
+
+  if (grepl("24", hours_str, ignore.case = TRUE) && grepl("hour", hours_str, ignore.case = TRUE)) {
+    return(TRUE)
+  }
+
+  today_full <- weekdays(Sys.Date())
+  pattern <- paste0("(?i)", today_full, ":[^|]+")
+  today_segment <- regmatches(hours_str, regexpr(pattern, hours_str, perl = TRUE))
+
+  if (!length(today_segment) || grepl("Closed", today_segment, ignore.case = TRUE)) {
+    if (exists("is_open_today_now", mode = "function")) {
+      return(tryCatch(is_open_today_now(hours_str), error = function(...) NA))
+    }
+    return(FALSE)
+  }
+
+  time_pattern <- "\\d{1,2}:\\d{2}\\s*(AM|PM)?\\s*[-–]\\s*\\d{1,2}:\\d{2}\\s*(AM|PM)?"
+  time_match <- regmatches(today_segment, regexpr(time_pattern, today_segment, perl = TRUE, ignore.case = TRUE))
+
+  if (!length(time_match)) {
+    if (exists("is_open_today_now", mode = "function")) {
+      return(tryCatch(is_open_today_now(hours_str), error = function(...) NA))
+    }
+    return(NA)
+  }
+
+  to_24 <- function(txt) {
+    txt <- trimws(txt)
+    if (grepl("AM|PM", txt, ignore.case = TRUE)) {
+      tryCatch(
+        format(lubridate::parse_date_time(txt, orders = "I:M p"), "%H:%M"),
+        error = function(...) NA_character_
+      )
+    } else {
+      parts <- strsplit(txt, ":", fixed = TRUE)[[1]]
+      if (length(parts) < 2) return(NA_character_)
+      h <- as.numeric(parts[1])
+      m <- as.numeric(parts[2])
+      if (is.na(h) || is.na(m)) return(NA_character_)
+      if (h < 6) h <- h + 12
+      sprintf("%02d:%02d", h, m)
+    }
+  }
+
+  bounds <- strsplit(gsub("\\s", "", time_match), "[-–]")[[1]]
+  if (length(bounds) < 2) return(NA)
+
+  open_time <- to_24(bounds[1])
+  close_time <- to_24(bounds[2])
+  if (is.na(open_time) || is.na(close_time)) return(NA)
+
+  now_time <- format(Sys.time(), "%H:%M")
+
+  if (close_time < open_time) {
+    return(now_time >= open_time || now_time <= close_time)
+  }
+  now_time >= open_time && now_time <= close_time
+}
+
+route_is_open_now <- function(hours_vec) {
+  if (length(hours_vec) == 0) return(logical(0))
+  vapply(hours_vec, route_is_open_single, logical(1))
+}
+
 load_route_data <- function() {
-  cafes <- read.csv("cafe_brunch_bakery_desc.csv", stringsAsFactors = FALSE)
-  bars <- read.csv("melbourne_cbd_bars.csv", stringsAsFactors = FALSE)
-  drinks <- read.csv("milktea_juice_english_clean.csv", stringsAsFactors = FALSE)
-  restaurants <- read.csv("restaurant_english_clean_desc.csv", stringsAsFactors = FALSE)
+  cafes <- read.csv("cafe.csv", stringsAsFactors = FALSE)
+  bars <- read.csv("bars.csv", stringsAsFactors = FALSE)
+  drinks <- read.csv("milk_juice.csv", stringsAsFactors = FALSE)
+  restaurants <- read.csv("restaurant.csv", stringsAsFactors = FALSE)
+
+  cafes$opening_hours <- if ("opening_hours" %in% names(cafes)) cafes$opening_hours else if ("openinghour" %in% names(cafes)) cafes$openinghour else NA_character_
+  bars$opening_hours <- if ("opening_hours" %in% names(bars)) bars$opening_hours else if ("openinghour" %in% names(bars)) bars$openinghour else NA_character_
+  drinks$opening_hours <- if ("opening_hours" %in% names(drinks)) drinks$opening_hours else if ("openinghour" %in% names(drinks)) drinks$openinghour else NA_character_
+  restaurants$opening_hours <- if ("opening_hours" %in% names(restaurants)) restaurants$opening_hours else if ("openinghour" %in% names(restaurants)) restaurants$openinghour else NA_character_
 
   cafes$category <- "Cafe/Brunch"
   bars$category <- "Bar"
@@ -28,6 +99,16 @@ load_route_data <- function() {
         price_level == "N/A" ~ 2,
         TRUE ~ 2
       )
+    ) %>%
+    mutate(
+      opening_hours = ifelse(is.na(opening_hours) | opening_hours == "", NA_character_, opening_hours),
+      open_now = route_is_open_now(opening_hours),
+      category_group = dplyr::case_when(
+        grepl("Bar", category, ignore.case = TRUE) ~ "Bar",
+        grepl("Cafe|Coffee|Brunch|Bakery", category, ignore.case = TRUE) ~ "Cafe/Brunch",
+        grepl("Milk Tea|Juice|Drink", category, ignore.case = TRUE) ~ "Drinks",
+        TRUE ~ "Restaurant"
+      )
     )
 }
 
@@ -48,31 +129,41 @@ route_default_meal_time <- function() {
 
 route_recommend_venues <- function(data, budget, use_location, meal_time, user_coords = NULL, search_text = "") {
   budget_filter <- dplyr::case_when(
-    budget == "Low" ~ 1,
-    budget == "Medium" ~ 2,
-    budget == "High" ~ 3,
-    budget == "Luxury" ~ 4,
+    grepl("Low", budget, ignore.case = TRUE) ~ 1,
+    grepl("Medium", budget, ignore.case = TRUE) ~ 2,
+    grepl("High", budget, ignore.case = TRUE) ~ 3,
+    grepl("Luxury", budget, ignore.case = TRUE) ~ 4,
     TRUE ~ 2
   )
 
   time_categories <- switch(
     meal_time,
-    "Breakfast (7-10 AM)" = c("Cafe/Brunch", "Cafe"),
-    "Lunch (12-2 PM)"    = c("Cafe/Brunch", "Cafe", "Other", "Mexican"),
-    "Dinner (6-9 PM)"    = c("Other", "Bar", "Mexican"),
-    "Late Night (9 PM+)" = c("Bar"),
-    c("Cafe/Brunch", "Cafe", "Bar", "Other", "Mexican", "Milk Tea", "Juice")
+    "Breakfast (7-10 AM)" = c("Cafe/Brunch", "Drinks"),
+    "Lunch (12-2 PM)"    = c("Restaurant", "Cafe/Brunch", "Drinks", "Bar"),
+    "Dinner (6-9 PM)"    = c("Restaurant", "Bar"),
+    "Late Night (9 PM+)" = c("Bar", "Drinks"),
+    c("Restaurant", "Cafe/Brunch", "Bar", "Drinks")
   )
 
-  filtered <- data %>%
-    filter(price_numeric <= budget_filter + 1) %>%
-    filter(category %in% time_categories | grepl(paste(time_categories, collapse = "|"), category, ignore.case = TRUE))
+  search_active <- !is.null(search_text) && nzchar(search_text)
 
-  if (!is.null(search_text) && nzchar(search_text)) {
+  filtered <- data %>%
+    filter(price_numeric <= budget_filter + 1)
+
+  if (search_active) {
     filtered <- filtered %>%
-      filter(grepl(search_text, name, ignore.case = TRUE) |
-               grepl(search_text, category, ignore.case = TRUE) |
-               grepl(search_text, address, ignore.case = TRUE))
+      filter(
+        grepl(search_text, name, ignore.case = TRUE) |
+          grepl(search_text, category, ignore.case = TRUE) |
+          grepl(search_text, address, ignore.case = TRUE)
+      )
+  } else {
+    filtered <- filtered %>%
+      filter(category_group %in% time_categories)
+  }
+
+  if (nrow(filtered) == 0) {
+    return(filtered)
   }
 
   if (isTRUE(use_location) && !is.null(user_coords)) {
@@ -84,7 +175,8 @@ route_recommend_venues <- function(data, budget, use_location, meal_time, user_c
         distance = (distHaversine(cbind(lon, lat), c(center_lon, center_lat)) / 1000) * 1.3
       )
   } else {
-    filtered$distance <- 0
+    filtered <- filtered %>%
+      mutate(distance = 0)
   }
 
   filtered %>%
@@ -300,6 +392,13 @@ route_module_ui <- function(id) {
         .route-sortable .sortable-item:hover { box-shadow:0 2px 8px rgba(0,0,0,0.1); }
         .route-sortable .sortable-ghost { opacity:0.4; background-color:#ecf0f1; }
         .route-sortable .sortable-drag { opacity:0.8; box-shadow:0 4px 12px rgba(0,0,0,0.15); }
+        .route-layout { display:flex; gap:24px; align-items:flex-start; }
+        .route-layout__sidebar { flex:0 0 280px; }
+        .route-layout__main { flex:1 1 auto; }
+        @media (max-width:1200px) {
+          .route-layout { flex-direction:column; }
+          .route-layout__sidebar { flex:1 1 auto; }
+        }
         .route-summary-card { display:flex; justify-content:space-between; align-items:center; padding:10px 12px; background:#f8f9fa; margin-bottom:10px; border:1px solid #e0e0e0; }
         .route-summary-card h4 { margin:0; font-size:14px; font-weight:400; color:#2c3e50; }
         .route-summary-card span { font-size:12px; color:#7f8c8d; }
@@ -379,53 +478,62 @@ route_module_ui <- function(id) {
         .route-legend-item:last-child {
           margin-bottom:0;
         }
+        .route-see-details {
+          margin-left:auto;
+          font-size:12px;
+          color:#3478f6;
+          text-decoration:none;
+          font-weight:500;
+        }
+        .route-see-details:hover {
+          text-decoration:underline;
+          color:#265ed2;
+        }
       "))
     ),
-    fluidRow(
-      column(
-        width = 3,
+    div(
+      class = "route-layout",
+      div(
+        class = "route-layout__sidebar route-sidebar",
+        textInput(ns("search_text"), "Search:", placeholder = "Enter restaurant name...", width = "100%"),
+        selectInput(
+          ns("budget"), "Budget:",
+          choices = c("Low ($)", "Medium ($$)", "High ($$$)", "Luxury ($$$$)"),
+          selected = "Medium ($$)",
+          width = "100%"
+        ),
         div(
-          class = "route-sidebar",
-          textInput(ns("search_text"), "Search:", placeholder = "Enter restaurant name...", width = "100%"),
-          selectInput(
-            ns("budget"), "Budget:",
-            choices = c("Low ($)", "Medium ($$)", "High ($$$)", "Luxury ($$$$)"),
-            selected = "Medium ($$)",
-            width = "100%"
-          ),
+          class = "route-location-card",
+          tags$label("Location:"),
           div(
-            class = "route-location-card",
-            tags$label("Location:"),
-            div(
-              class = "route-location-actions",
-              actionButton(ns("locate_btn"), "Locate Me", class = "route-locate-btn"),
-              actionButton(ns("clear_location"), "Clear", class = "route-location-clear")
-            ),
-            uiOutput(ns("location_status"))
+            class = "route-location-actions",
+            actionButton(ns("locate_btn"), "Locate Me", class = "route-locate-btn"),
+            actionButton(ns("clear_location"), "Clear", class = "route-location-clear")
           ),
-          selectInput(
-            ns("meal_time"), "Meal Time:",
-            choices = c(
-              "Breakfast (7-10 AM)",
-              "Lunch (12-2 PM)",
-              "Dinner (6-9 PM)",
-              "Late Night (9 PM+)",
-              "Anytime"
-            ),
-            selected = route_default_meal_time(),
-            width = "100%"
+          uiOutput(ns("location_status"))
+        ),
+        selectInput(
+          ns("meal_time"), "Meal Time:",
+          choices = c(
+            "Breakfast (7-10 AM)",
+            "Lunch (12-2 PM)",
+            "Dinner (6-9 PM)",
+            "Late Night (9 PM+)",
+            "Anytime"
           ),
-          actionButton(ns("clear_selection"), "CLEAR SELECTION", class = "route-clear-btn", width = "100%"),
-          tags$hr(),
-          div(
-            style = "font-size:11px; color:#34495e;",
-            icon("info-circle"),
-            " Recommendations update automatically when you change filters."
-          )
+          selected = route_default_meal_time(),
+          width = "100%"
+        ),
+        actionButton(ns("clear_selection"), "CLEAR SELECTION", class = "route-clear-btn", width = "100%"),
+        tags$hr(),
+        div(
+          style = "font-size:11px; color:#34495e;",
+          icon("info-circle"),
+          " Recommendations update automatically when you change filters."
         )
       ),
-      column(
-        width = 9,
+      div(
+        class = "route-layout__main",
         fluidRow(
           shinydashboard::box(
             title = "SELECTED VENUES",
@@ -498,6 +606,49 @@ route_module_server <- function(id) {
       }
       suffix <- if (isTRUE(selected)) "_icon_red.png" else "_icon.png"
       paste0(base, suffix)
+    }
+
+    format_price <- function(value) {
+      if (is.null(value) || length(value) == 0 || is.na(value) || value %in% c("", "N/A")) {
+        "No Price Info"
+      } else {
+        value
+      }
+    }
+
+    format_open_status <- function(open_now, opening_hours) {
+      if (is.null(opening_hours) || length(opening_hours) == 0 || is.na(opening_hours) || !nzchar(opening_hours)) {
+        "No Opening Hours Info"
+      } else if (isTRUE(open_now)) {
+        "🟢 <i>Open</i>"
+      } else if (identical(open_now, FALSE)) {
+        "🔴 <i>Closed</i>"
+      } else {
+        "No Opening Hours Info"
+      }
+    }
+
+    price_level_to_budget <- function(price_level) {
+      switch(
+        price_level,
+        "$" = "Low ($)",
+        "$$" = "Medium ($$)",
+        "$$$" = "High ($$$)",
+        "$$$$" = "Luxury ($$$$)",
+        "N/A" = "Medium ($$)",
+        NULL
+      )
+    }
+
+    category_group_to_mealtime <- function(group) {
+      switch(
+        group,
+        "Cafe/Brunch" = "Breakfast (7-10 AM)",
+        "Bar" = "Late Night (9 PM+)",
+        "Drinks" = "Anytime",
+        "Restaurant" = "Dinner (6-9 PM)",
+        "Anytime"
+      )
     }
 
     observeEvent(input$locate_btn, {
@@ -574,6 +725,38 @@ route_module_server <- function(id) {
       recommendations(recs)
     })
 
+    observeEvent(input$search_text, {
+      text <- trimws(input$search_text)
+      if (!nzchar(text)) return()
+
+      venues <- all_venues()
+      if (nrow(venues) == 0) return()
+
+      exact_matches <- venues %>%
+        filter(tolower(name) == tolower(text))
+
+      candidate <- if (nrow(exact_matches) == 1) {
+        exact_matches
+      } else {
+        partial_matches <- venues %>%
+          filter(grepl(text, name, ignore.case = TRUE))
+        if (nrow(partial_matches) == 1) partial_matches else NULL
+      }
+
+      if (is.null(candidate) || nrow(candidate) == 0) return()
+
+      venue <- candidate[1, ]
+      budget_choice <- price_level_to_budget(venue$price_level)
+      meal_choice <- category_group_to_mealtime(venue$category_group)
+
+      if (!is.null(budget_choice)) {
+        updateSelectInput(session, "budget", selected = budget_choice)
+      }
+      if (!is.null(meal_choice)) {
+        updateSelectInput(session, "meal_time", selected = meal_choice)
+      }
+    }, ignoreNULL = TRUE)
+
     observeEvent(input$clear_selection, {
       selected_venues(data.frame())
       showNotification("Selection cleared!", type = "warning", duration = 2)
@@ -583,10 +766,10 @@ route_module_server <- function(id) {
       selected <- selected_venues()
       if (nrow(selected) == 0) return(NULL)
 
-      cafes <- sum(grepl("Cafe|Coffee|Brunch|Bakery", selected$category, ignore.case = TRUE))
-      bars <- sum(grepl("Bar", selected$category, ignore.case = TRUE))
-      drinks <- sum(grepl("Milk Tea|Juice|Drink", selected$category, ignore.case = TRUE))
-      restaurants <- nrow(selected) - cafes - bars - drinks
+      cafes <- sum(selected$category_group == "Cafe/Brunch", na.rm = TRUE)
+      bars <- sum(selected$category_group == "Bar", na.rm = TRUE)
+      drinks <- sum(selected$category_group == "Drinks", na.rm = TRUE)
+      restaurants <- sum(selected$category_group == "Restaurant", na.rm = TRUE)
 
       div(
         class = "route-summary-card",
@@ -618,15 +801,29 @@ route_module_server <- function(id) {
       venue_items <- lapply(seq_len(nrow(selected)), function(i) {
         venue <- selected[i, ]
         venue_id <- URLencode(venue$name, reserved = TRUE)
-        border_color <- if (grepl("Bar", venue$category, ignore.case = TRUE)) {
+        venue_group <- venue$category_group
+        if (is.null(venue_group) || length(venue_group) == 0 || is.na(venue_group)) {
+          venue_group <- "Restaurant"
+        }
+        border_color <- if (venue_group == "Bar") {
           "#9b59b6"
-        } else if (grepl("Cafe|Coffee|Brunch|Bakery", venue$category, ignore.case = TRUE)) {
+        } else if (venue_group == "Cafe/Brunch") {
           "#f39c12"
-        } else if (grepl("Milk Tea|Juice|Drink", venue$category, ignore.case = TRUE)) {
+        } else if (venue_group == "Drinks") {
           "#e91e63"
         } else {
           "#3498db"
         }
+        price_display <- format_price(venue$price_level)
+        display_address <- sub(",\\s*Australia\\s*$", "", venue$address)
+        status_display <- format_open_status(venue$open_now, venue$opening_hours)
+
+        details_link <- tags$a(
+          "See Details",
+          href = "#",
+          class = "route-see-details",
+          onclick = sprintf("Shiny.setInputValue('%s', '%s', {priority:'event'})", ns("see_details"), venue_id)
+        )
 
         div(
           `data-venue-name` = venue$name,
@@ -647,15 +844,21 @@ route_module_server <- function(id) {
             tags$span(style = "display:block; color:#95a5a6; font-size:12px; margin-top:4px; font-weight:300;", sprintf("★ %.1f", venue$rating))
           ),
           p(
-            style = "margin:6px 0; padding-left:12px; font-size:12px; color:#7f8c8d; font-weight:300;",
+            style = "margin:6px 0; padding-left:12px; font-size:12px; color:#7f8c8d; font-weight:300; display:flex; align-items:center; gap:15px;",
             tags$span(venue$category),
-            tags$span(style = "margin-left:15px; color:#2c3e50;", venue$price_level),
-            if (!is.null(venue$distance) && venue$distance > 0) tags$span(style = "margin-left:15px;", sprintf("%.1f km", venue$distance))
+            tags$span(style = "color:#2c3e50;", price_display),
+            if (!is.null(venue$distance) && venue$distance > 0) tags$span(sprintf("%.1f km", venue$distance)),
+            details_link
+          ),
+          p(
+            style = "font-size:11px; color:#7f8c8d; margin:4px 0; padding-left:12px; font-weight:300;",
+            tags$span(style = "font-weight:500; color:#2c3e50;", "Status: "),
+            HTML(status_display)
           ),
           p(
             style = "font-size:11px; color:#95a5a6; margin:4px 0; padding-left:12px; font-weight:300;",
-            substr(venue$address, 1, 40),
-            if (nchar(venue$address) > 40) "..." else ""
+            substr(display_address, 1, 40),
+            if (nchar(display_address) > 40) "..." else ""
           ),
           if (!is.na(venue$description) && nchar(venue$description) > 0) {
             p(
@@ -757,6 +960,13 @@ route_module_server <- function(id) {
         clearShapes()
 
       if (nrow(recs) > 0) {
+        recs$price_text <- vapply(recs$price_level, format_price, character(1))
+        recs$opening_text <- mapply(
+          format_open_status,
+          recs$open_now,
+          recs$opening_hours,
+          USE.NAMES = FALSE
+        )
         recs$popup_content <- sapply(seq_len(nrow(recs)), function(i) {
           venue_name <- recs$name[i]
           venue_name_encoded <- URLencode(venue_name, reserved = TRUE)
@@ -766,20 +976,22 @@ route_module_server <- function(id) {
               <span style='color:#7f8c8d; font-size:12px;'>%s</span><br/>
               <span style='color:#34495e; font-size:12px;'>Rating: %.1f</span><br/>
               <span style='color:#34495e; font-size:12px;'>Price: <strong style='color:#27ae60;'>%s</strong></span><br/>
+              <span style='color:#34495e; font-size:12px;'>Status: %s</span><br/>
               <span style='color:#95a5a6; font-size:11px;'>%s</span><br/>
               <button onclick=\"Shiny.setInputValue('%s','%s',{priority:'event'})\" style='margin-top:10px; padding:8px 15px; background-color:#3498db; color:white; border:none; border-radius:0; cursor:pointer; font-weight:300; width:100%%; letter-spacing:0.5px;'>ADD TO TRIP</button>
             </div>",
             venue_name,
             recs$category[i],
             recs$rating[i],
-            recs$price_level[i],
+            recs$price_text[i],
+            recs$opening_text[i],
             substr(recs$address[i], 1, 50),
             ns("add_to_trip"),
             venue_name_encoded
           )
         })
 
-        recs$icon_file <- sapply(recs$category, category_icon_name, selected = FALSE)
+        recs$icon_file <- sapply(recs$category_group, category_icon_name, selected = FALSE)
         rec_icons <- icons(
           iconUrl = recs$icon_file,
           iconWidth = 40,
@@ -811,8 +1023,15 @@ route_module_server <- function(id) {
       }
 
       if (nrow(selected) > 0) {
+        selected$price_text <- vapply(selected$price_level, format_price, character(1))
+        selected$opening_text <- mapply(
+          format_open_status,
+          selected$open_now,
+          selected$opening_hours,
+          USE.NAMES = FALSE
+        )
         selected_icons <- icons(
-          iconUrl = sapply(selected$category, category_icon_name, selected = TRUE),
+          iconUrl = sapply(selected$category_group, category_icon_name, selected = TRUE),
           iconWidth = 40,
           iconHeight = 55,
           iconAnchorX = 20,
@@ -832,9 +1051,10 @@ route_module_server <- function(id) {
                 <strong style='color:#e74c3c;'>SELECTED: %s</strong><br/>
                 <span style='color:#7f8c8d; font-size:12px;'>%s</span><br/>
                 <span style='color:#34495e; font-size:12px;'>Rating: %.1f</span><br/>
-                <span style='color:#34495e; font-size:12px;'>Price: <strong style='color:#27ae60;'>%s</strong></span>
+                <span style='color:#34495e; font-size:12px;'>Price: <strong style='color:#27ae60;'>%s</strong></span><br/>
+                <span style='color:#34495e; font-size:12px;'>Status: %s</span>
               </div>",
-              name, category, rating, price_level
+              name, category, rating, price_text, opening_text
             ),
             label = ~paste("SELECTED:", name),
             group = "selected",

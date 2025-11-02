@@ -189,7 +189,30 @@ is_open_today_now <- function(hours_str) {
 }
 
 # ===================== Opening Hours + Helper =====================
-price_map <- c("FREE"=0, "Low"=1, "Medium"=2, "High"=3, "Luxury"=4)
+price_map <- c(
+  "FREE" = 0,
+  "LOW" = 1,
+  "INEXPENSIVE" = 1,
+  "MEDIUM" = 2,
+  "MODERATE" = 2,
+  "HIGH" = 3,
+  "EXPENSIVE" = 3,
+  "VERY_EXPENSIVE" = 4,
+  "LUXURY" = 4,
+  "N/A" = 2
+)
+price_range_map <- c(
+  "FREE" = "Free",
+  "LOW" = "Low ($)",
+  "INEXPENSIVE" = "Low ($)",
+  "MEDIUM" = "Medium ($$)",
+  "MODERATE" = "Medium ($$)",
+  "HIGH" = "High ($$$)",
+  "EXPENSIVE" = "High ($$$)",
+  "VERY_EXPENSIVE" = "Luxury ($$$$)",
+  "LUXURY" = "Luxury ($$$$)",
+  "N/A" = "No Price Info"
+)
 
 price_range <- function(x){
   lvl <- as.character(x) |> stringr::str_to_upper() |> stringr::str_replace_all("^PRICE_LEVEL_", "")
@@ -1101,9 +1124,28 @@ server <- function(input, output, session){
   
   # ✅ 改动点：无论选中过没选过，从 Map/Route 切回 Detail 都显示 skyline
   observeEvent(input$navtabs, ignoreInit = TRUE, {
-    if (identical(input$navtabs, "Detail")) {
-      show_skyline(TRUE)
-    }
+    if (!identical(input$navtabs, "Detail")) return()
+    show_skyline(TRUE)
+    updateSelectizeInput(session, "pick", selected = "")
+  })
+
+  # 来自 Route 页面“See Details”点击
+  observeEvent(input$`route-see_details`, {
+    raw_name <- input$`route-see_details`
+    if (is.null(raw_name) || !nzchar(raw_name)) return()
+    venue_name <- URLdecode(raw_name)
+    if (!nzchar(venue_name)) return()
+    last_pick(venue_name)
+    has_selected(TRUE)
+    show_skyline(FALSE)
+    updateNavbarPage(session, "navtabs", selected = "Detail")
+    updateSelectizeInput(
+      session,
+      "pick",
+      choices = c("", sort(unique(stats::na.omit(all$name)))),
+      selected = venue_name,
+      server = TRUE
+    )
   })
   
   # 选中记录（为空时走 last_pick）
@@ -1117,7 +1159,8 @@ server <- function(input, output, session){
   
   # ================= 主内容：全屏 skyline 或 详情布局 =================
   output$mainContent <- renderUI({
-    if (isTRUE(show_skyline())) {
+    current_choice <- if (!is.null(input$pick) && nzchar(input$pick)) input$pick else last_pick()
+    if (isTRUE(show_skyline()) || is.null(current_choice) || !nzchar(current_choice)) {
       bg_img <- if (!is.null(skyline_file)) skyline_file else
         "https://upload.wikimedia.org/wikipedia/commons/b/bc/Melbourne_skyline_sunset.jpg"
       
@@ -1617,21 +1660,22 @@ server <- function(input, output, session){
     if (is.null(loc$lat) || is.null(loc$lon)) return()
     user_loc(loc)
     r <- as.numeric(input$radius_select)
-    
+    showNotification("GPS location detected successfully!", type = "message", duration = 3)
+
     leafletProxy("map", session = session) %>%
       clearGroup("user_marker") %>%
       clearGroup("range_circle") %>%
-      addMarkers(
+      addAwesomeMarkers(
         lng = loc$lon,
         lat = loc$lat,
-        icon = icons(
-          iconUrl = "https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon.png",
-          iconWidth = 25,
-          iconHeight = 41,
-          iconAnchorX = 12,
-          iconAnchorY = 20
+        icon = awesomeIcons(
+          icon = "user",
+          iconColor = "white",
+          library = "fa",
+          markerColor = "blue"
         ),
-        label = "You are here 📍",
+        popup = "<strong>Your Location</strong>",
+        label = "You are here",
         options = markerOptions(className = "user-location", clickable = FALSE),
         group = "user_marker"
       ) %>%
@@ -1670,6 +1714,7 @@ server <- function(input, output, session){
       clearGroup("user_marker") %>%
       clearGroup("range_circle") %>%
       setView(lng = 144.9631, lat = -37.8100, zoom = 15)
+    showNotification("Location cleared.", type = "warning", duration = 2)
   })
   
   session$onFlushed(function(){
