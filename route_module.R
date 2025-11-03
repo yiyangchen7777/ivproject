@@ -191,22 +191,34 @@ route_recommend_venues <- function(data, budget, use_location, meal_time, user_c
 }
 
 route_get_route_from_osrm <- function(from_lon, from_lat, to_lon, to_lat) {
+  # Validate coordinates
+  if (any(is.na(c(from_lon, from_lat, to_lon, to_lat)))) return(NULL)
+  if (any(!is.numeric(c(from_lon, from_lat, to_lon, to_lat)))) return(NULL)
+  # Validate coordinate range (Melbourne approx: lon 144.5-145.5, lat -38.5 to -37.5)
+  if (from_lat < -90 || from_lat > 90 || to_lat < -90 || to_lat > 90) return(NULL)
+  if (from_lon < -180 || from_lon > 180 || to_lon < -180 || to_lon > 180) return(NULL)
+  
   tryCatch({
     url <- sprintf(
       "http://router.project-osrm.org/route/v1/driving/%f,%f;%f,%f?overview=full&geometries=geojson",
       from_lon, from_lat, to_lon, to_lat
     )
     response <- jsonlite::fromJSON(url)
-    if (response$code == "Ok" && length(response$routes) > 0) {
+    if (response$code == "Ok" && length(response$routes) > 0 && nrow(response$routes) > 0) {
       route <- response$routes[1, ]
-      return(list(
-        distance = route$distance / 1000,
-        duration = route$duration / 60,
-        geometry = route$geometry$coordinates[[1]]
-      ))
+      if (!is.null(route$geometry) && !is.null(route$geometry$coordinates)) {
+        return(list(
+          distance = route$distance / 1000,
+          duration = route$duration / 60,
+          geometry = route$geometry$coordinates[[1]]
+        ))
+      }
     }
     NULL
-  }, error = function(e) NULL)
+  }, error = function(e) {
+    # Fail silently and return NULL
+    NULL
+  })
 }
 
 route_calculate_route <- function(selected_venues) {
@@ -220,42 +232,100 @@ route_calculate_route <- function(selected_venues) {
     ))
   }
 
-  route_details <- data.frame()
-  route_geometries <- list()
-  total_distance <- 0
+    route_details <- data.frame()
+    route_geometries <- list()
+    total_distance <- 0
 
-  for (i in 1:(nrow(selected_venues) - 1)) {
-    from <- selected_venues[i, ]
-    to <- selected_venues[i + 1, ]
+    for (i in 1:(nrow(selected_venues) - 1)) {
+      from <- selected_venues[i, ]
+      to <- selected_venues[i + 1, ]
+      
+      # Ensure coordinate fields exist and are valid
+      if (!"lon" %in% names(from) || !"lat" %in% names(from) ||
+          !"lon" %in% names(to) || !"lat" %in% names(to)) {
+        # Skip invalid venues but still append to route_details with placeholders
+        route_details <- rbind(
+          route_details,
+          data.frame(
+            from = from$name,
+            to = to$name,
+            distance_km = 0,
+            walk_time_min = 0,
+            drive_time_min = 0
+          )
+        )
+        route_geometries[[i]] <- NULL
+        next
+      }
+      
+      from_lon <- as.numeric(from$lon)
+      from_lat <- as.numeric(from$lat)
+      to_lon <- as.numeric(to$lon)
+      to_lat <- as.numeric(to$lat)
+      
+      # Validate that coordinates are not NA and fall within bounds
+      if (any(is.na(c(from_lon, from_lat, to_lon, to_lat)))) {
+        route_details <- rbind(
+          route_details,
+          data.frame(
+            from = from$name,
+            to = to$name,
+            distance_km = 0,
+            walk_time_min = 0,
+            drive_time_min = 0
+          )
+        )
+        route_geometries[[i]] <- NULL
+        next
+      }
+      
+      # Validate coordinate range
+      if (from_lat < -90 || from_lat > 90 || to_lat < -90 || to_lat > 90 ||
+          from_lon < -180 || from_lon > 180 || to_lon < -180 || to_lon > 180) {
+        route_details <- rbind(
+          route_details,
+          data.frame(
+            from = from$name,
+            to = to$name,
+            distance_km = 0,
+            walk_time_min = 0,
+            drive_time_min = 0
+          )
+        )
+        route_geometries[[i]] <- NULL
+        next
+      }
 
-    osrm_route <- route_get_route_from_osrm(from$lon, from$lat, to$lon, to$lat)
+      osrm_route <- route_get_route_from_osrm(from_lon, from_lat, to_lon, to_lat)
 
-    if (!is.null(osrm_route)) {
-      distance <- osrm_route$distance
-      drive_time <- osrm_route$duration
-      walk_time <- (distance / 5) * 60
-      route_geometries[[i]] <- osrm_route$geometry
-    } else {
-      straight_distance <- distHaversine(c(from$lon, from$lat), c(to$lon, to$lat)) / 1000
-      distance <- straight_distance * 1.3
-      walk_time <- (distance / 5) * 60
-      drive_time <- (distance / 30) * 60
-      route_geometries[[i]] <- NULL
-    }
+      if (!is.null(osrm_route)) {
+        distance <- osrm_route$distance
+        drive_time <- osrm_route$duration
+        walk_time <- (distance / 5) * 60
+        route_geometries[[i]] <- osrm_route$geometry
+      } else {
+        # Use an estimated distance
+        straight_distance <- distHaversine(c(from_lon, from_lat), c(to_lon, to_lat)) / 1000
+        distance <- straight_distance * 1.3
+        walk_time <- (distance / 5) * 60
+        drive_time <- (distance / 30) * 60
+        route_geometries[[i]] <- NULL
+      }
 
-    route_details <- rbind(
-      route_details,
-      data.frame(
-        from = from$name,
-        to = to$name,
-        distance_km = round(distance, 2),
-        walk_time_min = round(walk_time, 1),
-        drive_time_min = round(drive_time, 1)
+      route_details <- rbind(
+        route_details,
+        data.frame(
+          from = from$name,
+          to = to$name,
+          distance_km = round(distance, 2),
+          walk_time_min = round(walk_time, 1),
+          drive_time_min = round(drive_time, 1),
+          stringsAsFactors = FALSE
+        )
       )
-    )
 
-    total_distance <- total_distance + distance
-  }
+      total_distance <- total_distance + distance
+    }
 
   list(
     total_distance = round(total_distance, 2),
@@ -317,6 +387,21 @@ route_module_ui <- function(id) {
           }
         });
       ", message_id, ns("user_coords"), ns("selected_venues_ui"), ns("sortable-venues-container"), ns("venue_order")))),
+      tags$script(HTML(sprintf("
+        Shiny.addCustomMessageHandler('route_refresh_map', function(message){
+          setTimeout(function(){
+            Shiny.setInputValue('%s', Date.now(), {priority:'event'});
+            var mapWidget = HTMLWidgets.find('#%s');
+            if (mapWidget && mapWidget.length > 0) {
+              mapWidget.forEach(function(w){
+                if (w && w.instance && w.instance.invalidateSize) {
+                  w.instance.invalidateSize();
+                }
+              });
+            }
+          }, 300);
+        });
+      ", ns("map_refresh"), ns("map")))),
       tags$style(HTML("
         body,
         .route-sidebar,
@@ -388,6 +473,10 @@ route_module_ui <- function(id) {
         .route-box { border-radius:0; box-shadow:none; border:1px solid #e0e0e0; background:#ffffff; }
         .route-box .box-header { border-bottom:1px solid #e0e0e0; background:#ffffff; }
         .route-box .box-title { font-weight:300; font-size:16px; color:#2c3e50; letter-spacing:0.5px; }
+        .route-box .box-body { overflow:hidden !important; }
+        .route-box[style*='flex'] .box-body { display:flex !important; flex-direction:column !important; }
+        .route-box[style*='flex'] .box-body > * { flex-shrink:0; }
+        .route-box[style*='flex'] .box-body > div[style*='flex:1'] { flex:1 !important; min-height:0; }
         .route-sortable .sortable-item { transition:all 0.2s ease; }
         .route-sortable .sortable-item:hover { box-shadow:0 2px 8px rgba(0,0,0,0.1); }
         .route-sortable .sortable-ghost { opacity:0.4; background-color:#ecf0f1; }
@@ -541,19 +630,20 @@ route_module_ui <- function(id) {
             solidHeader = FALSE,
             status = "primary",
             class = "route-box",
-            height = 600,
+            style = "max-height:600px; overflow:hidden; display:flex; flex-direction:column;",
             uiOutput(ns("trip_summary")),
             div(
-              style = "display:flex; justify-content:flex-end; padding:8px 10px; margin-bottom:10px;",
+              style = "display:flex; justify-content:space-between; align-items:center; padding:8px 10px; margin-bottom:10px; flex-shrink:0; gap:12px; flex-wrap:wrap;",
+              uiOutput(ns("route_stats")),
               actionButton(
                 ns("optimize_route"),
                 "OPTIMIZE ROUTE",
                 icon = icon("route"),
                 class = "route-optimize-btn",
-                style = "padding:10px 24px; font-size:14px; letter-spacing:0.5px; border-radius:10px; background:#3478f6; border:none; color:white; box-shadow:0 4px 10px rgba(52,120,246,0.25); transition:all .3s ease;"
+                style = "padding:10px 24px; font-size:14px; letter-spacing:0.5px; border-radius:10px; background:#3478f6; border:none; color:white; box-shadow:0 4px 10px rgba(52,120,246,0.25); transition:all .3s ease; flex-shrink:0;"
               )
             ),
-            div(style = "height:400px; overflow-y:auto;", class = "route-sortable",
+            div(style = "flex:1; min-height:0; overflow-y:auto;", class = "route-sortable",
                 uiOutput(ns("selected_venues_ui"))
             )
           ),
@@ -568,6 +658,7 @@ route_module_ui <- function(id) {
           )
         ),
         fluidRow(
+          style = "margin-top:20px;",
           shinydashboard::box(
             title = "ROUTE DETAILS",
             width = 12,
@@ -582,7 +673,7 @@ route_module_ui <- function(id) {
   )
 }
 
-route_module_server <- function(id) {
+route_module_server <- function(id, map_user_location = NULL) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
     message_id <- sprintf("route_get_location_%s", id)
@@ -591,10 +682,51 @@ route_module_server <- function(id) {
     recommendations <- reactiveVal(data.frame())
     selected_venues <- reactiveVal(data.frame())
     user_location <- reactiveVal(NULL)
+    map_refresh_trigger <- reactiveVal(0)
+
+    if (!is.null(map_user_location)) {
+      observeEvent(map_user_location(), {
+        loc <- map_user_location()
+        if (is.null(loc)) {
+          user_location(NULL)
+          return()
+        }
+        lat_val <- loc$lat
+        if (is.null(lat_val) && !is.null(loc$latitude)) lat_val <- loc$latitude
+        lng_val <- loc$lon
+        if (is.null(lng_val) && !is.null(loc$lng)) lng_val <- loc$lng
+        lat_num <- suppressWarnings(as.numeric(lat_val))
+        lng_num <- suppressWarnings(as.numeric(lng_val))
+        if (is.na(lat_num) || is.na(lng_num)) return()
+        name_val <- loc$name
+        if (is.null(name_val) || !nzchar(name_val)) {
+          name_val <- "Map Page Location"
+        }
+        ts_val <- loc$ts
+        if (is.null(ts_val)) ts_val <- Sys.time()
+        user_location(list(
+          name = name_val,
+          lat = lat_num,
+          lng = lng_num,
+          ts = ts_val
+        ))
+      }, ignoreNULL = FALSE)
+    }
 
     category_icon_name <- function(cat, selected = FALSE) {
-      base <- "Restaurant"
       cat <- ifelse(is.na(cat), "", cat)
+      # Use a dedicated start icon for the User Location
+      if (grepl("User Location", cat, ignore.case = TRUE)) {
+        # Use locate_icon.png when available; otherwise fall back to the default icon
+        if (file.exists("www/locate_icon.png")) {
+          return("locate_icon.png")
+        } else {
+          # If locate_icon.png is missing return a placeholder so a custom icon can be added later
+          return("locate_icon.png")  # Try to use this name even if the file is missing
+        }
+      }
+      
+      base <- "Restaurant"
       if (grepl("Bar", cat, ignore.case = TRUE)) {
         base <- "Bar"
       } else if (grepl("Cafe|Coffee|Brunch|Bakery", cat, ignore.case = TRUE)) {
@@ -680,12 +812,24 @@ route_module_server <- function(id) {
       proxy <- leafletProxy(ns("map"), session = session)
       proxy <- proxy %>% clearGroup("user_location")
       if (!is.null(loc)) {
+        # Build popup content that includes the Add to Route button
+        popup_content <- sprintf(
+          "<div style='min-width:200px; font-family:-apple-system,BlinkMacSystemFont,sans-serif;'>
+            <strong style='font-size:14px; color:#2c3e50;'>📍 Your Location</strong><br/>
+            <span style='color:#7f8c8d; font-size:12px;'>Lat: %.4f, Lng: %.4f</span><br/>
+            <button onclick=\"Shiny.setInputValue('%s','user_location',{priority:'event'})\" style='margin-top:10px; padding:8px 15px; background-color:#3478f6; color:white; border:none; border-radius:6px; cursor:pointer; font-weight:500; width:100%%; letter-spacing:0.5px;'>➕ Add to Route (Start Point)</button>
+          </div>",
+          loc$lat,
+          loc$lng,
+          ns("add_user_location")
+        )
+        
         proxy %>%
           addAwesomeMarkers(
             lng = loc$lng,
             lat = loc$lat,
             icon = awesomeIcons(icon = "user", iconColor = "white", library = "fa", markerColor = "blue"),
-            popup = "<strong>Your Location</strong>",
+            popup = popup_content,
             label = "You are here",
             layerId = "user_location",
             group = "user_location"
@@ -771,6 +915,17 @@ route_module_server <- function(id) {
       drinks <- sum(selected$category_group == "Drinks", na.rm = TRUE)
       restaurants <- sum(selected$category_group == "Restaurant", na.rm = TRUE)
 
+      # Calculate route information if there are 2+ venues
+      route_info <- NULL
+      if (nrow(selected) >= 2) {
+        # Filter to ensure valid coordinates
+        selected_valid <- selected %>% 
+          filter(!is.na(lat) & !is.na(lon) & !is.na(lon) & !is.na(lat))
+        if (nrow(selected_valid) >= 2) {
+          route_info <- route_calculate_route(selected_valid)
+        }
+      }
+
       div(
         class = "route-summary-card",
         div(
@@ -782,6 +937,44 @@ route_module_server <- function(id) {
           tags$span(sprintf("☕ %d Cafe%s", cafes, if (cafes != 1) "s" else "")),
           tags$span(sprintf("🍸 %d Bar%s", bars, if (bars != 1) "s" else "")),
           tags$span(sprintf("🧋 %d Drink%s", drinks, if (drinks != 1) "s" else ""))
+        )
+      )
+    })
+
+    output$route_stats <- renderUI({
+      selected <- selected_venues()
+      
+      # Calculate route information if there are 2+ venues
+      route_info <- NULL
+      if (nrow(selected) >= 2) {
+        # Filter to ensure valid coordinates
+        selected_valid <- selected %>% 
+          filter(!is.na(lat) & !is.na(lon) & !is.na(lon) & !is.na(lat))
+        if (nrow(selected_valid) >= 2) {
+          route_info <- route_calculate_route(selected_valid)
+        }
+      }
+      
+      if (is.null(route_info) || route_info$total_distance == 0) {
+        return(NULL)
+      }
+      
+      div(
+        style = "display: flex; align-items: center; gap: 16px; flex-wrap: wrap;",
+        div(
+          style = "display: flex; align-items: center; gap: 6px;",
+          tags$span(style = "font-size: 16px;", "📏"),
+          tags$span(style = "color: #34495e; font-weight: 500; font-size: 13px;", sprintf("%.2f km", route_info$total_distance))
+        ),
+        div(
+          style = "display: flex; align-items: center; gap: 6px;",
+          tags$span(style = "font-size: 16px;", "🚶"),
+          tags$span(style = "color: #34495e; font-weight: 500; font-size: 13px;", sprintf("%.1f min", route_info$total_walk_time))
+        ),
+        div(
+          style = "display: flex; align-items: center; gap: 6px;",
+          tags$span(style = "font-size: 16px;", "🚗"),
+          tags$span(style = "color: #34495e; font-weight: 500; font-size: 13px;", sprintf("%.1f min", route_info$total_drive_time))
         )
       )
     })
@@ -811,11 +1004,22 @@ route_module_server <- function(id) {
           "#f39c12"
         } else if (venue_group == "Drinks") {
           "#e91e63"
+        } else if (venue_group == "User Location") {
+          "#3498db"  # Use blue for the user location
         } else {
           "#3498db"
         }
         price_display <- format_price(venue$price_level)
-        display_address <- sub(",\\s*Australia\\s*$", "", venue$address)
+        address_raw <- if ("address" %in% names(venue) && !is.null(venue$address) && !is.na(venue$address)) {
+          as.character(venue$address)
+        } else {
+          ""
+        }
+        display_address <- if (nzchar(address_raw)) {
+          sub(",\\s*Australia\\s*$", "", address_raw)
+        } else {
+          ""
+        }
         status_display <- format_open_status(venue$open_now, venue$opening_hours)
 
         details_link <- tags$a(
@@ -825,6 +1029,9 @@ route_module_server <- function(id) {
           onclick = sprintf("Shiny.setInputValue('%s', '%s', {priority:'event'})", ns("see_details"), venue_id)
         )
 
+        # Show a simplified card for the User Location (no details)
+        is_user_location <- !is.null(venue_group) && venue_group == "User Location"
+        
         div(
           `data-venue-name` = venue$name,
           class = "info-box sortable-item",
@@ -840,31 +1047,62 @@ route_module_server <- function(id) {
           ),
           h4(
             style = "margin:0 30px 8px 0; padding-left:12px; font-size:15px; font-weight:400; color:#2c3e50;",
+            if (is_user_location) {
+              tags$span(style = "font-size: 16px; margin-right: 6px;", "📍")
+            } else {
+              NULL
+            },
             venue$name,
-            tags$span(style = "display:block; color:#95a5a6; font-size:12px; margin-top:4px; font-weight:300;", sprintf("★ %.1f", venue$rating))
+            if (!is_user_location) {
+              tags$span(
+                style = "display:block; color:#95a5a6; font-size:12px; margin-top:4px; font-weight:300;",
+                sprintf("★ %.1f", if ("rating" %in% names(venue) && !is.null(venue$rating) && !is.na(venue$rating)) venue$rating else 0)
+              )
+            } else {
+              NULL
+            }
           ),
-          p(
-            style = "margin:6px 0; padding-left:12px; font-size:12px; color:#7f8c8d; font-weight:300; display:flex; align-items:center; gap:15px;",
-            tags$span(venue$category),
-            tags$span(style = "color:#2c3e50;", price_display),
-            if (!is.null(venue$distance) && venue$distance > 0) tags$span(sprintf("%.1f km", venue$distance)),
-            details_link
-          ),
-          p(
-            style = "font-size:11px; color:#7f8c8d; margin:4px 0; padding-left:12px; font-weight:300;",
-            tags$span(style = "font-weight:500; color:#2c3e50;", "Status: "),
-            HTML(status_display)
-          ),
-          p(
-            style = "font-size:11px; color:#95a5a6; margin:4px 0; padding-left:12px; font-weight:300;",
-            substr(display_address, 1, 40),
-            if (nchar(display_address) > 40) "..." else ""
-          ),
-          if (!is.na(venue$description) && nchar(venue$description) > 0) {
+          # Only non User Location entries display details
+          if (!is_user_location) {
+            tagList(
+              p(
+                style = "margin:6px 0; padding-left:12px; font-size:12px; color:#7f8c8d; font-weight:300; display:flex; align-items:center; gap:15px;",
+                tags$span(if ("category" %in% names(venue) && !is.null(venue$category) && !is.na(venue$category)) as.character(venue$category) else ""),
+                tags$span(style = "color:#2c3e50;", price_display),
+                if ("distance" %in% names(venue) && !is.null(venue$distance) && !is.na(venue$distance) && is.numeric(venue$distance) && venue$distance > 0) {
+                  tags$span(sprintf("%.1f km", venue$distance))
+                } else {
+                  NULL
+                },
+                details_link
+              ),
+              p(
+                style = "font-size:11px; color:#7f8c8d; margin:4px 0; padding-left:12px; font-weight:300;",
+                tags$span(style = "font-weight:500; color:#2c3e50;", "Status: "),
+                HTML(status_display)
+              ),
+              p(
+                style = "font-size:11px; color:#95a5a6; margin:4px 0; padding-left:12px; font-weight:300;",
+                if (!is.null(display_address) && !is.na(display_address) && nzchar(display_address)) {
+                  paste0(substr(display_address, 1, 40), if (nchar(display_address) > 40) "..." else "")
+                } else {
+                  ""
+                }
+              ),
+              if (!is.null(venue$description) && !is.na(venue$description) && nzchar(as.character(venue$description))) {
+                p(
+                  style = "font-size:10px; color:#bdc3c7; font-style:italic; margin:4px 0 0 0; padding-left:12px; font-weight:300;",
+                  paste0(substr(venue$description, 1, 60), if (nchar(venue$description) > 60) "..." else "")
+                )
+              } else {
+                NULL
+              }
+            )
+          } else {
+            # User Location shows only a starting-point hint
             p(
-              style = "font-size:10px; color:#bdc3c7; font-style:italic; margin:4px 0 0 0; padding-left:12px; font-weight:300;",
-              substr(venue$description, 1, 60),
-              if (nchar(venue$description) > 60) "..." else ""
+              style = "margin:6px 0; padding-left:12px; font-size:12px; color:#7f8c8d; font-weight:300; font-style:italic;",
+              "🚩 Starting Point"
             )
           }
         )
@@ -895,6 +1133,119 @@ route_module_server <- function(id) {
       }
     })
 
+    observeEvent(input$add_user_location, {
+      loc <- user_location()
+      if (is.null(loc)) {
+        showNotification("Please set your location first!", type = "warning", duration = 2)
+        return()
+      }
+      
+      # Build a pseudo-venue entry for the user location
+      # Ensure coordinates stay within valid ranges (lat -90–90, lon -180–180)
+      # Note: upstream app.R sends fields named lat and lon (not lng)
+      lat_val <- as.numeric(loc$lat)
+      lon_val <- as.numeric(loc$lon %||% loc$lng)  # Accept both lon and lng
+      
+      # Validate coordinates
+      if (is.na(lat_val) || is.na(lon_val)) {
+        showNotification("Invalid location coordinates!", type = "error", duration = 2)
+        return()
+      }
+      
+      # Validate and adjust coordinates (Melbourne approx lat -38.5 to -37.5, lon 144.5 to 145.5)
+      # Swap values when the coordinates look outside Melbourne's range
+      if ((lat_val > 90 || lat_val < -90) || 
+          (abs(lat_val) < abs(lon_val) && abs(lon_val) < 90)) {
+        # Swap lat/lon if lat is invalid or the pair appears reversed
+        temp <- lat_val
+        lat_val <- lon_val
+        lon_val <- temp
+      }
+      
+      # Re-validate the coordinate range
+      if (lat_val < -90 || lat_val > 90 || lon_val < -180 || lon_val > 180) {
+        showNotification("Invalid location coordinates range!", type = "error", duration = 2)
+        return()
+      }
+      
+      user_venue <- data.frame(
+        name = loc$name %||% "Your Location",
+        lat = lat_val,
+        lon = lon_val,
+        category = "User Location",
+        category_group = "User Location",
+        rating = NA_real_,
+        price_level = "N/A",
+        price_numeric = 2,
+        address = sprintf("Lat: %.4f, Lng: %.4f", lat_val, lon_val),
+        phone = NA_character_,
+        website = NA_character_,
+        opening_hours = NA_character_,
+        open_now = NA,
+        description = NA_character_,
+        stringsAsFactors = FALSE
+      )
+      
+      current <- selected_venues()
+      
+      # Check whether the user location already exists (by coordinates)
+      if (nrow(current) > 0) {
+        # Detect an existing user location by name or coordinates
+        has_user_location <- any(
+          current$name == user_venue$name | 
+          (abs(current$lat - user_venue$lat) < 0.0001 & abs(current$lon - user_venue$lon) < 0.0001),
+          na.rm = TRUE
+        )
+        
+        if (has_user_location) {
+          showNotification("Your location is already in the route!", type = "warning", duration = 2)
+          return()
+        }
+        
+        # Insert it at the first position
+        selected_venues(bind_rows(user_venue, current))
+      } else {
+        # Add directly when the list is empty
+        selected_venues(user_venue)
+      }
+      
+      showNotification("Your location added as starting point!", type = "message", duration = 3)
+    })
+
+    observeEvent(input$add_from_map, {
+      venue_name <- URLdecode(input$add_from_map)
+      if (is.null(venue_name) || !nzchar(venue_name)) return()
+      
+      # Look up the venue in all_venues
+      venues <- all_venues()
+      
+      # Search the combined dataset
+      venue <- venues %>% filter(name == venue_name) %>% slice(1)
+      
+      if (nrow(venue) == 0) {
+        showNotification(sprintf("Venue '%s' not found in route data.", venue_name), type = "warning", duration = 2)
+        return()
+      }
+      
+      current <- selected_venues()
+      
+      # Check whether it already exists
+      if (venue_name %in% current$name) {
+        showNotification(sprintf("%s is already in the route!", venue_name), type = "warning", duration = 2)
+        return()
+      }
+      
+      # Append to the list
+      if (nrow(current) == 0) {
+        selected_venues(venue)
+      } else {
+        # Use bind_rows instead of rbind so column mismatches are handled automatically
+        selected_venues(bind_rows(current, venue))
+      }
+      
+      showNotification(sprintf("%s added to route!", venue_name), type = "message", duration = 3)
+    })
+
     observeEvent(input$add_to_trip, {
       venue_name <- URLdecode(input$add_to_trip)
       recs <- recommendations()
@@ -904,11 +1255,21 @@ route_module_server <- function(id) {
       if (nrow(venue) == 0) return()
 
       current <- selected_venues()
+      
+      # Check whether it already exists
+      if (venue_name %in% current$name) {
+        showNotification(sprintf("%s is already in the route!", venue_name), type = "warning", duration = 2)
+        return()
+      }
+      
+      # Append to the list (use bind_rows instead of rbind)
       if (nrow(current) == 0) {
         selected_venues(venue)
-      } else if (!venue_name %in% current$name) {
-        selected_venues(rbind(current, venue))
+      } else {
+        # Use bind_rows instead of rbind so column mismatches are handled automatically
+        selected_venues(bind_rows(current, venue))
       }
+      
       showNotification(sprintf("%s added to trip!", venue_name), type = "message", duration = 3)
     })
 
@@ -947,9 +1308,16 @@ route_module_server <- function(id) {
         addControl(legend_html, position = "topright", layerId = "route-legend")
     })
 
+    observeEvent(input$map_refresh, {
+      map_refresh_trigger(input$map_refresh)
+    }, ignoreInit = TRUE)
+    
     observe({
+      # Explicitly touch dependencies so observe tracks these reactive values
       recs <- recommendations()
       selected <- selected_venues()
+      map_refresh_trigger()  # Trigger map refresh
+      
       if (nrow(selected) > 0 && nrow(recs) > 0) {
         recs <- recs %>% filter(!name %in% selected$name)
       }
@@ -1023,13 +1391,47 @@ route_module_server <- function(id) {
       }
 
       if (nrow(selected) > 0) {
+        # Filter out venues with missing coordinates
+        selected <- selected %>% 
+          filter(!is.na(lat) & !is.na(lon) & !is.na(lon) & !is.na(lat))
+        
+        if (nrow(selected) == 0) {
+          return()  # Return immediately when no valid venues remain
+        }
+        
+        # Ensure all required columns exist
+        if (!"category_group" %in% names(selected)) {
+          selected$category_group <- dplyr::case_when(
+            grepl("Bar", selected$category, ignore.case = TRUE) ~ "Bar",
+            grepl("Cafe|Coffee|Brunch|Bakery", selected$category, ignore.case = TRUE) ~ "Cafe/Brunch",
+            grepl("Milk Tea|Juice|Drink", selected$category, ignore.case = TRUE) ~ "Drinks",
+            TRUE ~ "Restaurant"
+          )
+        }
+        
+        # Ensure the category column exists
+        if (!"category" %in% names(selected)) {
+          selected$category <- selected$category_group
+        }
+        
+        # Ensure the price_level column exists
+        if (!"price_level" %in% names(selected)) {
+          selected$price_level <- "$$"
+        }
+        
+        # Ensure the rating column exists
+        if (!"rating" %in% names(selected)) {
+          selected$rating <- 3.5
+        }
+        
         selected$price_text <- vapply(selected$price_level, format_price, character(1))
         selected$opening_text <- mapply(
           format_open_status,
-          selected$open_now,
-          selected$opening_hours,
+          if ("open_now" %in% names(selected)) selected$open_now else NA,
+          if ("opening_hours" %in% names(selected)) selected$opening_hours else NA,
           USE.NAMES = FALSE
         )
+        
         selected_icons <- icons(
           iconUrl = sapply(selected$category_group, category_icon_name, selected = TRUE),
           iconWidth = 40,
@@ -1040,13 +1442,18 @@ route_module_server <- function(id) {
           popupAnchorY = -55
         )
 
-        proxy <- proxy %>%
-          addMarkers(
-            data = selected,
-            lng = ~lon,
-            lat = ~lat,
-            icon = selected_icons,
-            popup = ~sprintf(
+        # Build popup content for each selected venue
+        selected$popup_content <- sapply(seq_len(nrow(selected)), function(i) {
+          if (selected$category_group[i] == "User Location") {
+            sprintf(
+              "<div style='font-family:-apple-system,BlinkMacSystemFont,sans-serif;'>
+                <strong style='color:#e74c3c;'>SELECTED: %s</strong><br/>
+                <span style='color:#7f8c8d; font-size:12px;'>📍 User Location</span>
+              </div>",
+              selected$name[i]
+            )
+          } else {
+            sprintf(
               "<div style='font-family:-apple-system,BlinkMacSystemFont,sans-serif;'>
                 <strong style='color:#e74c3c;'>SELECTED: %s</strong><br/>
                 <span style='color:#7f8c8d; font-size:12px;'>%s</span><br/>
@@ -1054,8 +1461,22 @@ route_module_server <- function(id) {
                 <span style='color:#34495e; font-size:12px;'>Price: <strong style='color:#27ae60;'>%s</strong></span><br/>
                 <span style='color:#34495e; font-size:12px;'>Status: %s</span>
               </div>",
-              name, category, rating, price_text, opening_text
-            ),
+              selected$name[i],
+              selected$category[i],
+              selected$rating[i],
+              selected$price_text[i],
+              selected$opening_text[i]
+            )
+          }
+        })
+
+        proxy <- proxy %>%
+          addMarkers(
+            data = selected,
+            lng = ~lon,
+            lat = ~lat,
+            icon = selected_icons,
+            popup = ~popup_content,
             label = ~paste("SELECTED:", name),
             group = "selected",
             layerId = ~name
@@ -1063,34 +1484,65 @@ route_module_server <- function(id) {
 
         if (nrow(selected) > 1) {
           route_info <- route_calculate_route(selected)
-          for (i in 1:(nrow(selected) - 1)) {
-            if (!is.null(route_info$route_geometries[[i]])) {
-              geometry <- route_info$route_geometries[[i]]
-              proxy <- proxy %>%
-                addPolylines(
-                  lng = geometry[, 1],
-                  lat = geometry[, 2],
-                  color = "#f59e0b",
-                  weight = 4,
-                  opacity = 0.8,
-                  popup = sprintf(
-                    "Distance: %.2f km<br/>Drive: %.1f min<br/>Walk: %.1f min",
-                    route_info$route_details$distance_km[i],
-                    route_info$route_details$drive_time_min[i],
-                    route_info$route_details$walk_time_min[i]
+          
+          # Validate route_info before drawing
+          if (!is.null(route_info) && !is.null(route_info$route_geometries) && 
+              nrow(route_info$route_details) > 0) {
+            for (i in 1:(nrow(selected) - 1)) {
+              # Ensure the index is valid
+              if (i > nrow(route_info$route_details)) next
+              
+              # Verify coordinate values
+              from_lon <- as.numeric(selected$lon[i])
+              from_lat <- as.numeric(selected$lat[i])
+              to_lon <- as.numeric(selected$lon[i + 1])
+              to_lat <- as.numeric(selected$lat[i + 1])
+              
+              if (any(is.na(c(from_lon, from_lat, to_lon, to_lat)))) next
+              
+              # Check whether route geometry is available
+              if (i <= length(route_info$route_geometries) && 
+                  !is.null(route_info$route_geometries[[i]]) && 
+                  is.matrix(route_info$route_geometries[[i]]) &&
+                  nrow(route_info$route_geometries[[i]]) > 0 &&
+                  ncol(route_info$route_geometries[[i]]) >= 2) {
+                geometry <- route_info$route_geometries[[i]]
+                proxy <- proxy %>%
+                  addPolylines(
+                    lng = geometry[, 1],
+                    lat = geometry[, 2],
+                    color = "#f59e0b",
+                    weight = 4,
+                    opacity = 0.8,
+                    popup = sprintf(
+                      "Distance: %.2f km<br/>Drive: %.1f min<br/>Walk: %.1f min",
+                      route_info$route_details$distance_km[i],
+                      route_info$route_details$drive_time_min[i],
+                      route_info$route_details$walk_time_min[i]
+                    )
                   )
-                )
-            } else {
-              proxy <- proxy %>%
-                addPolylines(
-                  lng = c(selected$lon[i], selected$lon[i + 1]),
-                  lat = c(selected$lat[i], selected$lat[i + 1]),
-                  color = "#f59e0b",
-                  weight = 3,
-                  opacity = 0.7,
-                  dashArray = "5, 5",
-                  popup = "Estimated route (API unavailable)"
-                )
+              } else {
+                # Fall back to a straight polyline
+                proxy <- proxy %>%
+                  addPolylines(
+                    lng = c(from_lon, to_lon),
+                    lat = c(from_lat, to_lat),
+                    color = "#f59e0b",
+                    weight = 3,
+                    opacity = 0.7,
+                    dashArray = "5, 5",
+                    popup = if (i <= nrow(route_info$route_details)) {
+                      sprintf(
+                        "Distance: %.2f km<br/>Walk: %.1f min<br/>Drive: %.1f min (Estimated)",
+                        route_info$route_details$distance_km[i],
+                        route_info$route_details$walk_time_min[i],
+                        route_info$route_details$drive_time_min[i]
+                      )
+                    } else {
+                      "Estimated route (API unavailable)"
+                    }
+                  )
+              }
             }
           }
         }
